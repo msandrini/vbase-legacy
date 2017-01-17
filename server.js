@@ -1,21 +1,27 @@
 const express = require('express');
-const mongo = require('mongodb').MongoClient;
-const mongoUrl = 'mongodb://localhost:27017/myproject';
+const { dbConnectionWrapper } = require('./server/utils');
 
 const app = express();
 
+// includes main processing routines
+const games = require('./server/games');
+
+// sets port
 app.set('port', (process.env.PORT || 5000));
 
-app.get('/', (req, res) => {
-    mongo.connect(mongoUrl, (err, db) => {
-    	const infos = db.collection('infos');
-    	infos.find({}).toArray((err, docs) => {
-	    	res.json({ thereIsDb: true, docs: docs });
-	    	db.close();
-    	});
-    });
-});
+// table with route mappings that are going to be processed
+const routeProcessingMapping = [
+    { method: 'get', route: '/', function: games.testRoute }
+];
 
+// executing the table above
+for (map of routeProcessingMapping) {
+    app[map.method](map.route, (req, res) => {
+        dbConnectionWrapper(map.function, {req, res});
+    });
+}
+
+// final listener
 app.listen(app.get('port'), () => {
     console.log('Node app is running on port ' + app.get('port'));
 });
