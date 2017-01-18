@@ -1,11 +1,8 @@
-const { collectionWrapper } = require('./utils');
-
 const games = {
 
-    testRoute: (db, connection) => {
-        const coll = collectionWrapper(db, connection.res);
-        coll.find('addons').then(function(docs) {
-            connection.res.json(docs);
+    testRoute: (collection, response) => {
+        collection.find('addons').then(function(docs) {
+            response.json(docs);
         });
     }
 

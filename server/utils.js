@@ -10,35 +10,36 @@ module.exports = {
                     error: { loc: 'DB', content: error }
                 });
             } else {
-                callback(db, connection);
+                const coll = collectionWrapper(db, connection.res);
+                callback(coll, connection.res);
             }
         });
-    },
-
-    collectionWrapper: (db, response) => {
-        return {
-            find: (collection, criteria = {}, projection = {}) => {
-                return new Promise((resolve, reject) => {
-                    db.collection(collection, (error, coll) => {
-                        if (error) {
-                            response.status(500).json({
-                                error: { loc: 'Collection', args: { collection }, content: error }
-                            });
-                            reject();
-                        }
-                    }).find(criteria, projection).toArray((error, docs) => {
-                        if (error) {
-                            response.status(500).json({
-                                error: { loc: 'Find', args: { collection, criteria, projection }, content: error }
-                            });
-                            reject();
-                        } else {
-                            resolve(docs);
-                        }
-                    });
-                });
-            }
-        };
     }
 
+};
+
+const collectionWrapper = (db, response) => {
+    return {
+        find: (collection, criteria = {}, projection = {}) => {
+            return new Promise((resolve, reject) => {
+                db.collection(collection, (error, coll) => {
+                    if (error) {
+                        response.status(500).json({
+                            error: { loc: 'Collection', args: { collection }, content: error }
+                        });
+                        reject();
+                    }
+                }).find(criteria, projection).toArray((error, docs) => {
+                    if (error) {
+                        response.status(500).json({
+                            error: { loc: 'Find', args: { collection, criteria, projection }, content: error }
+                        });
+                        reject();
+                    } else {
+                        resolve(docs);
+                    }
+                });
+            });
+        }
+    };
 };
