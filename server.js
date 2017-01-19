@@ -5,21 +5,17 @@ const app = express();
 
 // includes main processing routines
 const games = require('./server/games');
+const users = require('./server/users');
+const misc = require('./server/misc');
 
 // sets port
 app.set('port', (process.env.PORT || 5000));
 
-// table with route mappings that are going to be processed
-const routeProcessingMapping = [
-    { method: 'get', route: '/', function: games.testRoute }
-];
-
-// executing the table above
-for (map of routeProcessingMapping) {
-    app[map.method](map.route, (req, res) => {
-        dbConnectionWrapper(map.function, {req, res});
-    });
-}
+// routes
+const dbc = dbConnectionWrapper;
+app
+    .get('/', (req, res) => dbc(misc.index, {req, res}))
+    .get('/games', (req, res) => dbc(games.test, {req, res}));
 
 // final listener
 app.listen(app.get('port'), () => {

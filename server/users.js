@@ -1,6 +1,6 @@
-const games = {
+const users = {
 
-    test: (collection, response, xtra) => {
+    testRoute: (collection, response) => {
         collection.find('addons').then(function(docs) {
             response.json(docs);
         });
@@ -8,4 +8,4 @@ const games = {
 
 };
 
-module.exports = games;
+module.exports = users;
