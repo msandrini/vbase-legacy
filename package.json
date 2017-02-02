@@ -1,7 +1,7 @@
 {
   "name": "proj2501",
   "version": "0.1.0",
-  "main": "index.js",
+  "main": "server.js",
   "author": "Marcos Sandrini <msandrinidesign@gmail.com>",
   "license": "MIT",
   "repository": {
@@ -14,13 +14,31 @@
   "devDependencies": {
     "babel-core": "^6.20.0",
     "babel-loader": "^6.2.10",
-    "webpack": "beta"
+    "babel-plugin-transform-object-rest-spread": "^6.22.0",
+    "babel-plugin-transform-runtime": "^6.22.0",
+    "extract-text-webpack-plugin": "2.0.0-rc.2",
+    "webpack": "2.2.1",
+    "webpack-md5-hash": "^0.0.5",
+    "webpack-uglify-js-plugin": "^1.1.9"
   },
   "dependencies": {
+    "babel-preset-latest": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "body-parser": "^1.16.0",
     "express": "^4.14.0",
-    "mongodb": "^2.2.21"
+    "mongodb": "^2.2.21",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.2",
+    "react-router": "^3.0.2",
+    "react-router-redux": "^4.0.7",
+    "redux": "^3.6.0",
+    "redux-saga": "^0.14.3"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "webpack",
+    "buildprod": "webpack --env \"production\"",
+    "clean": "rm -r app/_bundled/*"
   }
 }

@@ -1,21 +1,26 @@
 const express = require('express');
-const { dbConnectionWrapper } = require('./server/utils');
+const { outputJsonError } = require('./server/utils');
+const routing = require('./server/routes');
+const bodyParser = require('body-parser');
 
 const app = express();
-
-// includes main processing routines
-const games = require('./server/games');
-const users = require('./server/users');
-const misc = require('./server/misc');
 
 // sets port
 app.set('port', (process.env.PORT || 5000));
 
-// routes
-const dbc = dbConnectionWrapper;
-app
-    .get('/', (req, res) => dbc(misc.index, {req, res}))
-    .get('/games', (req, res) => dbc(games.test, {req, res}));
+// initialize bodyParser to interpret POST values
+app.use(bodyParser.urlencoded({extended:true}));
+
+// connect to DB and then continue to routing
+const mongo = require('mongodb').MongoClient;
+const mongoUrl = 'mongodb://localhost:27017/local';
+mongo.connect(mongoUrl, null, (error, db) => {
+    if (error) {
+        outputJsonError(connection.res, 'DBConn', error);
+    } else {
+        routing(app, db);
+    }
+});
 
 // final listener
 app.listen(app.get('port'), () => {
