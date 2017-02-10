@@ -2,6 +2,21 @@ const { collectionOutputError, find } = require('./utils');
 
 const misc = {
 
+    conv: (db, response) => {
+        const fs = require('fs');
+        const gCursor = db.collection('games').find({});
+        gCursor.sort({ "old_id": 1 }).forEach((game) => {
+            const id = game._id;
+            const oldPath = path.join(__dirname, `../static/images/games/additional/${id}.png`);
+            const newPath = path.join(__dirname, `../static/images/games/gameplay/${id}/2.png`);
+            const fexO = fs.existsSync(oldPath);
+            if (fexO) {
+                fs.renameSync(oldPath, newPath);
+                console.log(`Moved ${game.title}, ${game.old_id} to ${game._id}`);
+            }
+        });
+    },
+
     index: (db, response, pag) => {
         // PHASE 2: , "otherNames.reasonForName": { "$ne": "japanese-script" }
         const gCursor = db.collection('games').find({});

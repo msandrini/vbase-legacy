@@ -1,16 +1,16 @@
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const UglifyJsPlugin = require('webpack-uglify-js-plugin');
-const WebpackMd5Hash = require('webpack-md5-hash');
+//const WebpackMd5Hash = require('webpack-md5-hash');
 
-const isProduction = () => (process.env.DEPLOY_ENV && process.env.DEPLOY_ENV === 'production');
+//const isProduction = () => (process.env.NODE_ENV && process.env.NODE_ENV === 'production');
 const appPath = (subPath) => path.resolve(__dirname, `app/${subPath}`);
 
 const basicConfig = {
     entry: {
         app: appPath('index.jsx'),
         vendor: [
+            'axios',
             'react',
             'react-dom',
             'redux',
@@ -43,6 +43,17 @@ const basicConfig = {
                     sourceMap: true
                 }
             })
+        }, {
+            test: /\.styl$/,
+            use: [
+                'style-loader',
+                'css-loader', {
+                    loader: 'stylus-loader'
+                },
+            ],
+        }, {
+            test: /\.json$/,
+            use: 'json-loader'
         }]
     },
     devtool: 'cheap-module-source-map',
@@ -60,14 +71,4 @@ const basicConfig = {
     ]
 };
 
-if (isProduction()) {
-    basicConfig.module.rules[0].use.push("UglifyJsPlugin");
-    basicConfig.plugins.push(new UglifyJsPlugin({
-        sourceMap: true,
-        cacheFolder: appPath('_cache/uglifyjs/'),
-        compress: { warnings: true }
-    }));
-}
-
 module.exports = basicConfig;
-

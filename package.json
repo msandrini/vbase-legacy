@@ -17,15 +17,19 @@
     "babel-plugin-transform-object-rest-spread": "^6.22.0",
     "babel-plugin-transform-runtime": "^6.22.0",
     "extract-text-webpack-plugin": "2.0.0-rc.2",
+    "pem": "^1.9.4",
     "webpack": "2.2.1",
     "webpack-md5-hash": "^0.0.5",
     "webpack-uglify-js-plugin": "^1.1.9"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "babel-preset-latest": "^6.22.0",
     "babel-preset-react": "^6.22.0",
     "body-parser": "^1.16.0",
+    "css-loader": "^0.26.1",
     "express": "^4.14.0",
+    "json-loader": "^0.5.4",
     "mongodb": "^2.2.21",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
@@ -33,12 +37,15 @@
     "react-router": "^3.0.2",
     "react-router-redux": "^4.0.7",
     "redux": "^3.6.0",
-    "redux-saga": "^0.14.3"
+    "redux-saga": "^0.14.3",
+    "style-loader": "^0.13.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^2.4.0"
   },
   "scripts": {
     "start": "node server.js",
     "build": "webpack",
-    "buildprod": "webpack --env \"production\"",
+    "buildprod": "webpack -p",
     "clean": "rm -r app/_bundled/*"
   }
 }

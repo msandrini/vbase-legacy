@@ -1,0 +1,54 @@
+.search
+	padding 50px 20px 0 20px
+	width calc(100% - 500px)
+	float left
+
+.basic-search
+	& input
+		width calc(100% - 50px)
+		font-size 24px
+		padding 8px 40px 8px 0
+		border 0
+		color white
+		background transparent
+		border-bottom 2px solid rgba(255,255,255,.5)
+		&:focus
+			outline none
+			border-bottom-color #FD7
+	& button
+		// ICON search
+		background rgba(0,0,0,.1)
+		border 0
+		position relative
+		left -32px
+		top 4px
+		width 32px
+		height 32px
+		&:active
+			left -31px
+			top 5px
+	& .trigger-advanced
+		font-size 12px
+		display block
+		margin 5px 0 0 calc(100% - 250px)
+		text-align right
+		width 200px
+		color rgba(255,255,255,.5)
+		&:hover
+			color white
+
+.advanced-search
+	// ICON +
+	-webkit-transition height .5s ease-in
+	transition height .5s ease-in
+	background rgba(0,0,0,.1)
+	height 300px
+	overflow hidden
+	margin-right 50px
+	&.hidden
+		height 0
+
+.no-results
+	font-size 32px
+	font-weight 100
+	margin 50px 100px

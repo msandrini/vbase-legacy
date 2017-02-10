@@ -1,0 +1,37 @@
+sample = rgba(0,0,0,.1)
+
+header
+	&:after
+		content ""
+		display table
+		clear both
+
+#logo
+	margin 0
+	width 350px
+	height 150px
+	background sample
+	float left
+	& span
+		color sample
+	
+#top-links
+	float right
+	padding 35px 12px 0 0
+	& a
+		display block
+		float right
+		width 18px
+		height 12px
+		background #999
+		margin-left 10px
+		border-radius 3px
+		& span
+			display none
+	& .contact-us
+		display block
+		text-align right
+	& .flag
+		display block
+		font-size 10px
+		text-align right

@@ -1,0 +1,69 @@
+.summary
+	margin 8px 0 0 100px
+	color rgba(255,255,255,.5)
+	font-size 14px
+
+.results
+	&:after 
+		content ""
+		display table
+		clear both
+	section
+		margin 50px 0 40px 100px
+
+.game-link
+	display block
+	clear both
+	padding 10px 0
+	-webkit-transition background .5s linear
+	transition background .5s linear
+	figure
+		width 64px
+		height 56px
+		background gray
+		float left
+		margin 0 15px 0 0
+		border-radius 15px
+		overflow hidden
+		img
+			width 100%
+			height 100%
+	h5
+		font-size 24px
+		line-height 24px
+		display inline-block
+		margin-right 15px
+		margin 0
+		font-weight 700
+	.aka
+		display inline-block
+		margin-left 10px
+		font-weight 200
+	.supplementary-info
+		font-size 14px
+		color rgba(255,255,255,.3)
+	.content
+		min-height 56px
+		width 90%
+		margin-left 30px
+	&:hover 
+		background rgba(0,0,0,.1)
+		background linear-gradient(to right, rgba(0,0,0,0) 0, rgba(0,0,0,.1) 50px)
+		.content
+			text-shadow none
+	&:after 
+		content ""
+		display table
+		clear both
+		
+.scorebar
+	font-size 10px
+	padding 2px
+	letter-spacing 1px
+	text-transform uppercase
+	width 20%
+	min-width 100px
+	text-align center
+	background rgba(255,255,255,.1)
+	display inline-block
+	margin-right 10px

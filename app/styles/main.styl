@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,400,400i,700,900');
+
+*
+	box-sizing border-box
+	font-family 'Titillium Web', sans-serif
+
+body
+	background-color #455
+	padding 0
+	margin 0
+	
+a
+	color #eee
+	text-decoration none
+	&:hover
+		color #fff
+		text-shadow 0 0 5px rgba(255,255,255,.4)
+		
+button, a.btn
+	opacity .7
+	&:focus
+		outline 1px dotted white
+	&:hover
+		opacity 1
+	&:active
+		opacity 1
+		position:relative
+		top 1px
+		left 1px
+		outline none
+
+::-webkit-input-placeholder
+	color rgba(255,255,255,.2)
+	font-weight 100
+::-moz-placeholder
+	color rgba(255,255,255,.2)
+	font-weight 100
+:-ms-input-placeholder
+	color rgba(255,255,255,.2)
+	font-weight 100
+
+.title
+	margin 20px 0 5px 100px
+	padding-bottom 5px
+	border-bottom 2px solid rgba(255,255,255,.5)
+	& h2, & h3
+		display inline-block
+		margin 0 10px 0 0
+		font-size 32px
+		color rgba(0,0,0,.5)
+		font-weight 900
+	& h3
+		font-weight 200
+		font-size 22px
