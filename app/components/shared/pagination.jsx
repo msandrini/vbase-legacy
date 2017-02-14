@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 
-import '../../styles/pagination.styl';
+import '../../styles/pagination.styl'
 import t from '../../i18n'
+import Icon from './icon.jsx'
+import SelectBox from './select-box.jsx'
 
 import { ITEMS_PER_PAGE } from '../../constants'
 
@@ -41,27 +43,31 @@ class Pagination extends Component {
 		const { linkFunction, currentPage } = this.props
 		const pageInt = parseInt(currentPage, 10)
 		return <aside className="pagination">
-			{this.hasPrev && 
+			{this.hasPrev &&
 	    		<a className="btn extremes first" title={t('first-page')} onClick={() => this._goToPage(0)}>
-	    			<span>{t('first-page')}</span>
+	    			<span className="alt">{t('first-page')}</span>
+	    			<Icon size="20" type="prev" />
 	    		</a>}
-	    	{this.hasPrev && 
+	    	{this.hasPrev &&
 	    		<a className="btn sequence prev" title={t('previous-page')} onClick={() => this._goToPage(pageInt - 1)}>
-	    			<span>{t('previous-page')}</span>
+	    			<span className="alt">{t('previous-page')}</span>
+	    			<Icon size="25" type="prev" />
 	    		</a>}
-	    	<select onChange={(ev) => this._goToPage(ev)} value={currentPage}>
-	    		{this.pagesArray.map(p => { return <option key={p} value={p}>{p+1}</option> })}
-	    	</select>
-	    	{this.hasNext && 
+	    	<SelectBox onChange={(ev) => this._goToPage(ev)} value={currentPage}>
+		    	{this.pagesArray.map(p => { return <option key={p} value={p}>{p+1}</option> })}
+		    </SelectBox>
+	    	{this.hasNext &&
 	    		<a className="btn sequence next" title={t('next-page')} onClick={() => this._goToPage(pageInt + 1)}>
-	    			<span>{t('next-page')}</span>
+	    			<span className="alt">{t('next-page')}</span>
+	    			<Icon size="25" type="next" />
 	    		</a>}
-	    	{this.hasNext && 
+	    	{this.hasNext &&
 	    		<a className="btn extremes last" title={t('last-page')} onClick={() => this._goToPage(this.pages - 1)}>
-	    			<span>{t('last-page')}</span>
+	    			<span className="alt">{t('last-page')}</span>
+	    			<Icon size="20" type="next" />
 	    		</a>}
 	    </aside>
 	}
 }
 
-export default Pagination;
+export default Pagination

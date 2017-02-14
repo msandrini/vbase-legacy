@@ -1,13 +1,12 @@
+@require 'common.styl'
+
 .summary
 	margin 8px 0 0 100px
-	color rgba(255,255,255,.5)
+	c-white .25
 	font-size 14px
 
 .results
-	&:after 
-		content ""
-		display table
-		clear both
+	clearfix()
 	section
 		margin 50px 0 40px 100px
 
@@ -15,8 +14,8 @@
 	display block
 	clear both
 	padding 10px 0
-	-webkit-transition background .5s linear
-	transition background .5s linear
+	trans .5s
+	clearfix()
 	figure
 		width 64px
 		height 56px
@@ -41,20 +40,16 @@
 		font-weight 200
 	.supplementary-info
 		font-size 14px
-		color rgba(255,255,255,.3)
+		c-white .3
 	.content
 		min-height 56px
 		width 90%
 		margin-left 30px
 	&:hover 
-		background rgba(0,0,0,.1)
-		background linear-gradient(to right, rgba(0,0,0,0) 0, rgba(0,0,0,.1) 50px)
+		bg-black .1
+		background linear-gradient(to right, transp-black(0) 0, transp-black(.1) 50px)
 		.content
 			text-shadow none
-	&:after 
-		content ""
-		display table
-		clear both
 		
 .scorebar
 	font-size 10px
@@ -64,6 +59,6 @@
 	width 20%
 	min-width 100px
 	text-align center
-	background rgba(255,255,255,.1)
+	bg-white .1
 	display inline-block
 	margin-right 10px

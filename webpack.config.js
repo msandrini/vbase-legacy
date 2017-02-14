@@ -54,6 +54,9 @@ const basicConfig = {
         }, {
             test: /\.json$/,
             use: 'json-loader'
+        }, { 
+            test: /\.svg$/, 
+            loader: 'svg-url-loader' 
         }]
     },
     devtool: 'cheap-module-source-map',

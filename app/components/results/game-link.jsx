@@ -22,7 +22,7 @@ const _getAka = game => {
 	return ''
 }
 const _getLink = game => {
-	const convertedName = game.title.replace(/[a-z]*/, )
+	const convertedName = game.title.replace(/[^a-zA-Z0-9\-]/g, '_');
 	return `game/${game._id}-${convertedName}`;
 }
 

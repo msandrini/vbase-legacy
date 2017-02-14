@@ -5,11 +5,12 @@ import { sendCall, warnOnNetworkError, createAction } from '../utils'
 
 const _getCallName = (action) => {
 	const page = (action.page && parseInt(action.page, 10) !== NaN) ? action.page : 0
-	let call;
     if (action.names) {
-    	return `games/by-names/${action.names}/${page}`
+        const query = encodeURIComponent(action.names)
+    	return `games/by-names/${query}/${page}`
     } else if (action.query) {
-    	return `` ///
+        const query = encodeURIComponent(action.query)
+    	return `games/advanced/${query}/${page}`
     } else {
     	return `games/all/${page}`
     }
@@ -18,7 +19,7 @@ const _getCallName = (action) => {
 const resultsEffects = {
 
     request: function*(action) {
-        const callName = _getCallName(action)
+        const callName = _getCallName(action); console.log(callName)
         
         try {
             const feedback = yield call(sendCall, callName)
@@ -38,12 +39,15 @@ const resultsEffects = {
     requestPage: function*(action) {
         const page = parseInt(action.page, 10) + 1
         if (action.params.query) {
-            hashHistory.push(`/advanced-search/${action.params.query}/${page}`)
+            const query = encodeURIComponent(action.params.query)
+            const firstPart = `advanced-search/${query}`
         } else if (action.params.names) {
-            hashHistory.push(`/search/${action.params.names}/${page}`)
+            const query = encodeURIComponent(action.params.names)
+            const firstPart = `search/${query}`
         } else {
-            hashHistory.push(`/all-games/${page}`)
+            const firstPart = `all-games`
         }
+        hashHistory.push(`/${firstPart}/${page}`)
     }
 
 }

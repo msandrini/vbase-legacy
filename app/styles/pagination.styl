@@ -1,3 +1,5 @@
+@require 'common.styl'
+
 .pagination
 	float right
 	margin:5px 20px 0 0
@@ -6,24 +8,51 @@
 		width 20px
 		height 25px
 		margin-left 10px
-		background rgba(0,0,0,.2)
-		span
+		cursor pointer
+		.alt
 			display none
+		svg
+			fill transp-white(.5)
+			trans .2
+		&:hover svg
+			fill white
 	.sequence
-		width 30px
-		// ICONS *
-	select
-		// ICON arrow
+		width 24px
+	.extremes
+		opacity .4
+		margin-top 2px
+		border 0 solid transp-white(.5)
+		height 20px
+		&:hover
+			border-color white
+	.first
+		border-left-width 3px
+		svg
+			position relative
+			left -2px
+	.last
+		border-right-width 3px
+	.select-box
 		float left
-		-webkit-appearance none
-		-moz-appearance none
-		border 0
 		margin-left 10px
-		padding 3px 15px 3px 5px
-		border-radius 0
-		border-bottom 2px solid rgba(255,255,255,.5)
-		color white
-		background transparent
-		&:focus
-			border-bottom-color white
-			outline none
+		position relative
+		select
+			appearance none
+			border 0
+			padding 3px 15px 3px 5px
+			border-radius 0
+			//border-bottom 2px solid transp-white(.5)
+			c-white .7
+			background transparent
+			trans .3s
+			&:focus, &:hover
+				color white
+				outline none
+				& + .icon svg
+					fill white
+		svg
+			trans .3s
+			position absolute
+			right 4px
+			top 10px
+			fill transp-white(.5)

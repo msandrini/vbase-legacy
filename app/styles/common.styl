@@ -1,0 +1,42 @@
+transp-white(n)
+	rgba(255,255,255,n)
+
+transp-black(n)
+	rgba(0,0,0,n)
+	
+bg-white(n)
+	background-color transp-white(n)
+	
+bg-black(n)
+	background-color transp-black(n)
+	
+c-white(n)
+	color transp-white(n)
+	
+c-black(n)
+	color transp-black(n)
+	
+f-white(n)
+	fill transp-white(n)
+	
+f-black(n)
+	fill transp-black(n)
+
+trans(duration)
+	-webkit-transition all duration ease-in
+	transition all duration ease-in
+	
+clearfix()
+	&:after
+		content ""
+		display table
+		clear both
+		
+flip()
+	-webkit-transform scaleX(-1)
+	transform scaleX(-1)
+	
+appearance(v)
+	-moz-appearance v
+	-webkit-appearance v
+	appearance v

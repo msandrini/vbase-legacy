@@ -1,9 +1,12 @@
+@require 'common.styl'
+
 .search
 	padding 50px 20px 0 20px
 	width calc(100% - 500px)
 	float left
 
 .basic-search
+	position relative
 	& input
 		width calc(100% - 50px)
 		font-size 24px
@@ -11,42 +14,49 @@
 		border 0
 		color white
 		background transparent
-		border-bottom 2px solid rgba(255,255,255,.5)
+		appearance none
+		border-bottom 2px solid transp-white(.5)
 		&:focus
 			outline none
-			border-bottom-color #FD7
+			border-bottom-color #FFF
 	& button
-		// ICON search
-		background rgba(0,0,0,.1)
 		border 0
 		position relative
 		left -32px
 		top 4px
 		width 32px
 		height 32px
+		opacity .5
+		bg-white .2
+		padding 2px
 		&:active
 			left -31px
 			top 5px
+		:hover
+			opacity .8
+		svg
+			flip()
+			c-white .5
+			fill white
 	& .trigger-advanced
+		position absolute
 		font-size 12px
 		display block
 		margin 5px 0 0 calc(100% - 250px)
 		text-align right
 		width 200px
-		color rgba(255,255,255,.5)
+		c-white .5
+		trans .3s
+		cursor pointer
+		svg
+			margin-left 5px
+			fill white
+			opacity .5
+			trans .3s
 		&:hover
 			color white
-
-.advanced-search
-	// ICON +
-	-webkit-transition height .5s ease-in
-	transition height .5s ease-in
-	background rgba(0,0,0,.1)
-	height 300px
-	overflow hidden
-	margin-right 50px
-	&.hidden
-		height 0
+			svg
+				opacity 1
 
 .no-results
 	font-size 32px

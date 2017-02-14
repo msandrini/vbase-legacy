@@ -1,0 +1,90 @@
+@require 'common.styl'
+
+.wrap-advanced
+	position relative
+	width 100%
+
+.hide-advanced
+	width 20px
+	height 20px
+	padding 4px
+	display block
+	position absolute
+	bg-black .2
+	top -30px
+	right 50px
+	svg
+		f-white .4
+		position relative
+		top -4px
+	&:hover
+		bg-black .3
+		svg
+			f-white .7
+
+.advanced-search
+	trans .5s
+	bg-black .3
+	height 368px
+	overflow hidden
+	margin-right 50px
+	position relative
+	padding 12px 18px
+	border-radius 0 0 20px 20px
+	&.hidden
+		height 0 
+		padding 0 18px
+	.group
+		height 36px
+	label
+		width 110px
+		float left
+		c-white .3
+		padding 3px 10px
+		font-size 13px
+		text-transform uppercase
+		text-align right
+	input, select
+		width calc(100% - 120px)
+		font-size 14px
+		border-radius 0
+		appearance none
+		background transparent
+		color white
+		padding 2px 0
+		border 0
+		border-bottom 2px solid transp-white(.5)
+		trans .3s
+		&:focus, &:hover
+			outline none
+			border-bottom-color white
+			& + .icon svg
+				fill white
+	select
+		padding-right 15px
+		width 90px
+	.select-box
+		float left
+		margin-left 8px
+		position relative
+		svg
+			f-white .5
+			position absolute
+			right 1px
+			top 10px
+			trans .3s
+		& + .acc
+			margin-left 15px
+	.acc
+		display block
+		float left
+		c-black .5
+		font-size 14px
+		padding-top 2px
+	button
+		margin-top 10px
+		&.submit
+			float right
+		&.reset
+			float left
+			margin-top 22px

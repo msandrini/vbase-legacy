@@ -11,8 +11,11 @@
 	"terms-of-use":"Terms of Use",
 
 	"search-for-a-game":"Search for a game",
+	"search-for-a-game-below":"Search for a game below",
 	"basic-search":"Basic search",
 	"advanced-search":"Advanced search",
+	"search":"Search",
+	"reset":"Reset",
 
 	"first-page":"First Page",
 	"last-page":"Last Page",
@@ -30,5 +33,19 @@
 	"showing-results":"Showing results",
 	"showing-all-games":"Showing all games",
 	"searching-for-x":"Searching for \"{0}\"",
-	"from-advanced-search":"From advanced search"
+	"from-advanced-search":"From advanced search",
+	"back-to-simple-search":"Back to simple search",
+
+	"names":"Names",
+	"years":"Years",
+	"company":"Company",
+	"genre":"Genres",
+	"series":"Series",
+	"description":"Description",
+	"sizes":"Sizes",
+	"editor-score":"Editor Score",
+
+	"any":"any",
+	"from":"from",
+	"to":"to"
 }

@@ -14,12 +14,12 @@ import rootSaga from './sagas/root'
 
 /* Containers */
 import AppWrapper from './components/app.jsx'
+import Results from './components/results/results.jsx'
 import PrivacyPage from './components/pages/privacy.jsx'
 import TermsPage from './components/pages/terms.jsx'
 import ContactPage from './components/pages/contact.jsx'
 import GamePage from './components/pages/game.jsx'
 import InfoPage from './components/pages/info.jsx'
-import Results from './components/results/results.jsx'
 
 /* Reducers */
 import loginReducer from './reducers/login.reducer'

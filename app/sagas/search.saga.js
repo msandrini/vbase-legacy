@@ -3,15 +3,19 @@ import { hashHistory } from 'react-router'
 import { SEARCH } from '../constants'
 //import { sendCall, warnOnNetworkError, createAction } from '../utils'
 
+const filterForUrl = str => encodeURIComponent(str)
+
 const searchEffects = {
 
     simple: function*(action) {
-        hashHistory.push(`/search/${action.value}`)
+    	const value = filterForUrl(action.value)
+        hashHistory.push(`/search/${value}`)
         
     },
 
     advanced: function*(action) {
-        hashHistory.push(`/advanced-search/${action.params.query}/${page}`)
+    	const query = filterForUrl(JSON.stringify(action.data))
+        hashHistory.push(`/advanced-search/${query}`)
     }
 
 }

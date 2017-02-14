@@ -1,37 +1,42 @@
-sample = rgba(0,0,0,.1)
+@require 'common.styl'
 
 header
-	&:after
-		content ""
-		display table
-		clear both
+	clearfix()
 
 #logo
 	margin 0
 	width 350px
 	height 150px
-	background sample
+	bg-black .1
 	float left
 	& span
-		color sample
+		c-black .1
 	
 #top-links
 	float right
 	padding 35px 12px 0 0
-	& a
+	a
 		display block
 		float right
 		width 18px
 		height 12px
-		background #999
 		margin-left 10px
 		border-radius 3px
-		& span
+		overflow hidden
+		.alt
 			display none
-	& .contact-us
+		svg
+			fill transp-white(.5)
+			trans(.3s)
+		&:hover svg
+			fill white
+	.contact-us
 		display block
 		text-align right
-	& .flag
+		svg
+			position relative
+			top -1px
+	.flag
 		display block
 		font-size 10px
 		text-align right
