@@ -1,6 +1,7 @@
 const games = require('./games.server')
 const assets = require('./assets.server')
 const index = require('./index.server')
+const contact = require('./contact.server')
 
 const routing = (app, db) => {
 	app
@@ -16,6 +17,8 @@ const routing = (app, db) => {
 	    .get('/games/all/:page', (req, res) => games.all(db, res, req.params.page))
 	    .get('/games/by-names/:name/:page', (req, res) => games.byNames(db, res, req.params.name, req.params.page))
 	    .get('/games/advanced/:query/:page', (req, res) => games.advanced(db, res, req.params.query, req.params.page))
+
+	    .post('/send-contact', (req, res) => contact(db, res, req.body))
 
 	    .get('/game/:id', (req, res) => games.all(db, res, req.params.id))
 

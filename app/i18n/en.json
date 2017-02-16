@@ -7,8 +7,16 @@
 	"do-logout":"Logout",
 
 	"contact":"Contact",
-	"privacy-policy":"Privacy Policy",
-	"terms-of-use":"Terms of Use",
+	"terms-of-use-and-privacy":"Terms of Use and Privacy",
+	"name":"Name",
+	"e-mail":"E-mail",
+	"message":"Message",
+	"send":"Send",
+
+	"filling-name-required":"Filling your name is required!",
+	"filling-email-required":"Filling your e-mail is required!",
+	"filling-message-required":"Filling the message is required!",
+	"message-sent-successfully":"Your message was sent! Thank you for contacting us!",
 
 	"search-for-a-game":"Search for a game",
 	"search-for-a-game-below":"Search for a game below",
@@ -47,5 +55,35 @@
 
 	"any":"any",
 	"from":"from",
-	"to":"to"
+	"to":"to",
+
+	"trm-1":"Terms",
+	"trm-1-p":"By accessing the website at {0}, you are agreeing to be bound by these terms of service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site. The information contained in this website is protected by applicable copyright and trademark law.",
+	"trm-2":"Use License",
+	"trm-2-p1":"You may not:",
+	"trm-2-li":"modify the information or copy to other websites and publications without knowledge of the owner of this website;]]]use the information for any commercial purpose, or for any public display (commercial or non-commercial);]]]attempt to decompile or reverse engineer any software contained on VBase's website;]]]remove any copyright or other proprietary notations from the information; or]]]transfer the information to another person or \"mirror\" the information on any other server.",
+	"trm-2-p2":"This license shall automatically terminate if you violate any of these restrictions and may be terminated by VBase at any time. Upon terminating your viewing of these information or upon the termination of this license, you must destroy any downloaded information in your possession whether in electronic or printed format.",
+	"trm-3":"Disclaimer",
+	"trm-3-p1":"The information on VBase's website are provided on an 'as is' basis. VBase makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.",
+	"trm-3-p2":"Further, VBase does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the information on its website or otherwise relating to such information or on any sites linked to this site.",
+	"trm-4":"Limitations",
+	"trm-4-p":"In no event shall VBase or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the information on VBase's website, even if VBase or a VBase authorized representative has been notified orally or in writing of the possibility of such damage. Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.",
+	"trm-5":"Accuracy of information",
+	"trm-5-p":"The information appearing on VBase's website could include technical errors.  VBase does not warrant that any of the information on its website are accurate, complete or current. VBase may make changes to the information contained on its website at any time without notice. However VBase does not make any commitment to update the information.",
+	"trm-6":"Links",
+	"trm-6-p":"VBase has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by VBase of the site. Use of any such linked website is at the user's own risk.",
+	"trm-7":"Modifications",
+	"trm-7-p":"VBase may revise these terms of service for its website at any time without notice. By using this website you are agreeing to be bound by the then current version of these terms of service.",
+	"trm-8":"Governing Law",
+	"trm-8-p":"These terms and conditions are governed by and construed in accordance with the laws of Berlin and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.",
+	"trm-pp":"Privacy Policy",
+	"trm-pp-p1":"Your privacy is important to us.",
+	"trm-pp-p2":"It is VBase's policy to respect your privacy regarding any information we may collect while operating our website. Accordingly, we have developed this privacy policy in order for you to understand how we collect, use, communicate, disclose and otherwise make use of personal information. We have outlined our privacy policy below.",
+	"trm-pp-p3":"We are committed to conducting our business in accordance with these principles in order to ensure that the confidentiality of personal information is protected and maintained. VBase may change this privacy policy from time to time at VBase's sole discretion.",
+	"trm-pp-li":"We will collect only the name and sometimes the country and city of our registered users.]]]Before or at the time of collecting personal information, we will identify the purposes for which information is being collected.]]]We will collect and use personal information solely for fulfilling those purposes specified by us and for other ancillary purposes, unless we obtain the consent of the individual concerned or as required by law.]]]Personal data should be relevant to the purposes for which it is to be used, and, to the extent necessary for those purposes, should be accurate, complete, and up-to-date.]]]We will protect personal information by using reasonable security safeguards against loss or theft, as well as unauthorized access, disclosure, copying, use or modification.]]]We will make readily available to customers information about our policies and practices relating to the management of personal information.]]]We will only retain personal information for as long as necessary for the fulfilment of those purposes."
 }
+
+
+
+
+

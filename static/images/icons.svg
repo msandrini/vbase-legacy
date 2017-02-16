@@ -2,6 +2,30 @@
 
 	<polygon id="icon_house" points="50,11.352 0.084,47 17,47 17,87 41,87 41,65 58,65 58,87 83,87 83,47 99.916,47 "/>
 
+	<g id="icon_flag-uk">
+		<clipPath id="t"><path d="M63,52h63v52z v52h-63z h-63v-52z v-52h63z"/></clipPath>
+		<rect width="126" height="104" fill="#00247d"/>
+		<g stroke="#fff" stroke-width="18" fill="none">
+			<path d="M0,0L126,104 M126,0L0,104"/>
+			<path d="M0,0L126,104 M126,0L0,104" clip-path="url(#t)" stroke-width="21"/>
+			<path d="M0,0L126,104 M126,0L0,104" clip-path="url(#t)" stroke-width="16" stroke="#cf142b"/>
+			<path d="M63,0v104 M0,52h126" stroke-width="26"/>
+			<path d="M63,0v104 M0,52h126" stroke="#cf142b"/>
+		</g>
+	</g>
+	<g id="icon_flag-br">
+		<rect x="-12.857" y="-1.5" fill="#009B3A" width="75.713" height="53"/>
+		<path fill="#FEDF00" d="M-4.643,25L25,43.93L54.643,25L25,6.072L-4.643,25z"/>
+		<circle fill="#002776" cx="25" cy="25" r="12.5"/>
+		<g>
+			<defs><circle id="flagbr_1_" cx="25" cy="25" r="12.5"/>
+			</defs><clipPath id="flagbr_2_"><use xlink:href="#flagbr_1_"  overflow="visible"/></clipPath>
+			<path clip-path="url(#flagbr_2_)" fill="#FFFFFF" d="M-12.5,50c0-16.766,13.591-30.356,30.357-30.356
+				c16.766,0,30.357,13.591,30.357,30.356h-1.786c0-15.779-12.792-28.571-28.571-28.571C2.077,21.429-10.714,34.221-10.714,50H-12.5z"
+				/>
+		</g>
+	</g>
+
 	<g id="icon_person">
 		<circle cx="49.562" cy="32.454" r="25.038"/><path d="M100,94v0.812C100,75.822,83.052,62,64.062,62H35.938C16.95,62,0,75.822,0,94.812V94H100z"/>
 	</g>

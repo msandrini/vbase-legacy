@@ -12,7 +12,7 @@ const app = express();
 app.set('port', (process.env.PORT || 5000));
 
 // initialize bodyParser to interpret POST values
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // connect to DB and then continue to routing
 const mongoUrl = 'mongodb://localhost:27017/local';

@@ -19,19 +19,19 @@ const _getCallName = (action) => {
 const resultsEffects = {
 
     request: function*(action) {
-        const callName = _getCallName(action); console.log(callName)
+        const callName = _getCallName(action);
         
         try {
             const feedback = yield call(sendCall, callName)
             if (feedback.status === 200) {
-                yield put(createAction(RESULTS.RETRIEVED)(feedback.data))
+                yield put(createAction(RESULTS.RETRIEVED)({ feedback: feedback.data }))
             } else {
-                yield put(createAction(RESULTS.FAILED)(feedback))
+                yield put(createAction(RESULTS.FAILED)({ feedback }))
                 warnOnNetworkError(feedback)
             }
             
         } catch(e) {
-            yield put(createAction(RESULTS.FAILED)(e))
+            yield put(createAction(RESULTS.FAILED)({ feedback: e }))
             warnOnNetworkError(e)
         }
     },

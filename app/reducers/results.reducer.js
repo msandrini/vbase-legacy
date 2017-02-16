@@ -14,7 +14,7 @@ const resultsReducer = (state = initialState, action) => {
             return {...state, isLoading: true, games: [], total: 0, hasFailed: false }
 
         case RESULTS.RETRIEVED:
-            return {...state, isLoading: false, games: action.games, total: action.total, hasFailed: false }
+            return {...state, isLoading: false, games: action.feedback.games, total: action.feedback.total, hasFailed: false }
 
         case RESULTS.FAILED:
             return {...state, isLoading: false, games: [], total: 0, hasFailed: true }

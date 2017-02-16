@@ -1,0 +1,35 @@
+@require 'common.styl'
+
+#contact-form
+	margin 20px 100px
+	input, textarea
+		padding 6px 12px
+		border-radius 10px
+		font-size 18px
+		bg-white .1
+		display block
+		margin 0 12px 12px 0
+		border 0
+		width 300px
+		float left
+		box-shadow inset 2px 2px 7px transp-black(.5)
+		trans .3s
+		&:focus
+			bg-white .3
+			outline none
+			box-shadow inset 2px 2px 7px transp-black(.8)
+	textarea
+		height 120px
+		float none
+		clear left
+		width 612px
+		resize vertical
+		-webkit-transition-property background-color
+		transition-property background-color
+	.failure-message
+		float left
+		color red
+		
+	.button-wrapper
+		width 612px
+		text-align right

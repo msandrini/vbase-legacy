@@ -59,7 +59,7 @@ class LoginBox extends Component {
 		const { user, isLoggedIn } = this.props
 		return <aside className="user-box">
 			{ isLoggedIn && <UserInfo user={user} logout={() => this.logout()} />}
-			{ !isLoggedIn && <a id="btn-google" href="#" style={this.loginButtonStyle()} alt={t('login-with-Google')}>
+			{ !isLoggedIn && <a id="btn-google" href="#" style={this.loginButtonStyle()} alt={t('login-with-Google')} title={t('login-with-Google')}>
 				<Icon type="person" size="50" />
 			</a>}
 		</aside>
