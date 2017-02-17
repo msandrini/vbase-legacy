@@ -8,7 +8,6 @@ import t from '../i18n'
 const contactEffects = {
 
     send: function*(action) {
-
         try {
             const feedback = yield call(sendCall, 'send-contact', 'post', action.fields)
             if (feedback.status === 200) {

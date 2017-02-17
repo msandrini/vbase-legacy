@@ -6,10 +6,10 @@ import { BASE_URL } from '../../constants'
 import t from '../../i18n'
 
 const _getGenre = game => {
-	return game.genre[0] + (game.genre[1]? ' / ' + game.genre[1] : '')
+	return game.genres[0] + (game.genres[1]? ' / ' + game.genres[1] : '')
 }
 const _getCompany = game => {
-	return game.company[0] + (game.company[1]? ' / ' + game.company[1] : '')
+	return game.companies[0] + (game.companies[1]? ' / ' + game.companies[1] : '')
 }
 const _getAka = game => {
 	if (game.otherNames) {
@@ -23,7 +23,7 @@ const _getAka = game => {
 }
 const _getLink = game => {
 	const convertedName = game.title.replace(/[^a-zA-Z0-9\-]/g, '_');
-	return `game/${game._id}-${convertedName}`;
+	return `game/${convertedName}-${game._id}`;
 }
 
 class Results extends Component {

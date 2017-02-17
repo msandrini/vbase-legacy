@@ -19,6 +19,8 @@ const resultsReducer = (state = initialState, action) => {
         case RESULTS.FAILED:
             return {...state, isLoading: false, games: [], total: 0, hasFailed: true }
 
+        // case RESULTS.PAGEREQUESTED - triggers saga
+
         default:
             return state
     }

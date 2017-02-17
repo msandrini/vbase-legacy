@@ -25,6 +25,7 @@ import loginReducer from './reducers/login.reducer'
 import searchReducer from './reducers/search.reducer'
 import resultsReducer from './reducers/results.reducer'
 import contactReducer from './reducers/contact.reducer'
+import gameReducer from './reducers/game.reducer'
 
 /* Styles */
 import './styles/main.styl'
@@ -35,6 +36,7 @@ const combinedReducers = combineReducers({
     search: searchReducer,
     contact: contactReducer,
     results: resultsReducer,
+    game: gameReducer,
     routing: routerReducer
 })
 const sagaMiddleware = createSagaMiddleware()

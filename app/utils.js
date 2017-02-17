@@ -20,3 +20,11 @@ export const sendCall = (url, method = 'get', data = {}) => {
 export const warnOnNetworkError = (error) => {
     console.error('Network error', error)
 }
+
+/* String helper */
+
+export const joinText = (array, comma, and) => {
+    const allButLast = array.slice(0, array.length - 1)
+    const last = array[array.length - 1]
+    return allButLast.join(`${comma} `) + ` ${and} ` + last
+}

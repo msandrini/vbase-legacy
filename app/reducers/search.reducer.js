@@ -18,6 +18,8 @@ const searchReducer = (state = initialState, action) => {
 		case SEARCH.CHANGEDSIMPLE:
 			return {...state, fieldValueSimple:action.value }
 
+		// case SEARCH.SUBMITTEDSIMPLE - triggers saga
+
 		case SEARCH.SUBMITTEDADVANCED:
 			return {...state, advancedVisible:false }
 
