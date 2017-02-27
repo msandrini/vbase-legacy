@@ -3,7 +3,7 @@ import t from '../../i18n'
 import SelectBox from '../shared/select-box.jsx'
 import Icon from '../shared/icon.jsx'
 
-import '../../styles/advanced-search.styl'
+import './advanced-fields.styl'
 
 class AdvancedFields extends Component {
 	constructor(props) {
@@ -46,78 +46,82 @@ class AdvancedFields extends Component {
 	}
 	render() {
 		return <div className="wrap-advanced">
-			{ this.props.visible &&
-				<a onClick={() => this.props.hide()} className="hide-advanced" alt={t('back-to-simple-search')} title={t('back-to-simple-search')}>
-					<Icon type="uparrow" size="12" />
-				</a> }
-			<form className={'advanced-search' + (this.props.visible?'':' hidden')} onSubmit={this._triggerSubmit}>
-				<div className="group">
-					<label htmlFor="names">{t('names')}</label>
-					<input type="search" autoComplete="off" name="names" />
+			{this.props.visible &&
+				<a onClick={() => this.props.hide()} className="hide-advanced ball btn" alt={t('back-to-simple-search')} title={t('back-to-simple-search')}>
+					<Icon type="x" size="24" />
+				</a>}
+			<form className={this.props.visible ? '' : ' hidden'} onSubmit={this._triggerSubmit}>
+				<div className="advanced-search">
+					<div className="group">
+						<label htmlFor="names">{t('names')}</label>
+						<input type="search" autoComplete="off" name="names" />
+					</div>
+					<div className="group">
+						<label htmlFor="years1">{t('years')}</label>
+						<span className="acc">{t('from')}</span>
+						<SelectBox name="years1">
+							<option value=''>{t('any')}</option>
+							{this.years.map(y => <option value={y} key={y}>{y}</option>)}
+						</SelectBox>
+						<span className="acc">{t('to')}</span>
+						<SelectBox name="years2">
+							<option value=''>{t('any')}</option>
+							{this.years.map(y => <option value={y} key={y}>{y}</option>)}
+						</SelectBox>
+					</div>
+					<div className="group">
+						<label htmlFor="scores1">{t('editor-score')}</label>
+						<span className="acc">{t('from')}</span>
+						<SelectBox name="scores1">
+							<option value=''>{t('any')}</option>
+							{this.scores.map(s => <option value={s} key={s}>{s}</option>)}
+						</SelectBox>
+						<span className="acc">{t('to')}</span>
+						<SelectBox name="scores2">
+							<option value=''>{t('any')}</option>
+							{this.scores.map(s => <option value={s} key={s}>{s}</option>)}
+						</SelectBox>
+					</div>
+					<div className="group">
+						<label htmlFor="company">{t('company')}</label>
+						<input type="search" autoComplete="off" name="company" />
+					</div>
+					<div className="group">
+						<label htmlFor="genre">{t('genres')}</label>
+						<input type="search" autoComplete="off" name="genre" />
+					</div>
+					<div className="group">
+						<label htmlFor="series">{t('series')}</label>
+						<input type="search" autoComplete="off" name="series" />
+					</div>
+					<div className="group">
+						<label htmlFor="description">{t('description')}</label>
+						<input type="search" autoComplete="off" name="description" />
+					</div>
+					<div className="group">
+						<label htmlFor="sizes1">{t('sizes')}</label>
+						<span className="acc">{t('from')}</span>
+						<SelectBox name="sizes1">
+							<option value=''>{t('any')}</option>
+							{this.sizes.map(s => <option value={s} key={s}>{s}</option>)}
+						</SelectBox>
+						<span className="acc">{t('to')}</span>
+						<SelectBox name="sizes2">
+							<option value=''>{t('any')}</option>
+							{this.sizes.map(s => <option value={s} key={s}>{s}</option>)}
+						</SelectBox>
+					</div>
+					<div className="group">
+						<label>&nbsp;</label>
+						<button className="secondary reset" type="reset">{t('reset')}</button>
+					</div>
 				</div>
-				<div className="group">
-					<label htmlFor="years1">{t('years')}</label>
-					<span className="acc">{t('from')}</span>
-					<SelectBox name="years1">
-						<option value=''>{t('any')}</option>
-						{this.years.map(y => <option value={y} key={y}>{y}</option>)}
-					</SelectBox>
-					<span className="acc">{t('to')}</span>
-					<SelectBox name="years2">
-						<option value=''>{t('any')}</option>
-						{this.years.map(y => <option value={y} key={y}>{y}</option>)}
-					</SelectBox>
-				</div>
-				<div className="group">
-					<label htmlFor="scores1">{t('editor-score')}</label>
-					<span className="acc">{t('from')}</span>
-					<SelectBox name="scores1">
-						<option value=''>{t('any')}</option>
-						{this.scores.map(s => <option value={s} key={s}>{s}</option>)}
-					</SelectBox>
-					<span className="acc">{t('to')}</span>
-					<SelectBox name="scores2">
-						<option value=''>{t('any')}</option>
-						{this.scores.map(s => <option value={s} key={s}>{s}</option>)}
-					</SelectBox>
-				</div>
-				<div className="group">
-					<label htmlFor="company">{t('company')}</label>
-					<input type="search" autoComplete="off" name="company" />
-				</div>
-				<div className="group">
-					<label htmlFor="genre">{t('genre')}</label>
-					<input type="search" autoComplete="off" name="genre" />
-				</div>
-				<div className="group">
-					<label htmlFor="series">{t('series')}</label>
-					<input type="search" autoComplete="off" name="series" />
-				</div>
-				<div className="group">
-					<label htmlFor="description">{t('description')}</label>
-					<input type="search" autoComplete="off" name="description" />
-				</div>
-				<div className="group">
-					<label htmlFor="sizes1">{t('sizes')}</label>
-					<span className="acc">{t('from')}</span>
-					<SelectBox name="sizes1">
-						<option value=''>{t('any')}</option>
-						{this.sizes.map(s => <option value={s} key={s}>{s}</option>)}
-					</SelectBox>
-					<span className="acc">{t('to')}</span>
-					<SelectBox name="sizes2">
-						<option value=''>{t('any')}</option>
-						{this.sizes.map(s => <option value={s} key={s}>{s}</option>)}
-					</SelectBox>
-				</div>
-				<div className="group">
-					<label>&nbsp;</label>
-					<button className="standard submit" type="submit"><Icon size="12" type="search" autoComplete="off" />{t('search')}</button>
-					<button className="secondary reset" type="reset">{t('reset')}</button>
-				</div>
+				<button className="btn ball submit-advanced" type="submit">
+					<Icon size="22" type="search" />
+				</button>
 			</form>
 		</div>
-	}
+			}
 
 }
 

@@ -1,0 +1,41 @@
+@require '../../common.styl'
+
+#game-info figure
+	float right
+	margin 0
+	border 3px solid c-light
+	border-top 0
+	border-right 0
+	position relative
+	.overlay
+		display block
+		size 320px 240px
+		background embedurl('../../../../static/images/tvoverlay.png')
+		position absolute
+		z-index 2
+		trans .3s
+		&:hover
+			opacity 0
+	img
+		size 320px 240px
+		display block
+	.controls
+		position absolute
+		right 12px 
+		bottom -17px
+		z-index 3
+		width 70px
+		a
+			display block
+			float left
+		svg
+			position relative
+		.prev
+			size 24px 24px
+			margin 5px 9px 0 0
+			svg
+				pos 4px 1px
+		.next
+			size 32px 32px
+			svg
+				pos 7px 6px

@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,400,400i,700,900')
+@require 'common.styl'
+
+*
+	box-sizing border-box
+	font-family 'Titillium Web', sans-serif
+
+body
+	background-color bgcolor
+	padding 0
+	margin 0
+	
+a
+	color #eee
+	text-decoration none
+		
+button, .btn
+	appearance none
+	border none
+	trans .25s
+	cursor pointer
+	&:focus
+		outline none
+	&:hover
+		transform scale(1.1, 1.1)
+	&:active
+		transform scale(.9, .9)
+	&.secondary
+		background transparent
+		padding 0
+		text-decoration underline
+		color white
+
+::-webkit-input-placeholder
+	color c-medium2
+	font-weight 100
+::-moz-placeholder
+	color c-medium2
+	font-weight 100
+:-ms-input-placeholder
+	color c-medium2
+	font-weight 100
+	
+.ball
+	background c-light
+	border-radius 100%
+	overflow hidden
+	svg
+		fill bgcolor
+		trans .25s
+button.ball
+	&:focus svg
+		fill black
+	&[disabled] svg
+		opacity .2
+	
+.disable-hover, .disable-hover *
+	pointer-events none !important
+
+/* generic content */
+		
+.text-content
+	padding 20px 30px 30px 100px
+	margin-right 170px
+	border-right 3px solid c-light
+	color c-dark2
+	font-size 14px

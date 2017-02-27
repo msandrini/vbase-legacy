@@ -1,0 +1,20 @@
+@require '../common.styl'
+
+.scorebar
+	position absolute
+
+	.game-link &
+		right -46px
+		top 0
+		.in
+			fill c-medium
+		.out
+			fill c-dark
+
+	#game-info &
+		pos 4px 35px
+		flip()
+		.in
+			fill white
+		.out
+			fill rgba(c-dark, .5)

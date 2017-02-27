@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { createAction } from '../../utils'
 import { LOGIN } from '../../constants'
 
-import '../../styles/login-box.styl'
+import './login-box.styl'
 import t from '../../i18n'
 import UserInfo from './user-info.jsx'
 import Icon from '../shared/icon.jsx'
@@ -59,9 +59,9 @@ class LoginBox extends Component {
 		const { user, isLoggedIn } = this.props
 		return <aside className="user-box">
 			{ isLoggedIn && <UserInfo user={user} logout={() => this.logout()} />}
-			{ !isLoggedIn && <a id="btn-google" href="#" style={this.loginButtonStyle()} alt={t('login-with-Google')} title={t('login-with-Google')}>
-				<Icon type="person" size="50" />
-			</a>}
+			<a id="btn-google" className="ball btn" href="#" style={this.loginButtonStyle()} title={t('login-with-Google')}>
+				<Icon type="person" size="24" />
+			</a>
 		</aside>
 	}
 }

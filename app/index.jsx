@@ -14,10 +14,10 @@ import rootSaga from './sagas/root'
 
 /* Containers */
 import AppWrapper from './components/app.jsx'
-import Results from './components/results/results.jsx'
+import Results from './components/results/_main.jsx'
 import TermsPage from './components/pages/terms.jsx'
 import ContactPage from './components/pages/contact.jsx'
-import GamePage from './components/pages/game.jsx'
+import GamePage from './components/pages/game/_main.jsx'
 import InfoPage from './components/pages/info.jsx'
 
 /* Reducers */
@@ -26,9 +26,6 @@ import searchReducer from './reducers/search.reducer'
 import resultsReducer from './reducers/results.reducer'
 import contactReducer from './reducers/contact.reducer'
 import gameReducer from './reducers/game.reducer'
-
-/* Styles */
-import './styles/main.styl'
 
 /* Middleware routines */
 const combinedReducers = combineReducers({
@@ -65,3 +62,15 @@ ReactDOM.render(
     document.getElementById('app')
 )
 
+/* Other */
+
+let timer;
+window.addEventListener('scroll', () => {
+    clearTimeout(timer);
+    if (!document.body.classList.contains('disable-hover')) {
+        document.body.classList.add('disable-hover')
+    }
+    timer = setTimeout(() => {
+        document.body.classList.remove('disable-hover')
+    }, 500);
+}, false);

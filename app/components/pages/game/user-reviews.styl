@@ -1,0 +1,32 @@
+@require '../../common.styl'
+
+#game-info .user-reviews
+	margin 0 0 0 180px
+	height 53px
+	padding 10px 40px 0 0
+	text-align right
+	text-transform lowercase
+	position relative
+	cursor pointer
+	.action-text
+		color c-medium
+		margin-left 10px
+		&:after
+			content ' '
+			display block
+			height 22px
+			width 3px
+			background c-light
+			position absolute
+			right 21px
+			top 32px
+	.ball
+		size 21px 21px
+		position absolute
+		right 12px
+		top 12px
+		svg
+			position absolute
+			pos 5px 4px
+	.ball.plus svg
+		top 5px

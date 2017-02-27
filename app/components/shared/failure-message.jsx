@@ -1,9 +1,12 @@
 import React from 'react'
 import t from '../../i18n'
 
+import './failure-message.styl'
+
 const FailureMessage = (props) => (
 	<div className="failure-message">
-		<span>{props.message || t('error')}</span>
+		<strong>{t('error')}</strong>
+		<p>{props.message}</p>
 	</div>
 )
 

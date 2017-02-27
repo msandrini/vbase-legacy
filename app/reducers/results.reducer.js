@@ -20,6 +20,7 @@ const resultsReducer = (state = initialState, action) => {
             return {...state, isLoading: false, games: [], total: 0, hasFailed: true }
 
         // case RESULTS.PAGEREQUESTED - triggers saga
+        // case RESULTS.BACKREQUESTED - triggers saga
 
         default:
             return state

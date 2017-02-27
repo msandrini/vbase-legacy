@@ -39,3 +39,6 @@ jspm_packages
 # built files
 app/_bundled/*
 app/_cache/*
+
+# visual studio
+.vscode/*

@@ -48,6 +48,10 @@ const resultsEffects = {
             const firstPart = `all-games`
         }
         hashHistory.push(`/${firstPart}/${page}`)
+    }, 
+
+    triggerBack: function*(action) { console.log(hashHistory)
+        hashHistory.goBack()
     }
 
 }

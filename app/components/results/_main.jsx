@@ -9,7 +9,7 @@ import FailureMessage from '../shared/failure-message.jsx'
 import Pagination from '../shared/pagination.jsx'
 import GameLink from './game-link.jsx'
 
-import '../../styles/results.styl'
+import './_main.styl'
 import t from '../../i18n';
 
 const _getComposedSearchDetails = query => {
@@ -68,6 +68,7 @@ const _getTitle = params => {
 class Results extends Component {
 	constructor(props) {
 		super(props)
+		this._goBack = this._goBack.bind(this)
 	}
 
 	componentWillMount() {
@@ -92,6 +93,10 @@ class Results extends Component {
 		this.props.requestPageAction({page, params})
 	}
 
+	_goBack() {
+		this.props.requestBackAction()
+	}
+
 	render() {
 		const { params, games, total, isLoading, hasFailed } = this.props;
 		const page = (parseInt(params.page, 10) - 1) || 0;
@@ -103,7 +108,7 @@ class Results extends Component {
 				( hasFailed? <FailureMessage /> :
 					(!games.length? <div className="no-results">
 							{t('no-results-found')}<br />
-							<button className="standard">{t('go-back')}</button>
+							<button className="standard" onClick={this._goBack}>{t('go-back')}</button>
 						</div> :
 						<div>
 							<Pagination currentPage={page} results={total} linkFunction={v => this._changePage(v)} />
@@ -133,7 +138,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
 	requestAction: createAction(RESULTS.REQUESTED),
-	requestPageAction: createAction(RESULTS.PAGEREQUESTED)
+	requestPageAction: createAction(RESULTS.PAGEREQUESTED),
+	requestBackAction: createAction(RESULTS.BACKREQUESTED)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Results);

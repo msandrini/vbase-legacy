@@ -22,9 +22,17 @@ f-white(n)
 f-black(n)
 	fill transp-black(n)
 
+size(w, h)
+	width w
+	height h
+
+pos(x, y)
+	left x
+	top y
+
 trans(duration)
-	-webkit-transition all duration ease-in
-	transition all duration ease-in
+	-webkit-transition all duration ease-out
+	transition all duration ease-out
 	
 clearfix()
 	&:after
@@ -40,3 +48,11 @@ appearance(v)
 	-moz-appearance v
 	-webkit-appearance v
 	appearance v
+
+bgcolor = #788
+c-light = lighten(bgcolor, 75%)
+c-medium = lighten(bgcolor, 50%)
+c-medium2 = lighten(bgcolor, 25%)
+c-dark = darken(bgcolor, 25%)
+c-dark2 = darken(bgcolor, 50%)
+c-dark3 = darken(bgcolor, 75%)

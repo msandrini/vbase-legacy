@@ -23,9 +23,9 @@ const gameEffects = {
         }
     },
 
-    triggerBack: function*() {
+    triggerBack: function*(action) {
         window.alert(t('game-not-found'))
-        hashHistory.back()
+        hashHistory.goBack()
     }
 
 }

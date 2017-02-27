@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-import Scorebar from './scorebar.jsx'
+import Scorebar from '../shared/scorebar.jsx'
 import { BASE_URL } from '../../constants'
 
-import t from '../../i18n'
+import t, { lang } from '../../i18n'
+import './game-link.styl'
 
 const _getGenre = game => {
-	return game.genres[0] + (game.genres[1]? ' / ' + game.genres[1] : '')
+	const genres = game.genreTitles
+	if (genres && genres[0]) {
+		return genres[0][lang] + (genres[1]? ' / ' + genres[1][lang] : '')
+	}
+	return ''
 }
 const _getCompany = game => {
 	return game.companies[0] + (game.companies[1]? ' / ' + game.companies[1] : '')
@@ -30,16 +35,16 @@ class Results extends Component {
 	render() {
 		const {game} = this.props;
 		return <Link className="game-link" to={_getLink(game)}>
-	    		<figure><img src={BASE_URL + `image-gameplay/${game._id}.1`} alt={game.title} /></figure>
-	    		<div className="content">
-		    		<h5>{game.title}</h5>
-		    		<div className="aka">{_getAka(game)}</div>
-		    		<div className="supplementary-info">
-		    			<Scorebar score={game.editorScore} />
-		    			<strong>{_getGenre(game)}</strong> {t('made-by')} {_getCompany(game)}
-		    		</div>
-		    	</div>
-	    	</Link>
+			<figure><img src={BASE_URL + `image-gameplay/${game._id}.1`} alt={game.title} /></figure>
+			<div className="content">
+				<div className="aka">{_getAka(game)}</div>
+				<h5>{game.title}</h5>
+				<div className="supplementary-info">
+					<Scorebar score={game.editorScore} leanMode={true} />
+					<strong>{_getGenre(game)}</strong> {t('made-by')} {_getCompany(game)}
+				</div>
+			</div>
+		</Link>
 	}
 }
  export default Results

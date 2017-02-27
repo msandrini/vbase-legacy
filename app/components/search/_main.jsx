@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { createAction } from '../../utils'
 import { SEARCH } from '../../constants'
 
-import '../../styles/search.styl'
+import './_main.styl'
 import t from '../../i18n'
 import Icon from '../shared/icon.jsx'
 
@@ -37,13 +37,13 @@ class Fields extends Component {
 	    	<form className="basic-search" onSubmit={this._submitSimple}>
 	        	<input type="search" placeholder={t(advancedSearchVisible? 'search-for-a-game-below':'search-for-a-game')} id="simpleSearchValue"
 	        		disabled={advancedSearchVisible} onChange={this._fieldChangeSimple} autoComplete="off" />
-	        	{fieldValueSimple && <button type="submit">
-	        		<Icon type="search" size="28" />
-	        	</button>}
+	        	<button type="submit" className="ball" disabled={!fieldValueSimple}>
+	        		<Icon type="search" size="24" />
+	        	</button>
 	        	{!advancedSearchVisible && 
 	        		<a onClick={this._toggleAdvanced} className="trigger-advanced">
 	        			{t('advanced-search')}
-	        			<Icon size="10" type="plus" />
+	        			<Icon size="9" type="plus" />
 	        		</a>}
 	        </form>
 	        <AdvancedFields visible={advancedSearchVisible} hide={this._toggleAdvanced} submit={this._submitAdvanced} />

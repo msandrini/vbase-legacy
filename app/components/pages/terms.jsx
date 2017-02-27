@@ -7,7 +7,7 @@ const address = document.location.origin
 
 const TermsPage = () => (
     <div>
-		<Title main="Terms of Service and Privacy Policy" />
+		<Title main="Terms of Service" sub="and Privacy Policy" />
 
 		<div className="text-content">
 		<h3>1. {t('trm-1')}</h3>

@@ -9,6 +9,7 @@ const rootSaga = function*() {
 	yield [
 		takeLatest(RESULTS.REQUESTED, resultsEffects.request),
 		takeLatest(RESULTS.PAGEREQUESTED, resultsEffects.requestPage),
+		takeLatest(RESULTS.BACKREQUESTED, resultsEffects.triggerBack),
 
 		takeLatest(SEARCH.SUBMITTEDSIMPLE, searchEffects.simple),
 		takeLatest(SEARCH.SUBMITTEDADVANCED, searchEffects.advanced),

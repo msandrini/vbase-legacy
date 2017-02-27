@@ -1,57 +1,46 @@
-@require 'common.styl'
+@require '../common.styl'
 
 .search
-	padding 50px 20px 0 20px
-	width calc(100% - 500px)
-	float left
+	width calc(100% - 580px)
+	position absolute
+	pos 375px 67px
+	z-index 5
 
 .basic-search
 	position relative
-	& input
-		width calc(100% - 50px)
+	input
+		width 70%
 		font-size 24px
 		padding 8px 40px 8px 0
 		border 0
 		color white
 		background transparent
 		appearance none
-		border-bottom 2px solid transp-white(.5)
+		border-bottom 3px solid c-light
 		&:focus
 			outline none
 			border-bottom-color #FFF
-	& button
+			& + button
+				background white
+	button
 		border 0
 		position relative
-		left -32px
-		top 4px
-		width 32px
-		height 32px
-		opacity .5
-		bg-white .2
+		pos -20px 27px
+		size 40px 40px
 		padding 2px
-		&:active
-			left -31px
-			top 5px
-		:hover
-			opacity .8
 		svg
 			flip()
-			c-white .5
-			fill white
-	& .trigger-advanced
+	.trigger-advanced
 		position absolute
 		font-size 12px
 		display block
-		margin 5px 0 0 calc(100% - 250px)
-		text-align right
-		width 200px
-		c-white .5
+		color c-medium
 		trans .3s
 		cursor pointer
+		text-transform lowercase
 		svg
 			margin-left 5px
-			fill white
-			opacity .5
+			fill c-medium
 			trans .3s
 		&:hover
 			color white

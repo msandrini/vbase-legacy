@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 
-import '../../styles/pagination.styl'
+import './pagination.styl'
 import t from '../../i18n'
 import Icon from './icon.jsx'
 import SelectBox from './select-box.jsx'
@@ -44,29 +44,27 @@ class Pagination extends Component {
 		const pageInt = parseInt(currentPage, 10)
 		return <aside className="pagination">
 			{this.hasPrev &&
-	    		<a className="btn extremes first" title={t('first-page')} onClick={() => this._goToPage(0)}>
-	    			<span className="alt">{t('first-page')}</span>
-	    			<Icon size="20" type="prev" />
-	    		</a>}
-	    	{this.hasPrev &&
-	    		<a className="btn sequence prev" title={t('previous-page')} onClick={() => this._goToPage(pageInt - 1)}>
-	    			<span className="alt">{t('previous-page')}</span>
-	    			<Icon size="25" type="prev" />
-	    		</a>}
-	    	<SelectBox onChange={(ev) => this._goToPage(ev)} value={currentPage}>
-		    	{this.pagesArray.map(p => { return <option key={p} value={p}>{p+1}</option> })}
-		    </SelectBox>
-	    	{this.hasNext &&
-	    		<a className="btn sequence next" title={t('next-page')} onClick={() => this._goToPage(pageInt + 1)}>
-	    			<span className="alt">{t('next-page')}</span>
-	    			<Icon size="25" type="next" />
-	    		</a>}
-	    	{this.hasNext &&
-	    		<a className="btn extremes last" title={t('last-page')} onClick={() => this._goToPage(this.pages - 1)}>
-	    			<span className="alt">{t('last-page')}</span>
-	    			<Icon size="20" type="next" />
-	    		</a>}
-	    </aside>
+				<a className="ball btn extremes first" title={t('first-page')} onClick={() => this._goToPage(0)}>
+					<Icon size="9" type="first" />
+				</a>}
+			{this.hasPrev &&
+				<a className="ball btn sequence prev" title={t('previous-page')} onClick={() => this._goToPage(pageInt - 1)}>
+					<Icon size="17" type="prev" />
+				</a>}
+			<div className="ball btn">
+				<SelectBox onChange={(ev) => this._goToPage(ev)} value={currentPage}>
+					{this.pagesArray.map(p => { return <option key={p} value={p}>{p + 1}</option> })}
+				</SelectBox>
+			</div>
+			{this.hasNext &&
+				<a className="ball btn sequence next" title={t('next-page')} onClick={() => this._goToPage(pageInt + 1)}>
+					<Icon size="17" type="next" />
+				</a>}
+			{this.hasNext &&
+				<a className="ball btn extremes last" title={t('last-page')} onClick={() => this._goToPage(this.pages - 1)}>
+					<Icon size="9" type="last" />
+				</a>}
+		</aside>
 	}
 }
 

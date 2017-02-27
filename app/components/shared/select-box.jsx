@@ -6,7 +6,7 @@ const SelectBox = props => (
 		<select onChange={props.onChange} value={props.value} name={props.name}>
 			{props.children}
 		</select>
-		<Icon size="8" type="downarrow" />
+		<Icon size="10" type="downarrow" />
 	</div>
 );
 

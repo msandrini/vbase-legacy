@@ -7,7 +7,7 @@ import { CONTACT } from '../../constants'
 import { createAction } from '../../utils'
 
 import t from '../../i18n'
-import '../../styles/contact.styl'
+import './contact.styl'
 
 class ContactPage extends Component {
 
@@ -48,13 +48,13 @@ class ContactPage extends Component {
 		return <div>
 			<Title main={t('contact-us')} />
 			<form id="contact-form" onSubmit={this._submitForm}>
-				<input type="text" autoComplete="off" name="name" required placeholder={t('name')} onChange={this._changeValue} />
 				<input type="email" autoComplete="off" name="email" required placeholder={t('e-mail')} onChange={this._changeValue} />
+				<input type="text" autoComplete="off" name="name" required placeholder={t('name')} onChange={this._changeValue} />
 				<textarea autoComplete="off" name="message" required placeholder={t('message')} onChange={this._changeValue} />
 				<div className="button-wrapper">
 					{this.props.failed && <div className="failure-message">{this.props.failed}</div>}
 					{this.props.isLoading ? <Spinner /> :
-						<button className="standard"><Icon type="mail" size="12" />{t('send')}</button>}
+						<button className="btn ball" title={t('send')}><Icon type="check" size="28" /></button>}
 				</div>
 			</form>
 		</div>
