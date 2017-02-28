@@ -4,6 +4,7 @@ const initialState = {
     isLoading: false,
     hasFailed: false,
     gameId: null,
+    seriesGames: {},
     info: {}
 }
 

@@ -22,7 +22,7 @@ const _getGames = (db, cursor, page, response) => {
 						genres = [...genres, ...d.genres]
 					}
 					if (genres.length) {
-						const genresCondition = { _id: { $in: _unique(genres) }}
+						const genresCondition = { _id: { $in: _unique(genres) } }
 						db.collection('genres').find(genresCondition, { title: 1 }).toArray((errGenre, docsGenre) => {
 							if (errGenre) {
 								response.status(500).json({ error: errGenre, errorType: 'count' })
@@ -154,7 +154,7 @@ const games = {
 						let counter;
 						let series = {}
 						for (s of results[0]) {
-							series[s._id] = s.title
+							series[s._id] = { title: s.title, id: s._id }
 						}
 						if (doc.series) {
 							counter = 0
@@ -165,7 +165,7 @@ const games = {
 						}
 						let addOns = {}
 						for (a of results[1]) {
-							addOns[a._id] = { title: a.title, type: a.type }
+							addOns[a._id] = { title: a.title, type: a.type, id: a._id }
 						}
 						if (doc.addOns) {
 							counter = 0
@@ -176,7 +176,7 @@ const games = {
 						}
 						let genres = {}
 						for (g of results[2]) {
-							genres[g._id] = { title: g.title, super: g.super }
+							genres[g._id] = { title: g.title, super: g.super, id: g._id }
 						}
 						if (doc.genres) {
 							counter = 0

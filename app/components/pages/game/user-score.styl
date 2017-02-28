@@ -2,17 +2,39 @@
 
 #game-info .user-score
 	.ball
-		size 72px 72px
-		margin 154px 0 0 20px
+		size 81px 81px
+		margin 144px 0 0 15px
 		text-align center
 	.label
 		display block
-		text-align center
+		text-align left
 		font-size 10px
+		line-height 10px
 		text-transform lowercase
 		color c-medium
-		margin-top 10px
-	.number
-		color red
+		margin 10px 24px 0 18px
+		line-height 9px
+	strong
+		size 100% 30px
+		padding-right 4px
+		font-size 30px
+		line-height 28px
+		letter-spacing -.1em
+		display block
+		text-shadow 2px 2px 5px c-medium
 	small
-		c-black .5
+		display block
+		text-align left
+		color c-dark
+		font-size 10px
+		line-height 9px
+		margin 0 14px 0
+	n = 10
+	for c in scoresColours
+		.score{replace('\.', '-', '' + n)}
+			strong
+				color mix(c, c-dark, 50%)
+		n = n - .5
+	.scorebar
+		top 149px
+		left 21px

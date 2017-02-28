@@ -20,14 +20,14 @@ const _getLocalsObject = ({releasedIn, otherNames}) => {
 }
 
 const _getLocalsString = props => {
-	const locals = _getLocalsObject(props); console.log(locals)
+	const locals = _getLocalsObject(props);
 	let localsStr = []
 	let localKeys = Object.keys(locals)
 	for (const l of localKeys) {
-		localsStr.push(t('in') + ` ${l} ` + (locals[l] ? (t('as') + ` *${locals[l]}* `) : ''))
+		localsStr.push(t('in') + ` ${l}` + (locals[l] ? (` ${t('as')} *${locals[l]}*`) : ''))
 	}
 	if (localKeys.length > 1) {
-		return joinText(localsStr, ',', t('and'))
+		return joinText(localsStr, ', ', ` ${t('and')} `)
 	} else {
 		return t('only-in') + ' ' + localKeys[0]
 	}

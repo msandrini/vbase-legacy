@@ -3,18 +3,23 @@
 .scorebar
 	position absolute
 
+	n = 10
+	for c in scoresColours
+		.colour{replace('\.', '-', '' + n)}
+			fill c
+		n = n - .5
+
 	.game-link &
 		right -46px
 		top 0
-		.in
-			fill c-medium
 		.out
 			fill c-dark
 
 	#game-info &
-		pos 4px 35px
-		flip()
-		.in
-			fill white
 		.out
-			fill rgba(c-dark, .5)
+			fill rgba(c-medium, .6)
+		n = 10
+		for c in scoresColours
+			.colour{replace('\.', '-', '' + n)}
+				fill mix(c, c-dark, 60%)
+			n = n - .5

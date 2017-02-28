@@ -3,24 +3,70 @@
 #game-info .editor-score
 	.ball
 		size 110px 110px
-		margin-top 30px
+		margin-top 20px
 		text-align center
+		position relative
 	.label
 		display block
-		text-align center
+		text-align right
 		font-size 10px
 		text-transform lowercase
 		color c-medium
-		margin-top 10px
+		margin 15px 28px 0 50px
+		line-height 9px
+		position absolute
+		top 0
+		right 0
+	.scorebar
+		pos 4px 5px
+		flip()
 	.line
 		position absolute
 		display block
 		background c-light
-		size 3px 100px
-		pos 54px 140px
-	.numbers
-		color red
+		size 3px 110px
+		pos 54px 130px
 	strong
-		font-size 30px
+		font-size 72px
+		line-height 50px
+		display block
+		position absolute
+		font-weight 900
+		top 34px
+		right 44px
+		text-align right
+		letter-spacing -.1em
+		z-index 2
+		text-shadow 2px 2px 5px c-medium
+		-webkit-text-stroke 3px c-medium
+	n = 10
+	for c in scoresColours
+		.score{replace('\.', '-', '' + n)}
+			strong
+				color c
+		n = n - .5
 	small
-		c-black .5
+		color c-medium2
+		position absolute
+		top 35px
+		right 15px
+		font-size 36px
+		&:before
+			content ' '
+			background-color c-medium
+			font-size 72px
+			line-height 20px
+			position absolute
+			pos -2px 44px
+			border-radius 100%
+			size 9px 9px
+	.score10
+		strong
+			right 36px
+		small 
+			right 7px
+	.score7, .score7-5
+		small 
+			right 17px
+			&:before
+				left -5px

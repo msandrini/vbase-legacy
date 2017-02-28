@@ -75,8 +75,8 @@
 	"sizes":"Sizes",
 	"editor-score":"Editor Score",
 	"user-score":"Users' Score",
-	"from-one-review":"From one review",
-	"from-x-reviews":"From {0} reviews",
+	"one-review":"1 review",
+	"x-reviews":"{0} reviews",
 	"editor-review":"Editor's review",
 
 	"any":"any",
@@ -102,7 +102,11 @@
 	"read-write":"Read & write your own",
 	"common-cartridge":"Common cartridge",
 	"no-peripherals-support-cartridge-addons":"No peripheral support or cartridge expansions",
-	"list-games-from-this-series":"List of all games from this series",
+	"games-from-this-series":"Games from this series",
+	"no-expansions-or-peripherals":"Cartridge with no expansions or peripheral support",
+	"cartridge-contains":"Cartridge contains",
+	"and-contains":"and contains",
+	"cartridge-supports":"Cartridge supports",
 
 	"onr__local":"local version",
 	"onr__on-line":"on-line version",

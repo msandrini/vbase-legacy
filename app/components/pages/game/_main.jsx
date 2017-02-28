@@ -13,6 +13,9 @@ import GameLocals from './locals.jsx'
 import GameEditorReview from './editor-review.jsx'
 import GameUserReviews from './user-reviews.jsx'
 import GameSeries from './series.jsx'
+import GameMediaInfo from './media-info.jsx'
+import GameBasicInfo from './basic-info.jsx'
+import GameOther from './other.jsx'
 
 import t, { lang } from '../../../i18n'
 import './_main.styl'
@@ -50,7 +53,7 @@ class GamePage extends Component {
 	_getTitle(title) {
 		return <strong>{title || t('loading-game-info')}</strong>
 	}
-	render() { console.log(this)
+	render() {
 		const game = this.props.info
 		return <div>
 			{this.props.isLoading && <div><Title main={t('loading-game-info')} /><Spinner /></div>}
@@ -69,7 +72,12 @@ class GamePage extends Component {
 						<GameEditorReview editorReview={game.editorReview} />
 						<GameUserReviews userReviews={game.userReviews} />
 					</div>
-					<GameSeries series={game.series} />
+					<div className="outer-box">
+						<GameBasicInfo year={game.year} companies={game.companies} />
+						<GameMediaInfo mediaSize={game.cartridgeSize} addOns={game.addOns} />
+					</div>
+					<GameSeries series={game.series} seriesGames={this.props.seriesGames} />
+					<GameOther />
 				</div>
 			</div>}
 		</div>
@@ -80,7 +88,8 @@ const mapStateToProps = state => ({
 	isLoading: state.game.isLoading,
 	hasFailed: state.game.hasFailed,
 	info: state.game.info,
-	gameId: state.game.gameId
+	gameId: state.game.gameId,
+	seriesGames: state.game.seriesGames
 });
 
 const mapDispatchToProps = {
