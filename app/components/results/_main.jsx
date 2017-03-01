@@ -75,7 +75,7 @@ class Results extends Component {
 		this._getResults(this.props)
 	}
 
-	componentWillUpdate(nextProps) { 
+	componentWillUpdate(nextProps) {
 		const differentNames = nextProps.params.names !== this.props.params.names
 		const differentQueries = nextProps.params.query && (nextProps.params.query !== this.props.params.query)
 		const differentPages = this.props.params.page !== nextProps.params.page
@@ -90,7 +90,7 @@ class Results extends Component {
 
 	_changePage(page) {
 		const params = this.props.params
-		this.props.requestPageAction({page, params})
+		this.props.requestPageAction({ page, params })
 	}
 
 	_goBack() {
@@ -101,21 +101,21 @@ class Results extends Component {
 		const { params, games, total, isLoading, hasFailed } = this.props;
 		const page = (parseInt(params.page, 10) - 1) || 0;
 		const currentFirstItem = ITEMS_PER_PAGE * page;
-		const lastItemFromPage = (currentFirstItem + ITEMS_PER_PAGE > total)? total : currentFirstItem + ITEMS_PER_PAGE
+		const lastItemFromPage = (currentFirstItem + ITEMS_PER_PAGE > total) ? total : currentFirstItem + ITEMS_PER_PAGE
 		return <div className="results">
 			{_getTitle(params)}
-			{isLoading? <Spinner /> :
-				( hasFailed? <FailureMessage /> :
-					(!games.length? <div className="no-results">
-							{t('no-results-found')}<br />
-							<button className="standard" onClick={this._goBack}>{t('go-back')}</button>
-						</div> :
+			{isLoading ? <Spinner /> :
+				(hasFailed ? <FailureMessage /> :
+					(!games.length ? <div className="no-results">
+						{t('no-results-found')}<br />
+						<button className="standard" onClick={this._goBack}>{t('go-back')}</button>
+					</div> :
 						<div>
 							<Pagination currentPage={page} results={total} linkFunction={v => this._changePage(v)} />
 							<aside className="summary">
 								{t('showing-x-to-y-from', [currentFirstItem, lastItemFromPage])}
-								<strong> {total} </strong> 
-								{total < 2 ? t('result') : t('results')}
+								<strong> {total} </strong>
+								{t('result', { plural: total })}
 							</aside>
 							<section>
 								{games.map(game => <GameLink key={game._id} game={game} />)}

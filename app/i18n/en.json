@@ -4,6 +4,8 @@
 	"loading":"Loading...",
 	"go-back":"Go back",
 	"back-to-all-games":"back to all games",
+	"game":"game",
+	"games":"games",
 
 	"contact-us":"Contact Us!",
 	"login-with-Google":"login with Google",
@@ -75,8 +77,7 @@
 	"sizes":"Sizes",
 	"editor-score":"Editor Score",
 	"user-score":"Users' Score",
-	"one-review":"1 review",
-	"x-reviews":"{0} reviews",
+	"x-review":"{0} review",
 	"editor-review":"Editor's review",
 
 	"any":"any",
@@ -102,7 +103,8 @@
 	"read-write":"Read & write your own",
 	"common-cartridge":"Common cartridge",
 	"no-peripherals-support-cartridge-addons":"No peripheral support or cartridge expansions",
-	"games-from-this-series":"Games from this series",
+	"from-this-series":"from this series",
+	"from-these-series":"from these series",
 	"no-expansions-or-peripherals":"Cartridge with no expansions or peripheral support",
 	"cartridge-contains":"Cartridge contains",
 	"and-contains":"and contains",

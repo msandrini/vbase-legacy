@@ -76,7 +76,7 @@ class GamePage extends Component {
 						<GameBasicInfo year={game.year} companies={game.companies} />
 						<GameMediaInfo mediaSize={game.cartridgeSize} addOns={game.addOns} />
 					</div>
-					<GameSeries series={game.series} seriesGames={this.props.seriesGames} />
+					<GameSeries series={game.series} seriesGames={this.props.seriesGames} currentGameId={this.props.gameId} />
 					<GameOther />
 				</div>
 			</div>}

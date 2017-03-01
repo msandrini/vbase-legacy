@@ -4,7 +4,6 @@ import Icon from '../../shared/icon.jsx'
 import t from '../../../i18n'
 import './user-reviews.styl'
 
-const _getKeyForUserPluralized = reviews => reviews > 1 ? 'users' : 'user'
 const _getKeyForActionText = reviews => reviews ? 'read-write' : 'write-a-review'
 const _getIcon = reviews => reviews ? 'plus' : 'pencil'
 
@@ -12,8 +11,8 @@ const GameUserReviews = ({userReviews}) => <div className="user-reviews">
 	<a>
 		{t('reviewed-by') + ' '}
 		{userReviews && userReviews.timesReviewed ?
-			<strong>{userReviews.timesReviewed + ' ' + 
-				t(_getKeyForUserPluralized(userReviews.timesReviewed))}</strong> : t('no-users')
+			<strong>{userReviews.timesReviewed + ' ' +
+				t('user', { plural: userReviews.timesReviewed })}</strong> : t('no-users')
 		}
 		<span className="action-text">
 			{t(_getKeyForActionText(userReviews && userReviews.timesReviewed))}

@@ -6,9 +6,9 @@ const basicCondition = { specialStatus: { $ne: 'homebrew' } }
 const _regExpParam = str => ({ $regex: `.*${str}.*` })
 const _unique = (array) => array.filter((value, index, self) => self.indexOf(value) === index)
 
-const _getGames = (db, cursor, page, response) => {
-	const skip = page * ITEMS_PER_PAGE
-	cursor.skip(skip).limit(ITEMS_PER_PAGE).sort(sortCriteria).toArray((err, docs) => {
+const _getGames = (db, cursor, page, response, pageSize = ITEMS_PER_PAGE) => {
+	const skip = page * pageSize
+	cursor.skip(skip).limit(pageSize).sort(sortCriteria).toArray((err, docs) => {
 		if (err) {
 			response.status(500).json({ error: err, errorType: 'find' })
 		} else {
@@ -19,7 +19,9 @@ const _getGames = (db, cursor, page, response) => {
 					docs = docs || []
 					let genres = []
 					for (d of docs) {
-						genres = [...genres, ...d.genres]
+						if (d.genres) {
+							genres = [...genres, ...d.genres]
+						}
 					}
 					if (genres.length) {
 						const genresCondition = { _id: { $in: _unique(genres) } }
@@ -42,6 +44,8 @@ const _getGames = (db, cursor, page, response) => {
 								response.json({ games: docs, total: count })
 							}
 						})
+					} else {
+						response.json({ games: docs, total: count })
 					}
 				}
 			})
@@ -61,6 +65,12 @@ const games = {
 	all: (db, response, page = 0) => {
 		const gamesCursor = db.collection('games').find(basicCondition, projectionForList)
 		_getGames(db, gamesCursor, page, response)
+	},
+
+	fromSeries: (db, response, seriesIds) => {
+		const condition = Object.assign({}, basicCondition, { series: { $in: seriesIds.split(',') }})
+		const gamesCursor = db.collection('games').find(condition, { title: 1 })
+		_getGames(db, gamesCursor, 0, response)
 	},
 
 	advanced: (db, response, query, page = 0) => {
@@ -111,91 +121,6 @@ const games = {
 		const condition = {}
 		const gamesCursor = db.collection('games').find(conditions, projectionForList)
 		_getGames(db, gamesCursor, page, response)
-	},
-
-	singleInfo: (db, response, id) => {
-		const oId = require('mongodb').ObjectId
-		const isIdValid = /[a-f0-9]{24}/.test(id)
-		if (!isIdValid) {
-			response.status(500).json({ error: 'Invalid ID' })
-		} else {
-			const condition = { _id: new oId(id) }
-			db.collection('games').findOne(condition, { _id: 0 }).then((doc, error) => {
-				if (error) {
-					response.status(500).json({ error: error, errorType: 'main' })
-				} else {
-					doc = doc || {}
-					let promises = []
-					if (doc.series) {
-						const seriesConditions = doc.series.map(series => ({ _id: series }))
-						promises.push(db.collection('series').find({ $or: seriesConditions }).toArray())
-					} else {
-						promises.push([])
-					}
-					if (doc.addOns) {
-						const addOnsConditions = doc.addOns.map(addOns => ({ _id: addOns }))
-						promises.push(db.collection('addons').find({ $or: addOnsConditions }).toArray())
-					} else {
-						promises.push([])
-					}
-					if (doc.genres) {
-						const genresConditions = doc.genres.map(genres => ({ _id: genres }))
-						promises.push(db.collection('genres').find({ $or: genresConditions }).toArray())
-					} else {
-						promises.push([])
-					}
-					const aggregationParams = [
-						{ $match: { game: new oId(id) } },
-						{ $group: { _id: null, averageScore: { $avg: "$score" }, timesReviewed: { $sum: 1 } } },
-					]
-					promises.push(db.collection('reviews').aggregate(aggregationParams).toArray())
-
-					Promise.all(promises).then(results => {
-						let counter;
-						let series = {}
-						for (s of results[0]) {
-							series[s._id] = { title: s.title, id: s._id }
-						}
-						if (doc.series) {
-							counter = 0
-							for (seriesOnGame of doc.series) {
-								doc.series[counter] = series[seriesOnGame]
-								counter++
-							}
-						}
-						let addOns = {}
-						for (a of results[1]) {
-							addOns[a._id] = { title: a.title, type: a.type, id: a._id }
-						}
-						if (doc.addOns) {
-							counter = 0
-							for (addOnsOnGame of doc.addOns) {
-								doc.addOns[counter] = addOns[addOnsOnGame]
-								counter++
-							}
-						}
-						let genres = {}
-						for (g of results[2]) {
-							genres[g._id] = { title: g.title, super: g.super, id: g._id }
-						}
-						if (doc.genres) {
-							counter = 0
-							for (genresOnGame of doc.genres) {
-								doc.genres[counter] = genres[genresOnGame]
-								counter++
-							}
-						}
-						if (results[3].length && results[3][0]) {
-							delete results[3][0]._id
-							doc.userReviews = results[3][0]
-						}
-						response.json(doc)
-					}).catch(errorCompl => {
-						response.status(500).json({ error: errorCompl, errorType: 'complimentary' })
-					})
-				}
-			})
-		}
 	}
 
 }

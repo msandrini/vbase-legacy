@@ -22,6 +22,9 @@ const contactReducer = (state = initialState, action) => {
         case GAME.INFORETRIEVED:
             return {...state, isLoading: false, info: action.info }
 
+        case GAME.RELATEDGAMESRETRIEVED:
+            return {...state, seriesGames: action.info }
+
         default:
             return state
     }

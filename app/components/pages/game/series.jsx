@@ -6,21 +6,31 @@ import t from '../../../i18n'
 import Icon from '../../shared/icon.jsx'
 import './series.styl'
 
-const GameSeries = ({series, seriesGames}) => <ul className="series">
-	{series.map(s => <li key={s.id}>
-		<h6>
-			{t('series')} 
-			<strong>{s.title}</strong>
-			{s && seriesGames[s.id] && <small>{t('games-from-this-series')}</small>}
-		</h6>
-		{s && seriesGames[s.id] && <ul>
-			{seriesGames[s.id].map(g => 
-				<li>
-					<Link className="btn ball" to={gameLinkStr(g.id, g.title)}><Icon type="next" size="10" /></Link>
-					<Link to={gameLinkStr(g.id, g.title)}>{g.title}</Link>
-				</li>)}
-		</ul>}
-	</li>)}
-</ul>
+const _getLink = (game, currentGameId) => <li key={game._id}>
+	{game._id !== currentGameId ?
+		<Link className="btn ball" to={gameLinkStr(game._id, game.title)}>
+			<Icon type="next" size="10" />
+		</Link> :
+		<span className="ball">
+			<Icon type="check" size="10" />
+		</span>}
+	{game._id !== currentGameId ?
+		<Link to={gameLinkStr(game._id, game.title)}>{game.title}</Link> :
+		<span>{game.title}</span>}
+</li>
+
+const GameSeries = ({series, seriesGames, currentGameId}) => <div className="series">
+	{series && <h6>
+		{t('series')}
+		{series.map(s => <strong key={s.title}>{s.title}</strong>)}
+		{series && seriesGames.total && <small>
+			{seriesGames.total} {t('game', { plural: seriesGames.total })} {t('from-this-series',
+				{ plural: { comparison: seriesGames.total, key: 'from-these-series' } })}
+		</small>}
+	</h6>}
+	{series && seriesGames.games && <ul>
+		{seriesGames.games.map(g => _getLink(g, currentGameId))}
+	</ul>}
+</div>
 
 export default GameSeries

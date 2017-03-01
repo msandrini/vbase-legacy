@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import t, { lang } from '../../../i18n'
 import './basic-info.styl'
 
 const _getCompanies = companies => companies.map(c => <Link to={`/info/${c}`} key={c} className="company">{c}</Link>)
