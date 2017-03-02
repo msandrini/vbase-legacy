@@ -30,6 +30,12 @@ const singleInfo = (db, response, id) => {
                 } else {
                     promises.push([])
                 }
+                if (doc.companies) {
+                    const companiesConditions = doc.companies.map(companies => ({ _id: companies }))
+                    promises.push(db.collection('companies').find({ $or: companiesConditions }).toArray())
+                } else {
+                    promises.push([])
+                }
                 const aggregationParams = [
                     { $match: { game: new oId(id) } },
                     { $group: { _id: null, averageScore: { $avg: "$score" }, timesReviewed: { $sum: 1 } } },
@@ -71,9 +77,20 @@ const singleInfo = (db, response, id) => {
                             counter++
                         }
                     }
-                    if (results[3].length && results[3][0]) {
-                        delete results[3][0]._id
-                        doc.userReviews = results[3][0]
+                    let companies = {}
+                    for (c of results[3]) {
+                        companies[c._id] = { title: c.name, id: c._id }
+                    }
+                    if (doc.companies) {
+                        counter = 0
+                        for (companiesOnGame of doc.companies) {
+                            doc.companies[counter] = companies[companiesOnGame]
+                            counter++
+                        }
+                    }
+                    if (results[4].length && results[4][0]) {
+                        delete results[4][0]._id
+                        doc.userReviews = results[4][0]
                     }
                     response.json(doc)
                 }).catch(errorCompl => {

@@ -6,15 +6,14 @@ import { BASE_URL } from '../../constants'
 import t, { lang } from '../../i18n'
 import './game-link.styl'
 
-const _getGenre = game => {
-	const genres = game.genreTitles
+const _getGenres = genres => {
 	if (genres && genres[0]) {
 		return genres[0][lang] + (genres[1]? ' / ' + genres[1][lang] : '')
 	}
 	return ''
 }
-const _getCompany = game => {
-	return game.companies[0] + (game.companies[1]? ' / ' + game.companies[1] : '')
+const _getCompanies = companies => {
+	return companies[0] + (companies[1]? ' / ' + companies[1] : '')
 }
 const _getAka = game => {
 	if (game.otherNames) {
@@ -41,7 +40,7 @@ class Results extends Component {
 				<h5>{game.title}</h5>
 				<div className="supplementary-info">
 					<Scorebar score={game.editorScore} size="85" />
-					<strong>{_getGenre(game)}</strong> {t('made-by')} {_getCompany(game)}
+					<strong>{_getGenres(game.genreTitles)}</strong> {t('made-by')} {_getCompanies(game.companyNames)}
 				</div>
 			</div>
 		</Link>

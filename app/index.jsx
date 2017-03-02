@@ -26,6 +26,7 @@ import searchReducer from './reducers/search.reducer'
 import resultsReducer from './reducers/results.reducer'
 import contactReducer from './reducers/contact.reducer'
 import gameReducer from './reducers/game.reducer'
+import infoReducer from './reducers/info.reducer'
 
 /* Middleware routines */
 const combinedReducers = combineReducers({
@@ -34,6 +35,7 @@ const combinedReducers = combineReducers({
     contact: contactReducer,
     results: resultsReducer,
     game: gameReducer,
+    info: infoReducer,
     routing: routerReducer
 })
 const sagaMiddleware = createSagaMiddleware()
@@ -53,7 +55,7 @@ ReactDOM.render(
                 <Route path="search/:names(/:page)" component={Results} />
                 <Route path="advanced-search/:query(/:page)" component={Results} />
                 <Route path="game/:game" component={GamePage} />
-                <Route path="info/:subject" component={InfoPage} />
+                <Route path="info/:subject/:key" component={InfoPage} />
                 <Route path="terms-privacy" component={TermsPage} />
                 <Route path="contact" component={ContactPage} />
             </Route>

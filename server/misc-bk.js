@@ -17,6 +17,24 @@ const misc = {
         });
     },
 
+    /*modifyFileWriteNew: (response, type, code) => {
+
+				let feedback = [];
+				let lastFileFound = false;
+				const dir = path.join(__dirname, '../static/images/companies/')
+				fs.readdir(dir, function (err, files) {
+					files.forEach(function(f) {
+						const name = f.substr(0,f.length-4).replace('.','-').split(/(?=[A-Z])/).join('-').toLowerCase()
+						const data = fs.readFileSync(dir + f);
+						fs.mkdirSync(`${dir}${name}`)
+						fs.writeFileSync(`${dir}${name}/1.png`, data)
+						console.log(`wrote ${name}`)
+					})
+				})
+				response.json(feedback);
+
+			}*/
+
     index: (db, response, pag) => {
         // PHASE 2: , "otherNames.reasonForName": { "$ne": "japanese-script" }
         const gCursor = db.collection('games').find({});

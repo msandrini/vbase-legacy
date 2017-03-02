@@ -52,6 +52,10 @@
 	"from-advanced-search":"From advanced search",
 	"back-to-simple-search":"Back to simple search",
 
+	"game-not-found":"Game not found",
+	"info-not-found":"Information not found",
+	"no-content":"No content",
+
 	"searching-for-games":"Searching for games",
 	"from-x":"from *{0}*",
 	"having-x-on-description":"having *{0}* on description",
@@ -74,6 +78,7 @@
 	"genre":"Genre",
 	"genres":"Genres",
 	"series":"Series",
+	"addon":"Add-on",
 	"description":"Description",
 	"sizes":"Sizes",
 	"editor-score":"Editor Score",

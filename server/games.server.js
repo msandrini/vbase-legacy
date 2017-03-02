@@ -23,26 +23,50 @@ const _getGames = (db, cursor, page, response, pageSize = ITEMS_PER_PAGE) => {
 							genres = [...genres, ...d.genres]
 						}
 					}
-					if (genres.length) {
-						const genresCondition = { _id: { $in: _unique(genres) } }
-						db.collection('genres').find(genresCondition, { title: 1 }).toArray((errGenre, docsGenre) => {
-							if (errGenre) {
-								response.status(500).json({ error: errGenre, errorType: 'count' })
-							} else {
-								let genresObj = {}
-								for (g of docsGenre) {
-									genresObj[g._id] = g.title
-								}
-								for (d of docs) {
-									let genresForThisDoc = []
-									for (dg of d.genres) {
-										genresForThisDoc.push(genresObj[dg])
-									}
-									d.genreTitles = genresForThisDoc
-									delete d.genres
-								}
-								response.json({ games: docs, total: count })
+					let companies = []
+					for (d of docs) {
+						if (d.companies) {
+							companies = [...companies, ...d.companies]
+						}
+					}
+					if (genres.length || companies.length) {
+						const genresCondition = { _id: { $in: _unique(genres) || [] } }
+						const companiesCondition = { _id: { $in: _unique(companies) || [] } }
+						Promise.all([
+							db.collection('genres').find(genresCondition, { title: 1 }).toArray(),
+							db.collection('companies').find(companiesCondition, { name: 1 }).toArray()
+						]).then((results) => {
+							let [docsGenre, docsCompany] = results
+
+							let genresObj = {}
+							for (g of docsGenre) {
+								genresObj[g._id] = g.title
 							}
+							for (d of docs) {
+								let genresForThisDoc = []
+								for (dg of d.genres) {
+									genresForThisDoc.push(genresObj[dg])
+								}
+								d.genreTitles = genresForThisDoc
+								delete d.genres
+							}
+
+							let companiesObj = {}
+							for (c of docsCompany) {
+								companiesObj[c._id] = c.name
+							}
+							for (d of docs) {
+								let companiesForThisDoc = []
+								for (dg of d.companies) {
+									companiesForThisDoc.push(companiesObj[dg])
+								}
+								d.companyNames = companiesForThisDoc
+								delete d.companies
+							}
+							response.json({ games: docs, total: count })
+							
+						}).catch((e) => {
+							response.status(500).json({ error: e, errorType: 'genre/company' })
 						})
 					} else {
 						response.json({ games: docs, total: count })

@@ -2,9 +2,20 @@
 const singleInfo = (db, response, type, key) => {
 
 	const condition = { _id: key }
-	const typeWhitelist = ['addons', 'genres', 'series', 'companies']
+	const typeWhitelist = ['addon', 'genre', 'series', 'company']
 	if (typeWhitelist.includes(type)) {
-		db.collection(type).findOne(condition, { _id: 0 }).then((doc, error) => {
+		let dbName, queryOperation;
+		if (type !== 'company') {
+			if (type !== 'series'){
+				dbName = type + 's'
+			} else {
+				dbName = type
+			}
+			queryOperation = db.collection(dbName).findOne(condition, { _id: 0 })
+		} else {
+			queryOperation = db.collection('companies').findOne(condition, { _id: 0 })
+		}
+		queryOperation.then((doc, error) => {
 			if (error) {
 				response.status(500).json({ error: error, errorType: 'main' })
 			} else {
