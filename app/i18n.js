@@ -48,7 +48,7 @@ const i18n = (key, parameters = {}, genericPluralParticle = 's') => {
 		}
 	}
 	/* Outputs single value or plural with parameter replacement */
-	if (parameters.replacements && parameters.replacements.length) {
+	if (parameters.replacements) {
 		return _replacer(value, parameters.replacements)
 	} else {
 		return value
@@ -57,7 +57,9 @@ const i18n = (key, parameters = {}, genericPluralParticle = 's') => {
 }
 
 const _replacer = (string, replacements) => {
-	if (replacements === 'string') replacements = [replacements]
+	if (replacements !== 'object') {
+		replacements = [String(replacements)]
+	}
 	return string.replace(/{(\d+)}/g, (match, number) => {
 		return typeof replacements[number] != 'undefined' ? replacements[number] : match
 	})

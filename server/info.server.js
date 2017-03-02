@@ -2,7 +2,7 @@
 const singleInfo = (db, response, type, key) => {
 
 	const condition = { _id: key }
-	const typeWhitelist = ['addons', 'genres', 'series']
+	const typeWhitelist = ['addons', 'genres', 'series', 'companies']
 	if (typeWhitelist.includes(type)) {
 		db.collection(type).findOne(condition, { _id: 0 }).then((doc, error) => {
 			if (error) {

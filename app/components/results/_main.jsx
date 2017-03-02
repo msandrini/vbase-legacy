@@ -15,40 +15,40 @@ import t from '../../i18n';
 const _getComposedSearchDetails = query => {
 	let searchDetails = []
 	if (query.company) {
-		searchDetails.push(t('from-x', [query.company]))
+		searchDetails.push(t('from-x', { replacements: query.company }))
 	}
 	if (query.description) {
-		searchDetails.push(t('having-x-on-description', [query.description]))
+		searchDetails.push(t('having-x-on-description', { replacements: query.description }))
 	}
 	if (query.genre) {
-		searchDetails.push(t('on-genre-x', [query.genre]))
+		searchDetails.push(t('on-genre-x', { replacements: query.genre }))
 	}
 	if (query.names) {
-		searchDetails.push(t('named-x', [query.names]))
+		searchDetails.push(t('named-x', { replacements: query.names }))
 	}
 	if (query.series) {
-		searchDetails.push(t('from-series-x', [query.series]))
+		searchDetails.push(t('from-series-x', { replacements: query.series }))
 	}
 	if (query.scores.from && query.scores.to) {
-		searchDetails.push(t('scored-between-x-and-y', [query.scores.from, query.scores.to]))
+		searchDetails.push(t('scored-between-x-and-y', { replacements: [query.scoresfrom, query.scores.to] }))
 	} else if (query.scores.from) {
-		searchDetails.push(t('scored-x-at-least', [query.scores.from]))
+		searchDetails.push(t('scored-x-at-least', { replacements: query.scoresfrom }))
 	} else if (query.scores.to) {
-		searchDetails.push(t('scored-up-to-x', [query.scores.to]))
+		searchDetails.push(t('scored-up-to-x', { replacements: query.scoresto }))
 	}
 	if (query.sizes.from && query.sizes.to) {
-		searchDetails.push(t('with-cart-size-between-x-and-y', [query.sizes.from, query.sizes.to]))
+		searchDetails.push(t('with-cart-size-between-x-and-y', { replacements: [query.sizesfrom, query.sizes.to] }))
 	} else if (query.sizes.from) {
-		searchDetails.push(t('min-cart-size-x', [query.sizes.from]))
+		searchDetails.push(t('min-cart-size-x', { replacements: query.sizesfrom }))
 	} else if (query.sizes.to) {
-		searchDetails.push(t('max-cart-size-x', [query.sizes.to]))
+		searchDetails.push(t('max-cart-size-x', { replacements: query.sizesto }))
 	}
 	if (query.years.from && query.years.to) {
-		searchDetails.push(t('released-from-x-to-y', [query.years.from, query.years.to]))
+		searchDetails.push(t('released-from-x-to-y', { replacements: [query.yearsfrom, query.years.to] }))
 	} else if (query.years.from) {
-		searchDetails.push(t('released-from-x', [query.years.from]))
+		searchDetails.push(t('released-from-x', { replacements: query.yearsfrom }))
 	} else if (query.years.to) {
-		searchDetails.push(t('released-until-x', [query.years.to]))
+		searchDetails.push(t('released-until-x', { replacements: query.yearsto }))
 	}
 
 	return searchDetails.length > 1 ? joinText(searchDetails, ',', t('and')) : searchDetails[0]
@@ -59,7 +59,7 @@ const _getTitle = params => {
 		const composedSearchDetails = _getComposedSearchDetails(JSON.parse(params.query))
 		return <Title main={t('showing-results')} details={[t('searching-for-games') + ' ' + composedSearchDetails]} />
 	} else if (params.names) {
-		return <Title main={t('showing-results')} sub={t('searching-for-x', [params.names])} />
+		return <Title main={t('showing-results')} sub={t('searching-for-x', { replacements: params.names })} />
 	} else {
 		return <Title main={t('showing-all-games')} sub="" />
 	}
@@ -113,7 +113,7 @@ class Results extends Component {
 						<div>
 							<Pagination currentPage={page} results={total} linkFunction={v => this._changePage(v)} />
 							<aside className="summary">
-								{t('showing-x-to-y-from', [currentFirstItem, lastItemFromPage])}
+								{t('showing-x-to-y-from', { replacements: [currentFirstItem, lastItemFromPage] })}
 								<strong> {total} </strong>
 								{t('result', { plural: total })}
 							</aside>

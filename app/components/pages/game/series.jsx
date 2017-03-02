@@ -22,7 +22,7 @@ const _getLink = (game, currentGameId) => <li key={game._id}>
 const GameSeries = ({series, seriesGames, currentGameId}) => <div className="series">
 	{series && <h6>
 		{t('series')}
-		{series.map(s => <strong key={s.title}>{s.title}</strong>)}
+		{series.map(s => <Link key={s.id} className="info-link" to={`info/series/${s.id}`}>{s.title}</Link>)}
 		{series && seriesGames.total && <small>
 			{seriesGames.total} {t('game', { plural: seriesGames.total })} {t('from-this-series',
 				{ plural: { comparison: seriesGames.total, key: 'from-these-series' } })}

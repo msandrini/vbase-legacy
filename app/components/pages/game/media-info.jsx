@@ -12,7 +12,7 @@ const _getAddOnsMarkup = addOns => {
 	if (addOns && addOns.length) {
 		let addOnsObj = { chip: [], peripheral: [] }
 		for (const a of addOns) {
-			addOnsObj[a.type].push(<Link to={`/info/${a.id}`} key={a.id}>{a.title[lang]}</Link>)
+			addOnsObj[a.type].push(<Link className="info-link" to={`/info/addons/${a.id}`} key={a.id}>{a.title[lang]}</Link>)
 		}
 		let returnArray = []
 		if (addOnsObj.peripheral) {

@@ -15,7 +15,7 @@ import GameUserReviews from './user-reviews.jsx'
 import GameSeries from './series.jsx'
 import GameMediaInfo from './media-info.jsx'
 import GameBasicInfo from './basic-info.jsx'
-import GameOther from './other.jsx'
+import GameGenres from './genres.jsx'
 
 import t, { lang } from '../../../i18n'
 import './_main.styl'
@@ -74,10 +74,10 @@ class GamePage extends Component {
 					</div>
 					<div className="outer-box">
 						<GameBasicInfo year={game.year} companies={game.companies} />
-						<GameMediaInfo mediaSize={game.cartridgeSize} addOns={game.addOns} />
+						<GameGenres genres={game.genres} />
 					</div>
 					<GameSeries series={game.series} seriesGames={this.props.seriesGames} currentGameId={this.props.gameId} />
-					<GameOther />
+					<GameMediaInfo mediaSize={game.cartridgeSize} addOns={game.addOns} />
 				</div>
 			</div>}
 		</div>
