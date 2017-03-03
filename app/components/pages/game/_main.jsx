@@ -9,7 +9,7 @@ import { Link } from 'react-router'
 import GamePicture from './picture.jsx'
 import GameEditorScore from './editor-score.jsx'
 import GameUserScore from './user-score.jsx'
-import GameLocals from './locals.jsx'
+import GamePlaces from './release-places.jsx'
 import GameEditorReview from './editor-review.jsx'
 import GameUserReviews from './user-reviews.jsx'
 import GameSeries from './series.jsx'
@@ -66,7 +66,7 @@ class GamePage extends Component {
 				<div id="game-info">
 					<GamePicture gameId={this.props.gameId} />
 					<div className="main-box">
-						<GameLocals releasedIn={game.releasedIn} otherNames={game.otherNames} />
+						<GamePlaces releasePlaces={game.releasePlaces} otherNames={game.otherNames} />
 						<GameEditorScore score={game.editorScore} />
 						<GameUserScore reviews={game.userReviews} />
 						<GameEditorReview editorReview={game.editorReview} />

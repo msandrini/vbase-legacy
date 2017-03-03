@@ -57,7 +57,7 @@ const i18n = (key, parameters = {}, genericPluralParticle = 's') => {
 }
 
 const _replacer = (string, replacements) => {
-	if (replacements !== 'object') {
+	if (typeof replacements !== 'object') {
 		replacements = [String(replacements)]
 	}
 	return string.replace(/{(\d+)}/g, (match, number) => {

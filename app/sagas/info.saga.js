@@ -14,7 +14,8 @@ const infoEffects = {
 			if (feedback.status === 200) {
 				yield put(createAction(INFO.CONTENTRETRIEVED)({ 
 					title: (feedback.data.title || feedback.data.name), 
-					content: feedback.data.text
+					content: feedback.data.text,
+					imageExists: feedback.data.imageExists
 				}))
 				
 			} else {

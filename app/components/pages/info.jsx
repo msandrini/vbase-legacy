@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createAction } from '../../utils'
+import { Link } from 'react-router'
 import { INFO } from '../../constants'
 
 import Title from '../shared/title.jsx'
@@ -8,9 +9,11 @@ import Title from '../shared/title.jsx'
 import t, { lang } from '../../i18n'
 import './info.styl'
 
+const keyToDbMapping = { genre: 'genres', addon: 'addons', series: 'series', company: 'companies' }
+
 const _getTitle = title => {
 	if (title) {
-		return (typeof title === 'string')? title : title[lang]
+		return (typeof title === 'string') ? title : title[lang]
 	} else {
 		return t('loading')
 	}
@@ -24,6 +27,26 @@ const _getContent = content => {
 	}
 }
 
+const _getImageUrl = (subject, subjectKey) => {
+	return `image-info/${keyToDbMapping[subject]}/${subjectKey}`
+}
+
+const _getLinkStr = (subject, title) => {
+	if (typeof title === 'object') title = title[lang]
+	if (subject !== 'addon') {
+		return t('list-games-from-the-x-y', {replacements: [subject, title]})
+	} else {
+		return t('list-games-with-supporting-x', {replacements: title})
+	}
+}
+
+const _getLinkUrl = (subject, subjectKey) => {
+	let tempObject = {}
+	tempObject[subject] = subjectKey
+	const json = encodeURIComponent(JSON.stringify(tempObject))
+	return `/advanced-search/${json}`
+}
+
 class InfoPage extends Component {
 
 	componentWillMount() {
@@ -31,13 +54,17 @@ class InfoPage extends Component {
 	}
 
 	render() {
+		const { title, subject, subjectKey, content, imageExists} = this.props
 		return <div>
-			<Title main={_getTitle(this.props.title)} sub={this.props.subject && t(this.props.subject)} />
+			<Title main={_getTitle(title)} sub={subject && t(subject)} />
 			<div id="info">
-				{this.props.image && <figure>
-					<img src={this.props.image} alt={this.props.title} />
+				{imageExists && <figure>
+					<img src={_getImageUrl(subject, subjectKey)} alt={title} />
 				</figure>}
-				{this.props.title && _getContent(this.props.content)}
+				<p>{title && _getContent(content)}</p>
+				<Link to={_getLinkUrl(subject, subjectKey)} className="see-also">
+					{_getLinkStr(subject, title)}
+				</Link>
 			</div>
 		</div>
 	}
@@ -51,7 +78,7 @@ const mapStateToProps = state => ({
 	subjectKey: state.info.key,
 	title: state.info.title,
 	content: state.info.content,
-	image: state.info.image
+	imageExists: state.info.imageExists
 })
 
 const mapDispatchToProps = {

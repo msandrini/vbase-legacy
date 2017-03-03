@@ -8,12 +8,11 @@ const initialState = {
 const searchReducer = (state = initialState, action) => {
 	switch (action.type) {
 		
+		case SEARCH.RESETFIELDREQUESTED:
+			return {...state, fieldValueSimple:'' }
+
 		case SEARCH.TOGGLEADVANCED:
-			let newState = {...state, advancedVisible:!state.advancedVisible }
-			if (!state.advancedVisible) {
-				newState.fieldValueSimple = ''
-			}
-			return newState
+			return {...state, advancedVisible:!state.advancedVisible }
 
 		case SEARCH.CHANGEDSIMPLE:
 			return {...state, fieldValueSimple:action.value }

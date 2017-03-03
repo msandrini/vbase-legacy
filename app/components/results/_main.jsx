@@ -14,6 +14,11 @@ import t from '../../i18n';
 
 const _getComposedSearchDetails = query => {
 	let searchDetails = []
+	for (const obj of ['scores', 'sizes', 'years']) {
+		if (!query[obj]) {
+			query[obj] = {}
+		}
+	}
 	if (query.company) {
 		searchDetails.push(t('from-x', { replacements: query.company }))
 	}
@@ -30,25 +35,25 @@ const _getComposedSearchDetails = query => {
 		searchDetails.push(t('from-series-x', { replacements: query.series }))
 	}
 	if (query.scores.from && query.scores.to) {
-		searchDetails.push(t('scored-between-x-and-y', { replacements: [query.scoresfrom, query.scores.to] }))
+		searchDetails.push(t('scored-between-x-and-y', { replacements: [query.scores.from, query.scores.to] }))
 	} else if (query.scores.from) {
-		searchDetails.push(t('scored-x-at-least', { replacements: query.scoresfrom }))
+		searchDetails.push(t('scored-x-at-least', { replacements: query.scores.from }))
 	} else if (query.scores.to) {
-		searchDetails.push(t('scored-up-to-x', { replacements: query.scoresto }))
+		searchDetails.push(t('scored-up-to-x', { replacements: query.scores.to }))
 	}
 	if (query.sizes.from && query.sizes.to) {
-		searchDetails.push(t('with-cart-size-between-x-and-y', { replacements: [query.sizesfrom, query.sizes.to] }))
+		searchDetails.push(t('with-cart-size-between-x-and-y', { replacements: [query.sizes.from, query.sizes.to] }))
 	} else if (query.sizes.from) {
-		searchDetails.push(t('min-cart-size-x', { replacements: query.sizesfrom }))
+		searchDetails.push(t('min-cart-size-x', { replacements: query.sizes.from }))
 	} else if (query.sizes.to) {
-		searchDetails.push(t('max-cart-size-x', { replacements: query.sizesto }))
+		searchDetails.push(t('max-cart-size-x', { replacements: query.sizes.to }))
 	}
 	if (query.years.from && query.years.to) {
-		searchDetails.push(t('released-from-x-to-y', { replacements: [query.yearsfrom, query.years.to] }))
+		searchDetails.push(t('released-from-x-to-y', { replacements: [query.years.from, query.years.to] }))
 	} else if (query.years.from) {
-		searchDetails.push(t('released-from-x', { replacements: query.yearsfrom }))
+		searchDetails.push(t('released-from-x', { replacements: query.years.from }))
 	} else if (query.years.to) {
-		searchDetails.push(t('released-until-x', { replacements: query.yearsto }))
+		searchDetails.push(t('released-until-x', { replacements: query.years.to }))
 	}
 
 	return searchDetails.length > 1 ? joinText(searchDetails, ',', t('and')) : searchDetails[0]

@@ -7,20 +7,22 @@ const initialState = {
 	key: '',
 	title: '',
 	content: '',
-	image: false
+	imageExists: false
 }
 
 const infoReducer = (state = initialState, action) => {
 	switch (action.type) {
 
 		case INFO.CONTENTREQUESTED:
-			return {...state, isLoading: false, subject: action.subject, key: action.key }
+			const {subject, key} = action
+			return {...state, isLoading: false, subject, key }
 
 		case INFO.FAILEDLOADING:
 			return {...state, isLoading: false, hasFailed: true }
 
 		case INFO.CONTENTRETRIEVED:
-			return {...state, isLoading: false, title: action.title, content: action.content }
+			const {title, content, imageExists} = action
+			return {...state, isLoading: false, title, content, imageExists }
 
 		default:
 			return state

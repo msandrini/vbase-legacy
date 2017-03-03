@@ -51,6 +51,8 @@
 	"searching-for-x":"Searching for *\"{0}\"*",
 	"from-advanced-search":"From advanced search",
 	"back-to-simple-search":"Back to simple search",
+	"list-games-from-the-x-y":"List all games from the {0} {1}",
+	"list-games-with-supporting-x":"List all games with/supporting {0}",
 
 	"game-not-found":"Game not found",
 	"info-not-found":"Information not found",

@@ -1,16 +1,19 @@
 import { call, put, select } from 'redux-saga/effects'
 import { hashHistory } from 'react-router'
 import { SEARCH } from '../constants'
-//import { sendCall, warnOnNetworkError, createAction } from '../utils'
+import { createAction } from '../utils'
 
 const filterForUrl = str => encodeURIComponent(str)
 
 const searchEffects = {
 
+    reset: function*() {
+        yield put(createAction(SEARCH.RESETFIELDREQUESTED)())
+    },
+
     simple: function*(action) {
     	const value = filterForUrl(action.value)
         hashHistory.push(`/search/${value}`)
-        
     },
 
     advanced: function*(action) {

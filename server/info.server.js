@@ -1,3 +1,5 @@
+const path = require("path");
+const fs = require('fs');
 
 const singleInfo = (db, response, type, key) => {
 
@@ -11,22 +13,23 @@ const singleInfo = (db, response, type, key) => {
 			} else {
 				dbName = type
 			}
-			queryOperation = db.collection(dbName).findOne(condition, { _id: 0 })
 		} else {
-			queryOperation = db.collection('companies').findOne(condition, { _id: 0 })
+			dbName = 'companies'
 		}
-		queryOperation.then((doc, error) => {
+		db.collection(dbName).findOne(condition, { _id: 0 }).then((doc, error) => {
 			if (error) {
 				response.status(500).json({ error: error, errorType: 'main' })
 			} else {
 				doc = doc || {}
+				const imgPath = `../static/images/${dbName}/${key}/1.png`
+				doc.imageExists = fs.existsSync(path.join(__dirname, imgPath))
 				response.json(doc)
 			}
 		}).catch(error => {
 			response.status(500).json({ error: error, errorType: 'main' })
 		})
 	} else {
-		response.status(500).json({ error: errorCompl, errorType: 'whitelist' })
+		response.status(500).json({ error: `${type} not recognised`, errorType: 'whitelist' })
 	}
 
 }

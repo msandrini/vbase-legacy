@@ -101,13 +101,13 @@ const games = {
 		const data = JSON.parse(query)
 		let conditions = Object.assign({}, basicCondition, {})
 		if (data.company) {
-			conditions.company = _regExpParam(data.company)
+			conditions.companies = _regExpParam(data.company)
 		}
 		if (data.description) {
 			conditions.description = _regExpParam(data.description)
 		}
 		if (data.genre) {
-			conditions.genre = _regExpParam(data.genre)
+			conditions.genres = _regExpParam(data.genre)
 		}
 		if (data.names) {
 			conditions.names = { $or: [{ title: _regExpParam(data.names) }, { 'otherNames.name': _regExpParam(data.names) }] }
@@ -115,7 +115,10 @@ const games = {
 		if (data.series) {
 			conditions.series = _regExpParam(data.series)
 		}
-		if (data.scores.from || data.scores.to) {
+		if (data.addon) {
+			conditions.addons = _regExpParam(data.addon)
+		}
+		if (data.scores && (data.scores.from || data.scores.to)) {
 			conditions.editorScore = {}
 			if (data.scores.from) {
 				conditions.editorScore['$gte'] = parseFloat(data.scores.from)
@@ -124,7 +127,7 @@ const games = {
 				conditions.editorScore['$lte'] = parseFloat(data.scores.to)
 			}
 		}
-		if (data.sizes.from || data.sizes.to) {
+		if (data.sizes && (data.sizes.from || data.sizes.to)) {
 			conditions.cartridgeSize = {}
 			if (data.sizes.from) {
 				conditions.cartridgeSize['$gte'] = parseFloat(data.sizes.from)
@@ -133,7 +136,7 @@ const games = {
 				conditions.cartridgeSize['$lte'] = parseFloat(data.sizes.to)
 			}
 		}
-		if (data.years.from || data.years.to) {
+		if (data.years && (data.years.from || data.years.to)) {
 			conditions.year = {}
 			if (data.years.from) {
 				conditions.year['$gte'] = parseInt(data.years.from, 10)
