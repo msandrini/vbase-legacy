@@ -3,8 +3,62 @@ const projectionForList = { title: 1, genres: 1, releaseIn: 1, otherNames: 1, co
 const sortCriteria = { title: 1 }
 const basicCondition = { specialStatus: { $ne: 'homebrew' } }
 
-const _regExpParam = str => ({ $regex: `.*${str}.*` })
+const _escapeRegExp = str => str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&")
+const _regExpParam = str => ({ $regex: `${_escapeRegExp(str)}`, $options: 'i' })
 const _unique = (array) => array.filter((value, index, self) => self.indexOf(value) === index)
+
+const _getConditions = (data, referer) => {
+	let conditions = {}
+	if (data.companyid) {
+		conditions.companies = _regExpParam(data.companyid)
+	}
+	if (data.review) {
+		const matches = referer.match(/https\:\/\/[a-z0-9\:\-]+\/([a-z]{2}).*/)
+		let lang = matches[1]
+		if (lang === 'br') lang = 'pt-br'
+		conditions[`editorReview.${lang}`] = _regExpParam(data.review)
+	}
+	if (data.genreid) {
+		conditions.genres = _regExpParam(data.genreid)
+	}
+	if (data.names) {
+		conditions.names = { $or: [{ title: _regExpParam(data.names) }, { 'otherNames.name': _regExpParam(data.names) }] }
+	}
+	if (data.seriesid) {
+		conditions.series = _regExpParam(data.seriesid)
+	}
+	if (data.addonid) {
+		conditions.addons = _regExpParam(data.addonid)
+	}
+	if (data.scores && (data.scores.from || data.scores.to)) {
+		conditions.editorScore = {}
+		if (data.scores.from) {
+			conditions.editorScore['$gte'] = parseFloat(data.scores.from)
+		}
+		if (data.scores.to) {
+			conditions.editorScore['$lte'] = parseFloat(data.scores.to)
+		}
+	}
+	if (data.sizes && (data.sizes.from || data.sizes.to)) {
+		conditions.cartridgeSize = {}
+		if (data.sizes.from) {
+			conditions.cartridgeSize['$gte'] = parseFloat(data.sizes.from)
+		}
+		if (data.sizes.to) {
+			conditions.cartridgeSize['$lte'] = parseFloat(data.sizes.to)
+		}
+	}
+	if (data.years && (data.years.from || data.years.to)) {
+		conditions.year = {}
+		if (data.years.from) {
+			conditions.year['$gte'] = parseInt(data.years.from, 10)
+		}
+		if (data.years.to) {
+			conditions.year['$lte'] = parseInt(data.years.to, 10)
+		}
+	}
+	return conditions
+}
 
 const _getGames = (db, cursor, page, response, pageSize = ITEMS_PER_PAGE) => {
 	const skip = page * pageSize
@@ -64,7 +118,7 @@ const _getGames = (db, cursor, page, response, pageSize = ITEMS_PER_PAGE) => {
 								delete d.companies
 							}
 							response.json({ games: docs, total: count })
-							
+
 						}).catch((e) => {
 							response.status(500).json({ error: e, errorType: 'genre/company' })
 						})
@@ -92,62 +146,27 @@ const games = {
 	},
 
 	fromSeries: (db, response, seriesIds) => {
-		const condition = Object.assign({}, basicCondition, { series: { $in: seriesIds.split(',') }})
+		const condition = Object.assign({}, basicCondition, { series: { $in: seriesIds.split(',') } })
 		const gamesCursor = db.collection('games').find(condition, { title: 1 })
 		_getGames(db, gamesCursor, 0, response)
 	},
 
-	advanced: (db, response, query, page = 0) => {
+	advanced: (db, response, referer, query, page = 0) => {
 		const data = JSON.parse(query)
-		let conditions = Object.assign({}, basicCondition, {})
+		let conditions = Object.assign({}, basicCondition, _getConditions(data, referer))
+		const _doMainCall = function (conditions) {
+			const gamesCursor = db.collection('games').find(conditions, projectionForList)
+			_getGames(db, gamesCursor, page, response)
+		}
 		if (data.company) {
-			conditions.companies = _regExpParam(data.company)
+			db.collection('companies').find({ name: _regExpParam(data.company) }, { _id: 1 }).toArray().then(docs => {
+				const companyIds = docs.map(d => d._id)
+				conditions.companies = { $in: companyIds }
+				_doMainCall(conditions)
+			})
+		} else {
+			_doMainCall(conditions)
 		}
-		if (data.description) {
-			conditions.description = _regExpParam(data.description)
-		}
-		if (data.genre) {
-			conditions.genres = _regExpParam(data.genre)
-		}
-		if (data.names) {
-			conditions.names = { $or: [{ title: _regExpParam(data.names) }, { 'otherNames.name': _regExpParam(data.names) }] }
-		}
-		if (data.series) {
-			conditions.series = _regExpParam(data.series)
-		}
-		if (data.addon) {
-			conditions.addons = _regExpParam(data.addon)
-		}
-		if (data.scores && (data.scores.from || data.scores.to)) {
-			conditions.editorScore = {}
-			if (data.scores.from) {
-				conditions.editorScore['$gte'] = parseFloat(data.scores.from)
-			}
-			if (data.scores.to) {
-				conditions.editorScore['$lte'] = parseFloat(data.scores.to)
-			}
-		}
-		if (data.sizes && (data.sizes.from || data.sizes.to)) {
-			conditions.cartridgeSize = {}
-			if (data.sizes.from) {
-				conditions.cartridgeSize['$gte'] = parseFloat(data.sizes.from)
-			}
-			if (data.sizes.to) {
-				conditions.cartridgeSize['$lte'] = parseFloat(data.sizes.to)
-			}
-		}
-		if (data.years && (data.years.from || data.years.to)) {
-			conditions.year = {}
-			if (data.years.from) {
-				conditions.year['$gte'] = parseInt(data.years.from, 10)
-			}
-			if (data.years.to) {
-				conditions.year['$lte'] = parseInt(data.years.to, 10)
-			}
-		}
-		const condition = {}
-		const gamesCursor = db.collection('games').find(conditions, projectionForList)
-		_getGames(db, gamesCursor, page, response)
 	}
 
 }

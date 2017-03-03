@@ -4,6 +4,7 @@ import { createAction } from '../../utils'
 import { Link } from 'react-router'
 import { INFO } from '../../constants'
 
+import PageTitle from '../shared/page-title.jsx'
 import Title from '../shared/title.jsx'
 
 import t, { lang } from '../../i18n'
@@ -34,15 +35,15 @@ const _getImageUrl = (subject, subjectKey) => {
 const _getLinkStr = (subject, title) => {
 	if (typeof title === 'object') title = title[lang]
 	if (subject !== 'addon') {
-		return t('list-games-from-the-x-y', {replacements: [subject, title]})
+		return t('list-games-from-the-x-y', { replacements: [subject, title] })
 	} else {
-		return t('list-games-with-supporting-x', {replacements: title})
+		return t('list-games-with-supporting-x', { replacements: title })
 	}
 }
 
 const _getLinkUrl = (subject, subjectKey) => {
 	let tempObject = {}
-	tempObject[subject] = subjectKey
+	tempObject[subject + 'id'] = subjectKey
 	const json = encodeURIComponent(JSON.stringify(tempObject))
 	return `/advanced-search/${json}`
 }
@@ -56,6 +57,7 @@ class InfoPage extends Component {
 	render() {
 		const { title, subject, subjectKey, content, imageExists} = this.props
 		return <div>
+			<PageTitle title={_getTitle(title) + ` (${subject && t(subject)})`} />
 			<Title main={_getTitle(title)} sub={subject && t(subject)} />
 			<div id="info">
 				{imageExists && <figure>

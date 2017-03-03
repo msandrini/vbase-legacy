@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+
+import PageTitle from '../../shared/page-title.jsx'
 import Title from '../../shared/title.jsx'
 import Spinner from '../../shared/spinner.jsx'
 import { GAME } from '../../../constants'
@@ -20,7 +22,7 @@ import GameGenres from './genres.jsx'
 import t, { lang } from '../../../i18n'
 import './_main.styl'
 
-const infoTypes = ['year', 'companies', 'genres', 'size', 'series', 'addons', 'locals']
+//const infoTypes = ['year', 'companies', 'genres', 'size', 'series', 'addons', 'locals']
 
 class GamePage extends Component {
 	constructor() {
@@ -50,19 +52,20 @@ class GamePage extends Component {
 		}
 
 	}
-	_getTitle(title) {
-		return <strong>{title || t('loading-game-info')}</strong>
-	}
 	render() {
 		const game = this.props.info
 		return <div>
-			{this.props.isLoading && <div><Title main={t('loading-game-info')} /><Spinner /></div>}
+			{this.props.isLoading && <div>
+				<Title main={t('loading-game-info')} />
+				<Spinner />
+			</div>}
 			{this.props.hasFailed && <div>
 				<Title main={t('error')} />
 				<FailureMessage message={this.props.hasFailed} />
 			</div>}
 			{game && game.title && <div>
-				<Title main={this._getTitle(game.title)} details={this._getOtherNamesFormatted(game.otherNames)} />
+				<PageTitle title={game.title + ` (${t('game')})`} />
+				<Title main={<strong>{game.title}</strong>} details={this._getOtherNamesFormatted(game.otherNames)} />
 				<div id="game-info">
 					<GamePicture gameId={this.props.gameId} />
 					<div className="main-box">

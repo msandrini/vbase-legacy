@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+
+import PageTitle from '../shared/page-title.jsx'
 import Title from '../shared/title.jsx'
 import Icon from '../shared/icon.jsx'
 import Spinner from '../shared/spinner.jsx'
@@ -46,6 +48,7 @@ class ContactPage extends Component {
 
 	render() {
 		return <div>
+			<PageTitle title={t('contact-us')} />
 			<Title main={t('contact-us')} />
 			<form id="contact-form" onSubmit={this._submitForm}>
 				<input type="email" autoComplete="off" name="email" required placeholder={t('e-mail')} onChange={this._changeValue} />

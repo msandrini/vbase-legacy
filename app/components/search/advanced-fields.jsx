@@ -25,10 +25,10 @@ class AdvancedFields extends Component {
 		const el = ev.target.elements
 		const data = {
 			company: el.company.value,
-			description: el.description.value,
-			genre: el.genre.value,
+			review: el.review.value,
+			//genre: el.genre.value,
 			names: el.names.value,
-			series: el.series.value,
+			//series: el.series.value,
 			scores: {
 				from: el.scores1.value,
 				to: el.scores2.value
@@ -86,17 +86,17 @@ class AdvancedFields extends Component {
 						<label htmlFor="company">{t('company')}</label>
 						<input type="search" autoComplete="off" name="company" />
 					</div>
-					<div className="group">
+					{/*<div className="group">
 						<label htmlFor="genre">{t('genres')}</label>
 						<input type="search" autoComplete="off" name="genre" />
 					</div>
 					<div className="group">
 						<label htmlFor="series">{t('series')}</label>
 						<input type="search" autoComplete="off" name="series" />
-					</div>
+					</div>*/}
 					<div className="group">
-						<label htmlFor="description">{t('description')}</label>
-						<input type="search" autoComplete="off" name="description" />
+						<label htmlFor="review">{t('on-review')}</label>
+						<input type="search" autoComplete="off" name="review" />
 					</div>
 					<div className="group">
 						<label htmlFor="sizes1">{t('sizes')}</label>

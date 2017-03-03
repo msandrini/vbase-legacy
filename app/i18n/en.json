@@ -16,6 +16,8 @@
 
 	"contact":"Contact",
 	"terms-of-use-and-privacy":"Terms of Use and Privacy",
+	"terms-of-service":"Terms of service",
+	"and-privacy-policy":"and privacy policy",
 	"name":"Name",
 	"e-mail":"E-mail",
 	"message":"Message",
@@ -54,13 +56,15 @@
 	"list-games-from-the-x-y":"List all games from the {0} {1}",
 	"list-games-with-supporting-x":"List all games with/supporting {0}",
 
+	"all-games":"all games",
+
 	"game-not-found":"Game not found",
 	"info-not-found":"Information not found",
 	"no-content":"No content",
 
 	"searching-for-games":"Searching for games",
 	"from-x":"from *{0}*",
-	"having-x-on-description":"having *{0}* on description",
+	"having-x-on-review":"having *{0}* on editor review",
 	"on-genre-x":"on genre *{0}*",
 	"named-x":"named *{0}*",
 	"from-series-x":"from the *{0}* series",
@@ -81,7 +85,7 @@
 	"genres":"Genres",
 	"series":"Series",
 	"addon":"Add-on",
-	"description":"Description",
+	"on-review":"in the review",
 	"sizes":"Sizes",
 	"editor-score":"Editor Score",
 	"user-score":"Users' Score",

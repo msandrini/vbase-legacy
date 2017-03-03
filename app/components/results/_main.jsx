@@ -3,8 +3,10 @@ import { connect } from 'react-redux'
 import { createAction, joinText } from '../../utils'
 import { RESULTS, ITEMS_PER_PAGE } from '../../constants'
 
+import PageTitle from '../shared/page-title.jsx'
 import Title from '../shared/title.jsx'
 import Spinner from '../shared/spinner.jsx'
+import Icon from '../shared/icon.jsx'
 import FailureMessage from '../shared/failure-message.jsx'
 import Pagination from '../shared/pagination.jsx'
 import GameLink from './game-link.jsx'
@@ -22,8 +24,8 @@ const _getComposedSearchDetails = query => {
 	if (query.company) {
 		searchDetails.push(t('from-x', { replacements: query.company }))
 	}
-	if (query.description) {
-		searchDetails.push(t('having-x-on-description', { replacements: query.description }))
+	if (query.review) {
+		searchDetails.push(t('having-x-on-review', { replacements: query.review }))
 	}
 	if (query.genre) {
 		searchDetails.push(t('on-genre-x', { replacements: query.genre }))
@@ -56,17 +58,24 @@ const _getComposedSearchDetails = query => {
 		searchDetails.push(t('released-until-x', { replacements: query.years.to }))
 	}
 
-	return searchDetails.length > 1 ? joinText(searchDetails, ',', t('and')) : searchDetails[0]
+	if (searchDetails.length) {
+		return t('searching-for-games') + ' ' + (searchDetails.length > 1 ? joinText(searchDetails, ',', t('and')) : searchDetails[0])
+	} else {
+		return t('advanced-search')
+	}
 }
 
 const _getTitle = params => {
 	if (params.query) {
 		const composedSearchDetails = _getComposedSearchDetails(JSON.parse(params.query))
-		return <Title main={t('showing-results')} details={[t('searching-for-games') + ' ' + composedSearchDetails]} />
+		return [<Title key="title" main={t('showing-results')} details={[composedSearchDetails]} />, 
+			<PageTitle key="pagetitle" title={t('advanced-search')} />]
 	} else if (params.names) {
-		return <Title main={t('showing-results')} sub={t('searching-for-x', { replacements: params.names })} />
+		return [<Title key="title" main={t('showing-results')} sub={t('searching-for-x', { replacements: params.names })} />, 
+			<PageTitle key="pagetitle" title={t('basic-search')} />]
 	} else {
-		return <Title main={t('showing-all-games')} sub="" />
+		return [<Title key="title" main={t('showing-all-games')} sub="" />, 
+			<PageTitle key="pagetitle" title={t('all-games')} />]
 	}
 }
 
@@ -112,8 +121,12 @@ class Results extends Component {
 			{isLoading ? <Spinner /> :
 				(hasFailed ? <FailureMessage /> :
 					(!games.length ? <div className="no-results">
-						{t('no-results-found')}<br />
-						<button className="standard" onClick={this._goBack}>{t('go-back')}</button>
+						<p>{t('no-results-found')}</p>
+						<div className="button-wrapper">
+							<button className="btn ball" title={t('go-back')} onClick={this._goBack}>
+								<Icon type="prev" size="28" />
+							</button>
+						</div>
 					</div> :
 						<div>
 							<Pagination currentPage={page} results={total} linkFunction={v => this._changePage(v)} />
