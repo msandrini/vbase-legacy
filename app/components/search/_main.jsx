@@ -25,7 +25,8 @@ class Fields extends Component {
 	_fieldChangeSimple(ev) {
 		this.props.simpleFieldValueChange({ value: ev.target.value })
 	}
-	_submitSimple() {
+	_submitSimple(ev) {
+		ev.preventDefault()
 		this.props.simpleSearchSubmit({ value: this.props.fieldValueSimple })
 	}
 	_submitAdvanced(data) {
@@ -33,34 +34,34 @@ class Fields extends Component {
 	}
 	render() {
 		const { advancedSearchVisible, fieldValueSimple } = this.props
-	    return <div className="search">
-	    	<form className="basic-search" onSubmit={this._submitSimple}>
-	        	<input type="search" placeholder={t(advancedSearchVisible? 'search-for-a-game-below':'search-for-a-game')} id="simpleSearchValue"
-	        		disabled={advancedSearchVisible} onChange={this._fieldChangeSimple} autoComplete="off" />
-	        	<button type="submit" className="ball" disabled={!fieldValueSimple}>
-	        		<Icon type="search" size="24" />
-	        	</button>
-	        	{!advancedSearchVisible && 
-	        		<a onClick={this._toggleAdvanced} className="trigger-advanced">
-	        			{t('advanced-search')}
-	        			<Icon size="9" type="plus" />
-	        		</a>}
-	        </form>
-	        <AdvancedFields visible={advancedSearchVisible} hide={this._toggleAdvanced} submit={this._submitAdvanced} />
-	    </div>
+		return <div className="search">
+			<form className="basic-search" onSubmit={this._submitSimple}>
+				<input type="search" placeholder={t(advancedSearchVisible ? 'search-for-a-game-below' : 'search-for-a-game')} id="simpleSearchValue"
+					disabled={advancedSearchVisible} onChange={this._fieldChangeSimple} autoComplete="off" />
+				<button type="submit" className="ball" disabled={!fieldValueSimple}>
+					<Icon type="search" size="24" />
+				</button>
+				{!advancedSearchVisible &&
+					<a onClick={this._toggleAdvanced} className="trigger-advanced">
+						{t('advanced-search')}
+						<Icon size="9" type="plus" />
+					</a>}
+			</form>
+			<AdvancedFields visible={advancedSearchVisible} hide={this._toggleAdvanced} submit={this._submitAdvanced} />
+		</div>
 	}
 }
 
 const mapStateToProps = state => ({
-    advancedSearchVisible: state.search.advancedVisible,
-    fieldValueSimple: state.search.fieldValueSimple
+	advancedSearchVisible: state.search.advancedVisible,
+	fieldValueSimple: state.search.fieldValueSimple
 })
 
 const mapDispatchToProps = {
-    simpleFieldValueChange: createAction(SEARCH.CHANGEDSIMPLE),
-    simpleSearchSubmit: createAction(SEARCH.SUBMITTEDSIMPLE),
-    advancedSearchSubmit: createAction(SEARCH.SUBMITTEDADVANCED),
-    toggleAdvancedAction: createAction(SEARCH.TOGGLEADVANCED)
+	simpleFieldValueChange: createAction(SEARCH.CHANGEDSIMPLE),
+	simpleSearchSubmit: createAction(SEARCH.SUBMITTEDSIMPLE),
+	advancedSearchSubmit: createAction(SEARCH.SUBMITTEDADVANCED),
+	toggleAdvancedAction: createAction(SEARCH.TOGGLEADVANCED)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Fields)

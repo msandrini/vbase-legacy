@@ -7,20 +7,20 @@ const initialState = {
 
 const searchReducer = (state = initialState, action) => {
 	switch (action.type) {
-		
+
 		case SEARCH.RESETFIELDREQUESTED:
-			return {...state, fieldValueSimple:'' }
+			return { ...state, fieldValueSimple: '' }
 
 		case SEARCH.TOGGLEADVANCED:
-			return {...state, advancedVisible:!state.advancedVisible }
+			return { ...state, advancedVisible: !state.advancedVisible }
 
 		case SEARCH.CHANGEDSIMPLE:
-			return {...state, fieldValueSimple:action.value }
+			return { ...state, fieldValueSimple: action.value }
 
 		// case SEARCH.SUBMITTEDSIMPLE - triggers saga
 
 		case SEARCH.SUBMITTEDADVANCED:
-			return {...state, advancedVisible:false }
+			return { ...state, advancedVisible: false }
 
 		default:
 			return state

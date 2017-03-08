@@ -1,10 +1,75 @@
 @require '../common.styl'
 
 #info
-	padding 20px 0 40px 377px
-	margin-right 170px
-	border-right 3px solid c-light
+	padding 20px 0 40px 0
+	margin 0 170px 80px 250px
+	border 3px solid c-light
+	border-top none
+	position relative
 	clearfix()
 	.no-content
 		font-size 24px
 		color c-medium2
+
+	.button-wrapper
+		position absolute
+		clear right
+		pos 0 0
+		&:after
+			content ' '
+			display block
+			size 3px 12px
+			background c-light
+			position absolute
+			pos -3px -14px
+		.ball
+			size 50px 50px
+			position absolute
+			pos -27px -64px
+			svg
+				position absolute
+				pos 14px 14px
+
+	figure
+		size 160px 160px
+		position absolute
+		pos -122px 22px
+		.image-container
+			display flex
+			justify-content center
+			align-items center 
+			margin 3px 0 0 3px
+			size 154px 154px
+			border-radius 100%
+			overflow hidden
+		img
+			max-width 154px
+			max-height 154px
+
+	p
+		min-height 180px
+		margin 0
+		padding 15px 0 30px 120px
+		width 60%
+		float left
+	
+	.links
+		float right
+		width 40%
+		padding 15px 30px 0 80px
+		a
+			display block
+			text-align right
+			line-height 16px
+			font-size 16px
+			margin-bottom 30px
+			position relative
+			&:after
+				content ' '
+				size 20px 20px
+				display block
+				position absolute
+				right -41px
+				top 0
+				background c-light
+				border-radius 100%

@@ -1,9 +1,6 @@
-const { outputFile404 } = require('./utils.server');
+const { outputFile404, gameIdIsValid } = require('./utils.server');
 const path = require("path");
 const fs = require('fs');
-const mongodb = require('mongodb');
-
-const validId = (id) => mongodb.ObjectID.isValid(id);
 
 const assets = {
 
@@ -21,7 +18,7 @@ const assets = {
 		gameplay: {
 			file: (response, code, count) => {
 				const countIsAllowed = /[0-9]{1}/.test(count);
-				if (validId(code) && countIsAllowed) {
+				if (gameIdIsValid(code) && countIsAllowed) {
 					const imgPath = path.join(__dirname, `../static/images/games/gameplay/${code}/${count}.png`);
 					const fileExists = fs.existsSync(imgPath);
 					if (fileExists) {
@@ -35,7 +32,7 @@ const assets = {
 				}
 			},
 			list: (response, code) => {
-				if (validId(code)) {
+				if (gameIdIsValid(code)) {
 					let feedback = [];
 					let counter = 1;
 					let lastFileFound = false;

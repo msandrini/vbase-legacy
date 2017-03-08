@@ -6,7 +6,6 @@ import Title from '../../shared/title.jsx'
 import Spinner from '../../shared/spinner.jsx'
 import { GAME } from '../../../constants'
 import { createAction } from '../../../utils'
-import { Link } from 'react-router'
 
 import GamePicture from './picture.jsx'
 import GameEditorScore from './editor-score.jsx'
@@ -19,23 +18,28 @@ import GameMediaInfo from './media-info.jsx'
 import GameBasicInfo from './basic-info.jsx'
 import GameGenres from './genres.jsx'
 
-import t, { lang } from '../../../i18n'
+import t from '../../../i18n'
 import './_main.styl'
 
-//const infoTypes = ['year', 'companies', 'genres', 'size', 'series', 'addons', 'locals']
+// const infoTypes = ['year', 'companies', 'genres', 'size', 'series', 'addons', 'locals']
 
 class GamePage extends Component {
-	constructor() {
-		super()
-	}
+
 	componentWillMount() {
-		const rawQuery = this.props.params.game
-		const idMatch = rawQuery.match(/\-[a-f0-9]{24}/);
-		if (idMatch && idMatch[0]) {
-			const gameId = idMatch[0].substr(1)
+		this._initPage(this.props.params.game, this.props.failedAction)
+	}
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.params.game !== this.props.params.game) {
+			this._initPage(nextProps.params.game, this.props.failedAction)
+		}
+	}
+
+	_initPage(gameId, failedAction) {
+		const gameIdIsOk = /[a-z0-9-]+/.test(gameId)
+		if (gameIdIsOk) {
 			this._getGameInfo(gameId)
 		} else {
-			this.props.failedAction({ rawQuery })
+			failedAction({ gameId })
 		}
 	}
 	_getGameInfo(gameId) {
@@ -45,13 +49,14 @@ class GamePage extends Component {
 		if (otherNames && otherNames.length) {
 			return otherNames.map(entry => {
 				return <div className="other-name">
-					<small>{t('onr__' + entry.reasonForName)}</small> 
+					<small>{t('onr__' + entry.reasonForName)}</small>
 					<strong>{entry.name}</strong>
 				</div>
 			})
 		}
 
 	}
+
 	render() {
 		const game = this.props.info
 		return <div>
@@ -67,6 +72,7 @@ class GamePage extends Component {
 				<PageTitle title={game.title + ` (${t('game')})`} />
 				<Title main={<strong>{game.title}</strong>} details={this._getOtherNamesFormatted(game.otherNames)} />
 				<div id="game-info">
+					{game.specialStatus && <span className="special-status">{t('sps__' + game.specialStatus)}</span>}
 					<GamePicture gameId={this.props.gameId} />
 					<div className="main-box">
 						<GamePlaces releasePlaces={game.releasePlaces} otherNames={game.otherNames} />
@@ -93,11 +99,11 @@ const mapStateToProps = state => ({
 	info: state.game.info,
 	gameId: state.game.gameId,
 	seriesGames: state.game.seriesGames
-});
+})
 
 const mapDispatchToProps = {
 	requestAction: createAction(GAME.REQUESTEDINFO),
 	failedAction: createAction(GAME.FAILEDONURL)
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamePage)

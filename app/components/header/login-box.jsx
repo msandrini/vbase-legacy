@@ -10,13 +10,9 @@ import Icon from '../shared/icon.jsx'
 
 class LoginBox extends Component {
 
-	constructor(props) {
-		super(props)
-	}
-
-	componentWillMount() {
-		/* REACTIVATE WHEN UP TO TEST */
-		/*window.googleApiLoaded = () => {
+	/* componentWillMount() {
+		// REACTIVATE WHEN UP TO TEST
+		window.googleApiLoaded = () => {
 			gapi.load('auth2', () => {
 				const ga = window.gapi.auth2.init({
 		            client_id: '688480051156-7hupvud4vjfinkpaj70ddl6g3tvdfuj5.apps.googleusercontent.com',
@@ -29,16 +25,16 @@ class LoginBox extends Component {
 
 		        ga.attachClickHandler('btn-google')
 			})
-		}*/
-	}
+		}
+	} */
 
 	checkLogin(ga) {
 		const isSignedIn = ga.isSignedIn.get()
-		if (isSignedIn == true) {
+		if (isSignedIn === true) {
 			const profile = ga.currentUser.get().getBasicProfile()
 			const userInfo = {
-				name: [ profile.getGivenName(), profile.getFamilyName() ],
-				image: { url: profile.getImageUrl() }, 
+				name: [profile.getGivenName(), profile.getFamilyName()],
+				image: { url: profile.getImageUrl() },
 				via: 'Google'
 			}
 			this.props.loginDoneAction({ userInfo })
@@ -47,18 +43,18 @@ class LoginBox extends Component {
 
 	loginButtonStyle() {
 		return {
-			display: (this.props.isLoggedIn? 'none' : 'block')
+			display: (this.props.isLoggedIn ? 'none' : 'block')
 		}
 	}
 
-	logout() {
-
-	}
+	/* logout() {
+		TODO
+	} */
 
 	render() {
 		const { user, isLoggedIn } = this.props
 		return <aside className="user-box">
-			{ isLoggedIn && <UserInfo user={user} logout={() => this.logout()} />}
+			{isLoggedIn && <UserInfo user={user} logout={() => this.logout()} />}
 			<a id="btn-google" className="ball btn" href="#" style={this.loginButtonStyle()} title={t('login-with-Google')}>
 				<Icon type="person" size="24" />
 			</a>
@@ -67,12 +63,12 @@ class LoginBox extends Component {
 }
 
 const mapStateToProps = state => ({
-    userInfo: state.login.userInfo,
-    isLoggedIn: state.login.loggedIn
+	userInfo: state.login.userInfo,
+	isLoggedIn: state.login.loggedIn
 })
 
 const mapDispatchToProps = {
-    loginDoneAction: createAction(LOGIN.CHECKED)
+	loginDoneAction: createAction(LOGIN.CHECKED)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginBox)

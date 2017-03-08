@@ -27,6 +27,14 @@ const basicConfig = {
     module: {
         rules: [{
             test: /\.jsx?$/,
+            enforce: 'pre',
+            exclude: [/mode_modules/],
+            loader: 'eslint-loader',
+            options: {
+                emitWarning: true,
+            },
+        }, {
+            test: /\.jsx?$/,
             include: /app\//,
             loader: "babel-loader",
             options: {
@@ -54,9 +62,9 @@ const basicConfig = {
         }, {
             test: /\.json$/,
             use: 'json-loader'
-        }, { 
-            test: /\.svg$/, 
-            loader: 'svg-url-loader' 
+        }, {
+            test: /\.svg$/,
+            loader: 'svg-url-loader'
         }]
     },
     devtool: 'cheap-module-source-map',

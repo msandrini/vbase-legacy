@@ -8,6 +8,6 @@ const SelectBox = props => (
 		</select>
 		<Icon size="10" type="downarrow" />
 	</div>
-);
+)
 
 export default SelectBox

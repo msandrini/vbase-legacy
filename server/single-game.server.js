@@ -1,11 +1,10 @@
+const { gameIdIsValid } = require('./utils.server')
 
 const singleInfo = (db, response, id) => {
-    const oId = require('mongodb').ObjectId
-    const isIdValid = /[a-f0-9]{24}/.test(id)
-    if (!isIdValid) {
+    if (!gameIdIsValid(id)) {
         response.status(500).json({ error: 'Invalid ID' })
     } else {
-        const condition = { _id: new oId(id) }
+        const condition = { _id: id }
         db.collection('games').findOne(condition, { _id: 0 }).then((doc, error) => {
             if (error) {
                 response.status(500).json({ error: error, errorType: 'main' })
@@ -37,7 +36,7 @@ const singleInfo = (db, response, id) => {
                     promises.push([])
                 }
                 const aggregationParams = [
-                    { $match: { game: new oId(id) } },
+                    { $match: { game: id } },
                     { $group: { _id: null, averageScore: { $avg: "$score" }, timesReviewed: { $sum: 1 } } },
                 ]
                 promises.push(db.collection('reviews').aggregate(aggregationParams).toArray())

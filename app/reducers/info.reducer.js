@@ -15,14 +15,16 @@ const infoReducer = (state = initialState, action) => {
 
 		case INFO.CONTENTREQUESTED:
 			const {subject, key} = action
-			return {...state, isLoading: false, subject, key }
+			return { ...state, isLoading: false, subject, key }
 
 		case INFO.FAILEDLOADING:
-			return {...state, isLoading: false, hasFailed: true }
+			return { ...state, isLoading: false, hasFailed: true }
 
 		case INFO.CONTENTRETRIEVED:
 			const {title, content, imageExists} = action
-			return {...state, isLoading: false, title, content, imageExists }
+			return { ...state, isLoading: false, title, content, imageExists }
+
+		// case INFO.BACKREQUESTED - triggers saga
 
 		default:
 			return state

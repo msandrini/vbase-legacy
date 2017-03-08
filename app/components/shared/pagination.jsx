@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router'
 
 import './pagination.styl'
 import t from '../../i18n'
@@ -27,24 +26,25 @@ class Pagination extends Component {
 	_buildPagination(props) {
 		this.pagesArray = []
 		this.pages = Math.ceil(props.results / ITEMS_PER_PAGE)
-		for (let x = 0; x < this.pages; x++) {
+		for (let x = 1; x <= this.pages; x++) {
 			this.pagesArray.push(x)
 		}
-		this.hasPrev = (props.currentPage !== 0)
-		this.hasNext = props.currentPage < (this.pages - 1)
+		this.hasPrev = (props.currentPage !== 1)
+		this.hasNext = props.currentPage < this.pages
 	}
 
 	_goToPage(ev) {
-		const page = (typeof ev === 'object' ? ev.target.value : String(ev))
+		const pageNumber = (typeof ev === 'object' ? parseInt(ev.target.value, 10) : ev)
+		const page = String(pageNumber)
 		this.props.linkFunction(page)
 	}
 
 	render() {
-		const { linkFunction, currentPage } = this.props
+		const { currentPage } = this.props
 		const pageInt = parseInt(currentPage, 10)
 		return <aside className="pagination">
 			{this.hasPrev &&
-				<a className="ball btn extremes first" title={t('first-page')} onClick={() => this._goToPage(0)}>
+				<a className="ball btn extremes first" title={t('first-page')} onClick={() => this._goToPage(1)}>
 					<Icon size="9" type="first" />
 				</a>}
 			{this.hasPrev &&
@@ -53,7 +53,7 @@ class Pagination extends Component {
 				</a>}
 			<div className="ball btn">
 				<SelectBox onChange={(ev) => this._goToPage(ev)} value={currentPage}>
-					{this.pagesArray.map(p => { return <option key={p} value={p}>{p + 1}</option> })}
+					{this.pagesArray.map(p => { return <option key={p} value={p}>{p}</option> })}
 				</SelectBox>
 			</div>
 			{this.hasNext &&
@@ -61,7 +61,7 @@ class Pagination extends Component {
 					<Icon size="17" type="next" />
 				</a>}
 			{this.hasNext &&
-				<a className="ball btn extremes last" title={t('last-page')} onClick={() => this._goToPage(this.pages - 1)}>
+				<a className="ball btn extremes last" title={t('last-page')} onClick={() => this._goToPage(this.pages)}>
 					<Icon size="9" type="last" />
 				</a>}
 		</aside>

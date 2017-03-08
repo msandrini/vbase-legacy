@@ -11,10 +11,10 @@ const GameEditorScore = ({score}) => {
 		<span className="line" />
 		<div className="ball">
 			<span className="label">{t('editor-score')}</span>
-			<div className={`numbers score${String(score).replace('.','-')}`}>
+			<div className={`numbers score${String(score).replace('.', '-')}`}>
 				<Scorebar score={score} size="100" />
 				<strong>{scoreParts[0]}</strong>
-				<small>{scoreParts[1]? scoreParts[1] : '0'}</small>
+				<small>{scoreParts[1] ? scoreParts[1] : '0'}</small>
 			</div>
 		</div>
 	</div>

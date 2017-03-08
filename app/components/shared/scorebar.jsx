@@ -21,7 +21,7 @@ const elements = [
 ]
 
 const _getClass = (elementScore, gameScore) => {
-	const strScore = String(gameScore).replace('.','-')
+	const strScore = String(gameScore).replace('.', '-')
 	if (gameScore === elementScore) {
 		return `colour${strScore}`
 	} else if (gameScore > elementScore) {

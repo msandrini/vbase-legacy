@@ -1,22 +1,22 @@
-import { call, put, select } from 'redux-saga/effects'
+import { call, put } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
-import { hashHistory } from 'react-router'
-import { GAME } from '../constants'
+import { browserHistory } from 'react-router'
+import { GAME, BASE_URL } from '../constants'
 import { sendCall, warnOnNetworkError, createAction } from '../utils'
 
 import t from '../i18n'
 
 const gameEffects = {
 
-	requestInfo: function*(action) {
+	requestInfo: function* (action) {
 		try {
-			const feedback = yield call(sendCall, 'game/' + action.id)
+			const feedback = yield call(sendCall, BASE_URL + 'game-entry/' + action.id)
 			if (feedback.status === 200) {
 				yield put(createAction(GAME.INFORETRIEVED)({ info: feedback.data }))
 				if (feedback.data.series && feedback.data.series.length) {
 					const seriesIds = feedback.data.series.map(s => s.id)
 					yield call(delay, 500)
-					const feedbackSeries = yield call(sendCall, 'games/from-series/' + seriesIds.join(','))
+					const feedbackSeries = yield call(sendCall, BASE_URL + 'games/from-series/' + seriesIds.join(','))
 					yield put(createAction(GAME.RELATEDGAMESRETRIEVED)({ info: feedbackSeries.data }))
 				}
 			} else {
@@ -30,9 +30,9 @@ const gameEffects = {
 		}
 	},
 
-	triggerBack: function*(action) {
+	triggerBack: function* (action) {
 		window.alert(t('game-not-found'))
-		hashHistory.goBack()
+		browserHistory.goBack()
 	}
 
 }

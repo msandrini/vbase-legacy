@@ -14,18 +14,6 @@ const collectionOutputError = (error, coll) => {
     }
 };
 
-// collection wrapper
-const find = (db, response, collection, criteria = {}, projection = {}) => {
-    return new Promise((resolve, reject) => {
-        db.collection(collection, collectionOutputError).find(criteria, projection).toArray((error, docs) => {
-            if (error) {
-                outputJsonError(response, 'CollFind', error, { collection, criteria, projection });
-                reject();
-            } else {
-                resolve(docs);
-            }
-        });
-    });
-};
+const gameIdIsValid = id => /[a-z0-9\-]+/.test(String(id))
 
-module.exports = { outputFile404, outputJsonError, collectionOutputError, find };
+module.exports = { outputFile404, outputJsonError, collectionOutputError, gameIdIsValid };

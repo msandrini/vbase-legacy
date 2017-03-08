@@ -35,6 +35,16 @@ const misc = {
 
 			}*/
 
+	const path = require('path')
+	const fs = require('fs')
+	db.collection('games').find().forEach(doc => {
+		const dir = path.join(__dirname, `../static/images/games/gameplay/${doc._id}/`);
+		const ndir = path.join(__dirname, `../static/images/games/gameplay/${doc.new_id}/`);
+		const renamed = fs.renameSync(dir, ndir);
+		console.log(renamed, dir, ndir)
+	})
+
+
     index: (db, response, pag) => {
         // PHASE 2: , "otherNames.reasonForName": { "$ne": "japanese-script" }
         const gCursor = db.collection('games').find({});

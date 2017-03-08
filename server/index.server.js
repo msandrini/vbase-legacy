@@ -12,8 +12,8 @@ const index = (response, lang) => {
 			<div id="app"></div>
 			${svg}
 			<script type="text/javascript">window.lang = '${lang}'</script>
-			<script type="text/javascript" src="jsbundles/vendor.js"></script>
-			<script type="text/javascript" src="jsbundles/app.js"></script>
+			<script type="text/javascript" src="/jsbundles/vendor.js"></script>
+			<script type="text/javascript" src="/jsbundles/app.js"></script>
 			<script src="https://apis.google.com/js/platform.js?onload=googleApiLoaded" async defer></script>
 		</body></html>`)
 }

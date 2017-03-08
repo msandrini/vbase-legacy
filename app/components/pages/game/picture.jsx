@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { BASE_URL } from '../../../constants'
 import Icon from '../../shared/icon.jsx'
 import t from '../../../i18n'
 import './picture.styl'
@@ -8,7 +9,7 @@ const morePictures = false /* for now */
 
 const GamePicture = props => <figure>
     <span className="overlay" />
-    <img src={`image-gameplay/${props.gameId}.1`} alt={t('image-of-the-gameplay')} />
+    <img src={`${BASE_URL}image-gameplay/${props.gameId}.1`} alt={t('image-of-the-gameplay')} />
     {morePictures && <div className="controls">
         <a className="ball btn prev" title={t('previous')}>
             <Icon size="14" type="prev" />

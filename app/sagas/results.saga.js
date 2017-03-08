@@ -1,60 +1,78 @@
-import { call, put, select } from 'redux-saga/effects'
-import { hashHistory } from 'react-router'
-import { RESULTS } from '../constants'
-import { sendCall, warnOnNetworkError, createAction } from '../utils'
+import { call, put } from 'redux-saga/effects'
+import { browserHistory } from 'react-router'
+import { RESULTS, BASE_URL } from '../constants'
+import { lang } from '../i18n'
+import { sendCall, warnOnNetworkError, createAction, historyPush, buildQueryString } from '../utils'
 
 const _getCallName = (action) => {
-	const page = (action.page && parseInt(action.page, 10) !== NaN) ? action.page : 0
-	if (action.names) {
-		const query = encodeURIComponent(action.names)
-		return `games/by-names/${query}/${page}`
-	} else if (action.query) {
-		const query = encodeURIComponent(action.query)
-		return `games/advanced/${query}/${page}`
+	let page = 1
+	if (action.params.page && !isNaN(parseInt(action.params.page, 10))) {
+		page = action.params.page
+	} else if (action.query.page && !isNaN(parseInt(action.query.page, 10))) {
+		page = action.query.page
+	}
+	const isQueryEmpty = Object.keys(action.query).length === 0
+	if (action.params.names) {
+		const query = encodeURIComponent(action.params.names)
+		return `${BASE_URL}games/by-names/${query}/${page}`
+	} else if (action.query && !isQueryEmpty) {
+		const query = { ...action.query, page, lang }
+		return [`${BASE_URL}games/advanced`, query]
 	} else {
-		return `games/all/${page}`
+		return `${BASE_URL}games/all/${page}`
 	}
 }
 
 const resultsEffects = {
 
-	request: function*(action) {
-		const callName = _getCallName(action);
-		
+	request: function* (action) {
+		const callFeedback = _getCallName(action)
+
 		try {
-			const feedback = yield call(sendCall, callName)
+			let feedback
+			if (typeof callFeedback === 'string') {
+				feedback = yield call(sendCall, callFeedback)
+			} else {
+				const [callName, callData] = callFeedback
+				feedback = yield call(sendCall, callName, 'post', callData)
+			}
 			if (feedback.status === 200) {
 				yield put(createAction(RESULTS.RETRIEVED)({ feedback: feedback.data }))
 			} else {
 				yield put(createAction(RESULTS.FAILED)({ feedback }))
 				warnOnNetworkError(feedback)
 			}
-			
-		} catch(e) {
+
+		} catch (e) {
 			yield put(createAction(RESULTS.FAILED)({ feedback: e }))
 			warnOnNetworkError(e)
 		}
 	},
 
-	requestPage: function*(action) {
-		const page = parseInt(action.page, 10) + 1
-		if (action.params.query) {
-			const query = encodeURIComponent(action.params.query)
-			const firstPart = `advanced-search/${query}`
+	requestPage: function* (action) {
+		const page = parseInt(action.page, 10)
+		let url
+		if (action.query && Object.keys(action.query).length) {
+			const queryObj = { ...action.query }
+			delete queryObj.page
+			delete queryObj.scores
+			delete queryObj.sizes
+			delete queryObj.years
+			const queryString = buildQueryString(queryObj)
+			url = `advanced-search?${queryString}&page=${page}`
 		} else if (action.params.names) {
 			const query = encodeURIComponent(action.params.names)
-			const firstPart = `search/${query}`
+			url = `search/${query}/${page}`
 		} else {
-			const firstPart = `all-games`
+			url = `all-games/${page}`
 		}
-		hashHistory.push(`/${firstPart}/${page}`)
-	}, 
+		historyPush(`/${url}`)
+	},
 
-	triggerBack: function*(action) {
-		hashHistory.goBack()
+	triggerBack: function* (action) {
+		browserHistory.goBack()
 	}
 
 }
 
 export default resultsEffects
-

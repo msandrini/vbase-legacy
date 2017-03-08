@@ -14,13 +14,13 @@ import './contact.styl'
 class ContactPage extends Component {
 
 	constructor(props) {
-		super(props);
+		super(props)
 		this._submitForm = this._submitForm.bind(this)
 		this._changeValue = this._changeValue.bind(this)
 	}
 
 	_submitForm(ev) {
-		ev.preventDefault();
+		ev.preventDefault()
 		const el = ev.target.elements
 		const fields = {
 			name: el.name.value,
@@ -28,9 +28,9 @@ class ContactPage extends Component {
 			message: el.message.value
 		}
 		if (fields.name && fields.email && fields.message) {
-			this.props.submitAction({ fields });
+			this.props.submitAction({ fields })
 		} else {
-			let failMessage;
+			let failMessage
 			if (!fields.name) {
 				failMessage = t('filling-name-required')
 			} else if (!fields.email) {
@@ -68,12 +68,12 @@ class ContactPage extends Component {
 const mapStateToProps = state => ({
 	isLoading: state.contact.isLoading,
 	failed: state.contact.failed
-});
+})
 
 const mapDispatchToProps = {
 	submitAction: createAction(CONTACT.SUBMITTED),
 	failAction: createAction(CONTACT.FAILED),
 	changedValueAction: createAction(CONTACT.VALUECHANGED)
-};
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactPage)

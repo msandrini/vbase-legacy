@@ -1,3 +1,4 @@
+/* exported React */
 import React, { Component } from 'react'
 import t from '../../i18n'
 import SelectBox from '../shared/select-box.jsx'
@@ -13,7 +14,7 @@ class AdvancedFields extends Component {
 			this.years.push(y)
 		}
 		this.scores = []
-		for (let s = 3.0; s <= 10.0; s = s + .5) {
+		for (let s = 3.0; s <= 10.0; s = s + 0.5) {
 			this.scores.push(s)
 		}
 		this.sizes = [1, 2, 3, 4, 6, 8, 8.5, 10, 12, 16, 20, 24, 32, 40, 48, 64, 72]
@@ -21,14 +22,14 @@ class AdvancedFields extends Component {
 		this._triggerSubmit = this._triggerSubmit.bind(this)
 	}
 	_triggerSubmit(ev) {
-		ev.preventDefault();
+		ev.preventDefault()
 		const el = ev.target.elements
 		const data = {
 			company: el.company.value,
 			review: el.review.value,
-			//genre: el.genre.value,
+			// genre: el.genre.value,
 			names: el.names.value,
-			//series: el.series.value,
+			// series: el.series.value,
 			scores: {
 				from: el.scores1.value,
 				to: el.scores2.value
@@ -86,14 +87,14 @@ class AdvancedFields extends Component {
 						<label htmlFor="company">{t('company')}</label>
 						<input type="search" autoComplete="off" name="company" />
 					</div>
-					{/*<div className="group">
+					{/* <div className="group">
 						<label htmlFor="genre">{t('genres')}</label>
 						<input type="search" autoComplete="off" name="genre" />
 					</div>
 					<div className="group">
 						<label htmlFor="series">{t('series')}</label>
 						<input type="search" autoComplete="off" name="series" />
-					</div>*/}
+					</div> */}
 					<div className="group">
 						<label htmlFor="review">{t('on-review')}</label>
 						<input type="search" autoComplete="off" name="review" />
@@ -111,18 +112,17 @@ class AdvancedFields extends Component {
 							{this.sizes.map(s => <option value={s} key={s}>{s}</option>)}
 						</SelectBox>
 					</div>
-					<div className="group">
+					{/* <div className="group">
 						<label>&nbsp;</label>
 						<button className="secondary reset" type="reset">{t('reset')}</button>
-					</div>
+					</div> */}
 				</div>
 				<button className="btn ball submit-advanced" type="submit">
 					<Icon size="22" type="search" />
 				</button>
 			</form>
 		</div>
-			}
-
+	}
 }
 
 export default AdvancedFields

@@ -1,9 +1,9 @@
-import i18nStrings_en from './i18n/en.json'
-import i18nStrings_pt_br from './i18n/pt-br.json'
+import i18nStringsEn from './i18n/en.json'
+import i18nStringsBr from './i18n/pt-br.json'
 
 const i18nDict = {
-	en: i18nStrings_en,
-	'pt-br': i18nStrings_pt_br
+	en: i18nStringsEn,
+	'pt-br': i18nStringsBr
 }
 
 export const lang = window.lang || 'en'
@@ -33,10 +33,10 @@ const i18n = (key, parameters = {}, genericPluralParticle = 's') => {
 	/* Verifies if plural was requested */
 	if (parameters.plural) {
 		let shallBePlural
-		if (typeof parameters.plural.comparison === 'function'){
+		if (typeof parameters.plural.comparison === 'function') {
 			shallBePlural = parameters.plural.comparison()
 		} else {
-			shallBePlural = (typeof parameters.plural.comparison === 'boolean' ? 
+			shallBePlural = (typeof parameters.plural.comparison === 'boolean' ?
 				(parameters.plural.comparison > 1) : (parameters.plural > 1))
 		}
 		if (shallBePlural) {
@@ -61,7 +61,7 @@ const _replacer = (string, replacements) => {
 		replacements = [String(replacements)]
 	}
 	return string.replace(/{(\d+)}/g, (match, number) => {
-		return typeof replacements[number] != 'undefined' ? replacements[number] : match
+		return typeof replacements[number] !== 'undefined' ? replacements[number] : match
 	})
 }
 

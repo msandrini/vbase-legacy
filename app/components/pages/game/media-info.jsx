@@ -1,12 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router'
-import reactStringReplace from 'react-string-replace'
 
-import { joinText } from '../../../utils'
 import t, { lang } from '../../../i18n'
 import './media-info.styl'
-
-const joinStd = elements => joinText(elements, ', ', t('and'))
 
 const _getAddOnsMarkup = addOns => {
 	if (addOns && addOns.length) {
@@ -22,7 +18,7 @@ const _getAddOnsMarkup = addOns => {
 		}
 		if (addOnsObj.chip) {
 			returnArray.push(<span key="2">
-				{returnArray.length? ' ' + t('and-contains') : t('cartridge-contains')} {addOnsObj.chip}
+				{returnArray.length ? ' ' + t('and-contains') : t('cartridge-contains')} {addOnsObj.chip}
 			</span>)
 		}
 		return returnArray

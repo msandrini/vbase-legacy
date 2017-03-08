@@ -1,27 +1,25 @@
-import { call, put, select } from 'redux-saga/effects'
-import { hashHistory } from 'react-router'
+import { put } from 'redux-saga/effects'
 import { SEARCH } from '../constants'
-import { createAction } from '../utils'
+import { createAction, historyPush, buildQueryString } from '../utils'
 
 const filterForUrl = str => encodeURIComponent(str)
 
 const searchEffects = {
 
-    reset: function*() {
-        yield put(createAction(SEARCH.RESETFIELDREQUESTED)())
-    },
+	reset: function* () {
+		yield put(createAction(SEARCH.RESETFIELDREQUESTED)())
+	},
 
-    simple: function*(action) {
-    	const value = filterForUrl(action.value)
-        hashHistory.push(`/search/${value}`)
-    },
+	simple: function* (action) {
+		const value = filterForUrl(action.value)
+		historyPush(`/search/${value}`)
+	},
 
-    advanced: function*(action) {
-    	const query = filterForUrl(JSON.stringify(action.data))
-        hashHistory.push(`/advanced-search/${query}`)
-    }
+	advanced: function* (action) {
+		const query = buildQueryString(action.data)
+		historyPush(`/advanced-search?${query}`)
+	}
 
 }
 
 export default searchEffects
-

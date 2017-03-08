@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PageTitle from '../shared/page-title.jsx'
 import Title from '../shared/title.jsx'
 
@@ -58,6 +58,6 @@ const TermsPage = () => (
 		</div>
 
 	</div>
-);
+)
 
 export default TermsPage

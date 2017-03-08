@@ -12,7 +12,7 @@ import Pagination from '../shared/pagination.jsx'
 import GameLink from './game-link.jsx'
 
 import './_main.styl'
-import t from '../../i18n';
+import t from '../../i18n'
 
 const _getComposedSearchDetails = query => {
 	let searchDetails = []
@@ -36,26 +36,26 @@ const _getComposedSearchDetails = query => {
 	if (query.series) {
 		searchDetails.push(t('from-series-x', { replacements: query.series }))
 	}
-	if (query.scores.from && query.scores.to) {
-		searchDetails.push(t('scored-between-x-and-y', { replacements: [query.scores.from, query.scores.to] }))
-	} else if (query.scores.from) {
-		searchDetails.push(t('scored-x-at-least', { replacements: query.scores.from }))
-	} else if (query.scores.to) {
-		searchDetails.push(t('scored-up-to-x', { replacements: query.scores.to }))
+	if (query['scores-from'] && query['scores-to']) {
+		searchDetails.push(t('scored-between-x-and-y', { replacements: [query['scores-from'], query['scores-to']] }))
+	} else if (query['scores-from']) {
+		searchDetails.push(t('scored-x-at-least', { replacements: query['scores-from'] }))
+	} else if (query['scores-to']) {
+		searchDetails.push(t('scored-up-to-x', { replacements: query['scores-to'] }))
 	}
-	if (query.sizes.from && query.sizes.to) {
-		searchDetails.push(t('with-cart-size-between-x-and-y', { replacements: [query.sizes.from, query.sizes.to] }))
-	} else if (query.sizes.from) {
-		searchDetails.push(t('min-cart-size-x', { replacements: query.sizes.from }))
-	} else if (query.sizes.to) {
-		searchDetails.push(t('max-cart-size-x', { replacements: query.sizes.to }))
+	if (query['sizes-from'] && query['sizes-to']) {
+		searchDetails.push(t('with-cart-size-between-x-and-y', { replacements: [query['sizes-from'], query['sizes-to']] }))
+	} else if (query['sizes-from']) {
+		searchDetails.push(t('min-cart-size-x', { replacements: query['sizes-from'] }))
+	} else if (query['sizes-to']) {
+		searchDetails.push(t('max-cart-size-x', { replacements: query['sizes-to'] }))
 	}
-	if (query.years.from && query.years.to) {
-		searchDetails.push(t('released-from-x-to-y', { replacements: [query.years.from, query.years.to] }))
-	} else if (query.years.from) {
-		searchDetails.push(t('released-from-x', { replacements: query.years.from }))
-	} else if (query.years.to) {
-		searchDetails.push(t('released-until-x', { replacements: query.years.to }))
+	if (query['years-from'] && query['years-to']) {
+		searchDetails.push(t('released-fom-x-to-y', { replacements: [query['years-from'], query['years-to']] }))
+	} else if (query['years-from']) {
+		searchDetails.push(t('released-from-x', { replacements: query['years-from'] }))
+	} else if (query['years-to']) {
+		searchDetails.push(t('released-until-x', { replacements: query['years-to'] }))
 	}
 
 	if (searchDetails.length) {
@@ -65,16 +65,16 @@ const _getComposedSearchDetails = query => {
 	}
 }
 
-const _getTitle = params => {
-	if (params.query) {
-		const composedSearchDetails = _getComposedSearchDetails(JSON.parse(params.query))
-		return [<Title key="title" main={t('showing-results')} details={[composedSearchDetails]} />, 
+const _getTitle = (params, location) => {
+	if (location.query && Object.keys(location.query).length) {
+		const composedSearchDetails = _getComposedSearchDetails(location.query)
+		return [<Title key="title" main={t('showing-results')} details={[composedSearchDetails]} />,
 			<PageTitle key="pagetitle" title={t('advanced-search')} />]
 	} else if (params.names) {
-		return [<Title key="title" main={t('showing-results')} sub={t('searching-for-x', { replacements: params.names })} />, 
+		return [<Title key="title" main={t('showing-results')} sub={t('searching-for-x', { replacements: params.names })} />,
 			<PageTitle key="pagetitle" title={t('basic-search')} />]
 	} else {
-		return [<Title key="title" main={t('showing-all-games')} sub="" />, 
+		return [<Title key="title" main={t('showing-all-games')} sub="" />,
 			<PageTitle key="pagetitle" title={t('all-games')} />]
 	}
 }
@@ -91,20 +91,21 @@ class Results extends Component {
 
 	componentWillUpdate(nextProps) {
 		const differentNames = nextProps.params.names !== this.props.params.names
-		const differentQueries = nextProps.params.query && (nextProps.params.query !== this.props.params.query)
-		const differentPages = this.props.params.page !== nextProps.params.page
+		const differentQueries = nextProps.location.search !== this.props.location.search
+		const differentPages = nextProps.params.page !== this.props.params.page
 		if (differentNames || differentQueries || differentPages) {
 			this._getResults(nextProps)
 		}
 	}
 
 	_getResults(props) {
-		this.props.requestAction(props.params)
+		this.props.requestAction({ params: props.params, query: props.location.query })
 	}
 
 	_changePage(page) {
 		const params = this.props.params
-		this.props.requestPageAction({ page, params })
+		const query = this.props.location.query
+		this.props.requestPageAction({ page, params, query })
 	}
 
 	_goBack() {
@@ -112,12 +113,12 @@ class Results extends Component {
 	}
 
 	render() {
-		const { params, games, total, isLoading, hasFailed } = this.props;
-		const page = (parseInt(params.page, 10) - 1) || 0;
-		const currentFirstItem = ITEMS_PER_PAGE * page;
+		const { params, location, games, total, isLoading, hasFailed } = this.props
+		const page = parseInt(params.page, 10) || parseInt(location.query.page, 10) || 1
+		const currentFirstItem = ITEMS_PER_PAGE * page
 		const lastItemFromPage = (currentFirstItem + ITEMS_PER_PAGE > total) ? total : currentFirstItem + ITEMS_PER_PAGE
 		return <div className="results">
-			{_getTitle(params)}
+			{_getTitle(params, location)}
 			{isLoading ? <Spinner /> :
 				(hasFailed ? <FailureMessage /> :
 					(!games.length ? <div className="no-results">
@@ -152,12 +153,12 @@ const mapStateToProps = state => ({
 	total: state.results.total,
 	isLoading: state.results.isLoading,
 	hasFailed: state.results.hasFailed
-});
+})
 
 const mapDispatchToProps = {
 	requestAction: createAction(RESULTS.REQUESTED),
 	requestPageAction: createAction(RESULTS.PAGEREQUESTED),
 	requestBackAction: createAction(RESULTS.BACKREQUESTED)
-};
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Results);
+export default connect(mapStateToProps, mapDispatchToProps)(Results)

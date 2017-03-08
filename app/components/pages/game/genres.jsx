@@ -5,8 +5,10 @@ import t, { lang } from '../../../i18n'
 import './genres.styl'
 
 const GameGenres = props => <div className="genres">
-    <small>{t('genre', { plural: props.genres.length })}</small>
-    {props.genres.map(g => <Link className="info-link" to={`/info/genre/${g.id}`} key={g.id}>{g.title[lang]}</Link>)}
+	<small>{t('genre', { plural: props.genres.length })}</small>
+	{props.genres.length === 1 && props.genres[0] === null && <small>{t('none-registered')}</small>}
+	{props.genres.map(g => g && g.id &&
+		<Link className="info-link" to={`/info/genre/${g.id}`} key={g.id}>{g.title[lang]}</Link>)}
 </div>
 
 export default GameGenres

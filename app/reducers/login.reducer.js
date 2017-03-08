@@ -1,27 +1,27 @@
-import { LOGIN } from '../constants';
+import { LOGIN } from '../constants'
 
 const initialState = {
-    loggedIn: false
-};
+	loggedIn: false
+}
 
 const loginReducer = (state = initialState, action) => {
-    switch (action.type) {
-        
-        case LOGIN.CHECKED:
-            return {...state, loggedIn:true, userInfo:action.userInfo };
+	switch (action.type) {
 
-        case LOGIN.REQUESTED:
-            return {...state, via: action.via };
+		case LOGIN.CHECKED:
+			return { ...state, loggedIn: true, userInfo: action.userInfo }
 
-        case LOGIN.REJECTED:
-            return {...state, isLoading:false, wrongLogin:action.message };
+		case LOGIN.REQUESTED:
+			return { ...state, via: action.via }
 
-        case LOGIN.ACCEPTED:
-            return {...state, image:action.image, name:action.name, token:'' };
+		case LOGIN.REJECTED:
+			return { ...state, isLoading: false, wrongLogin: action.message }
 
-        default:
-            return state;
-    }
-};
+		case LOGIN.ACCEPTED:
+			return { ...state, image: action.image, name: action.name, token: '' }
 
-export default loginReducer;
+		default:
+			return state
+	}
+}
+
+export default loginReducer

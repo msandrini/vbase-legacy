@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import t from '../../i18n';
+import React from 'react'
+import t from '../../i18n'
 
 const UserInfo = ({props}) => <div className="ball">
 	<img src={props.user.image.url} alt={t('profile-picture')} />

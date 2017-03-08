@@ -5,8 +5,11 @@ import ReactDOM from 'react-dom'
 /* Additional React Libs */
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
-import { Router, Route, IndexRedirect, hashHistory } from 'react-router'
+import { Router, Route, IndexRedirect, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+
+/* Utils */
+import { optimizeScroll } from './utils'
 
 /* Saga init */
 import createSagaMiddleware from 'redux-saga'
@@ -30,13 +33,13 @@ import infoReducer from './reducers/info.reducer'
 
 /* Middleware routines */
 const combinedReducers = combineReducers({
-    login: loginReducer,
-    search: searchReducer,
-    contact: contactReducer,
-    results: resultsReducer,
-    game: gameReducer,
-    info: infoReducer,
-    routing: routerReducer
+	login: loginReducer,
+	search: searchReducer,
+	contact: contactReducer,
+	results: resultsReducer,
+	game: gameReducer,
+	info: infoReducer,
+	routing: routerReducer
 })
 const sagaMiddleware = createSagaMiddleware()
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -45,34 +48,25 @@ const store = createStore(combinedReducers, composeEnhancers(applyMiddleware(sag
 sagaMiddleware.run(rootSaga)
 
 /* Router mapping */
-const history = syncHistoryWithStore(hashHistory, store)
+const history = syncHistoryWithStore(browserHistory, store)
+// history.listen(location => ...)
 ReactDOM.render(
-    <Provider store={store}>
-        <Router history={history}>
-            <Route path="/" component={AppWrapper}>
-                <IndexRedirect to="/all-games" />
-                <Route path="all-games(/:page)" component={Results} />
-                <Route path="search/:names(/:page)" component={Results} />
-                <Route path="advanced-search/:query(/:page)" component={Results} />
-                <Route path="game/:game" component={GamePage} />
-                <Route path="info/:subject/:key" component={InfoPage} />
-                <Route path="terms-privacy" component={TermsPage} />
-                <Route path="contact" component={ContactPage} />
-            </Route>
-        </Router>
-    </Provider>,
-    document.getElementById('app')
+	<Provider store={store}>
+		<Router history={history}>
+			<Route path="/" component={AppWrapper}>
+				<IndexRedirect to="all-games" />
+				<Route path="all-games(/:page)" component={Results} />
+				<Route path="search/:names(/:page)" component={Results} />
+				<Route path="advanced-search(/:page)" component={Results} />
+				<Route path="game/:game" component={GamePage} />
+				<Route path="info/:subject/:key" component={InfoPage} />
+				<Route path="terms-privacy" component={TermsPage} />
+				<Route path="contact" component={ContactPage} />
+			</Route>
+		</Router>
+	</Provider>,
+	document.getElementById('app')
 )
 
 /* Other */
-
-let timer;
-window.addEventListener('scroll', () => {
-    clearTimeout(timer);
-    if (!document.body.classList.contains('disable-hover')) {
-        document.body.classList.add('disable-hover')
-    }
-    timer = setTimeout(() => {
-        document.body.classList.remove('disable-hover')
-    }, 500);
-}, false);
+window.addEventListener('scroll', optimizeScroll, false)

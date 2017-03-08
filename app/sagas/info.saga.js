@@ -1,23 +1,20 @@
-import { call, put, select } from 'redux-saga/effects'
-import { delay } from 'redux-saga'
-import { hashHistory } from 'react-router'
-import { INFO } from '../constants'
+import { call, put } from 'redux-saga/effects'
+import { browserHistory } from 'react-router'
+import { INFO, BASE_URL } from '../constants'
 import { sendCall, warnOnNetworkError, createAction } from '../utils'
-
-import t from '../i18n'
 
 const infoEffects = {
 
-	requestContent: function*(action) {
+	requestContent: function* (action) {
 		try {
-			const feedback = yield call(sendCall, `info/${action.subject}/${action.key}`)
+			const feedback = yield call(sendCall, `${BASE_URL}info-entry/${action.subject}/${action.key}`)
 			if (feedback.status === 200) {
-				yield put(createAction(INFO.CONTENTRETRIEVED)({ 
-					title: (feedback.data.title || feedback.data.name), 
+				yield put(createAction(INFO.CONTENTRETRIEVED)({
+					title: (feedback.data.title || feedback.data.name),
 					content: feedback.data.text,
 					imageExists: feedback.data.imageExists
 				}))
-				
+
 			} else {
 				yield put(createAction(INFO.FAILEDLOADING)({ feedback }))
 				warnOnNetworkError(feedback)
@@ -29,9 +26,8 @@ const infoEffects = {
 		}
 	},
 
-	triggerBack: function*(action) {
-		window.alert(t('info-not-found'))
-		hashHistory.goBack()
+	triggerBack: function* (action) {
+		browserHistory.goBack()
 	}
 
 }
