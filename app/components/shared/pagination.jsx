@@ -43,27 +43,23 @@ class Pagination extends Component {
 		const { currentPage } = this.props
 		const pageInt = parseInt(currentPage, 10)
 		return <aside className="pagination">
-			{this.hasPrev &&
-				<a className="ball btn extremes first" title={t('first-page')} onClick={() => this._goToPage(1)}>
-					<Icon size="9" type="first" />
-				</a>}
-			{this.hasPrev &&
-				<a className="ball btn sequence prev" title={t('previous-page')} onClick={() => this._goToPage(pageInt - 1)}>
-					<Icon size="17" type="prev" />
-				</a>}
+			<a className={'ball btn extremes first' + (this.hasPrev ? '' : ' inactive')} title={t('first-page')} onClick={() => this.hasPrev && this._goToPage(1)}>
+				<Icon size="9" type="first" />
+			</a>
+			<a className={'ball btn sequence prev' + (this.hasPrev ? '' : ' inactive')} title={t('previous-page')} onClick={() => this.hasPrev && this._goToPage(pageInt - 1)}>
+				<Icon size="17" type="prev" />
+			</a>
 			<div className="ball btn">
 				<SelectBox onChange={(ev) => this._goToPage(ev)} value={currentPage}>
 					{this.pagesArray.map(p => { return <option key={p} value={p}>{p}</option> })}
 				</SelectBox>
 			</div>
-			{this.hasNext &&
-				<a className="ball btn sequence next" title={t('next-page')} onClick={() => this._goToPage(pageInt + 1)}>
-					<Icon size="17" type="next" />
-				</a>}
-			{this.hasNext &&
-				<a className="ball btn extremes last" title={t('last-page')} onClick={() => this._goToPage(this.pages)}>
-					<Icon size="9" type="last" />
-				</a>}
+			<a className={'ball btn sequence next' + (this.hasNext ? '' : ' inactive')} title={t('next-page')} onClick={() => this.hasNext && this._goToPage(pageInt + 1)}>
+				<Icon size="17" type="next" />
+			</a>
+			<a className={'ball btn extremes last' + (this.hasNext ? '' : ' inactive')} title={t('last-page')} onClick={() => this.hasNext && this._goToPage(this.pages)}>
+				<Icon size="9" type="last" />
+			</a>
 		</aside>
 	}
 }

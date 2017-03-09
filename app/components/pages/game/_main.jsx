@@ -24,7 +24,10 @@ import './_main.styl'
 // const infoTypes = ['year', 'companies', 'genres', 'size', 'series', 'addons', 'locals']
 
 class GamePage extends Component {
-
+	constructor() {
+		super()
+		this._changeImage = this._changeImage.bind(this)
+	}
 	componentWillMount() {
 		this._initPage(this.props.params.game, this.props.failedAction)
 	}
@@ -54,7 +57,10 @@ class GamePage extends Component {
 				</div>
 			})
 		}
+	}
 
+	_changeImage(increment) {
+		this.props.changeImageAction({ increment })
 	}
 
 	render() {
@@ -73,7 +79,8 @@ class GamePage extends Component {
 				<Title main={<strong>{game.title}</strong>} details={this._getOtherNamesFormatted(game.otherNames)} />
 				<div id="game-info">
 					{game.specialStatus && <span className="special-status">{t('sps__' + game.specialStatus)}</span>}
-					<GamePicture gameId={this.props.gameId} />
+					<GamePicture gameId={this.props.gameId} current={this.props.currentImage}
+						changeImage={this._changeImage} total={this.props.images} />
 					<div className="main-box">
 						<GamePlaces releasePlaces={game.releasePlaces} otherNames={game.otherNames} />
 						<GameEditorScore score={game.editorScore} />
@@ -98,12 +105,15 @@ const mapStateToProps = state => ({
 	hasFailed: state.game.hasFailed,
 	info: state.game.info,
 	gameId: state.game.gameId,
-	seriesGames: state.game.seriesGames
+	seriesGames: state.game.seriesGames,
+	images: state.game.images,
+	currentImage: state.game.currentImage
 })
 
 const mapDispatchToProps = {
 	requestAction: createAction(GAME.REQUESTEDINFO),
-	failedAction: createAction(GAME.FAILEDONURL)
+	failedAction: createAction(GAME.FAILEDONURL),
+	changeImageAction: createAction(GAME.CHANGEIMAGEREQUESTED)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamePage)

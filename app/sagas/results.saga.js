@@ -59,12 +59,12 @@ const resultsEffects = {
 			delete queryObj.sizes
 			delete queryObj.years
 			const queryString = buildQueryString(queryObj)
-			url = `advanced-search?${queryString}&page=${page}`
+			url = `${t('url__advanced-search')}?${queryString}&page=${page}`
 		} else if (action.params.names) {
 			const query = encodeURIComponent(action.params.names)
-			url = `search/${query}/${page}`
+			url = `${t('url__search')}/${query}/${page}`
 		} else {
-			url = `all-games/${page}`
+			url = `${t('url__all-games')}/${page}`
 		}
 		historyPush(`/${url}`)
 	},

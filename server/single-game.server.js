@@ -29,7 +29,7 @@ const singleInfo = (db, response, id) => {
                 } else {
                     promises.push([])
                 }
-                if (doc.companies) {
+                if (doc.companies && doc.companies.length) {
                     const companiesConditions = doc.companies.map(companies => ({ _id: companies }))
                     promises.push(db.collection('companies').find({ $or: companiesConditions }).toArray())
                 } else {

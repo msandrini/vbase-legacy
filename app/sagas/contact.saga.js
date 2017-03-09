@@ -25,7 +25,7 @@ const contactEffects = {
 
 	afterSent: function* (action) {
 		window.alert(t('message-sent-successfully'))
-		browserHistory.push('/all-games')
+		browserHistory.push(`/${t('url__all-games')}`)
 	}
 
 }

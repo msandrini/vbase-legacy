@@ -128,6 +128,18 @@
 	"and-contains":"and contains",
 	"cartridge-supports":"Cartridge supports",
 
+	"url__all-games":"all-games",
+	"url__search":"search",
+	"url__advanced-search":"advanced-search",
+	"url__game":"game",
+	"url__info":"info",
+	"url__terms-privacy":"terms-privacy",
+	"url__contact":"contact",
+	"url__company":"company",
+	"url__genre":"genre",
+	"url__addon":"addon",
+	"url__series":"series",
+
 	"sps__prototype-alpha":"unfinished prototype",
 	"sps__prototype-beta":"almost finished prototype",
 	"sps__prototype-finished":"finished prototype",

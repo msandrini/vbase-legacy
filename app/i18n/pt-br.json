@@ -10,6 +10,14 @@
 	"privacy-policy":"Politica de privacidade",
 	"terms-of-use":"Termos de Uso",
 
+	"url__all-games":"todos-os-jogos",
+	"url__search":"busca",
+	"url__advanced-search":"busca-avancada",
+	"url__game":"jogo",
+	"url__info":"informacao",
+	"url__terms-privacy":"termos-privacidade",
+	"url__contact":"contato",
+
 	"onr__local":"versão local",
 	"onr__on-line":"versão on-line",
 	"onr__alternative":"versão alternativa",

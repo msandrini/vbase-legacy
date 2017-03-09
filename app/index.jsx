@@ -8,8 +8,9 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
 import { Router, Route, IndexRedirect, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
-/* Utils */
+/* Utils and i18n */
 import { optimizeScroll } from './utils'
+import t from './i18n'
 
 /* Saga init */
 import createSagaMiddleware from 'redux-saga'
@@ -54,14 +55,14 @@ ReactDOM.render(
 	<Provider store={store}>
 		<Router history={history}>
 			<Route path="/" component={AppWrapper}>
-				<IndexRedirect to="all-games" />
-				<Route path="all-games(/:page)" component={Results} />
-				<Route path="search/:names(/:page)" component={Results} />
-				<Route path="advanced-search(/:page)" component={Results} />
-				<Route path="game/:game" component={GamePage} />
-				<Route path="info/:subject/:key" component={InfoPage} />
-				<Route path="terms-privacy" component={TermsPage} />
-				<Route path="contact" component={ContactPage} />
+				<IndexRedirect to={t('url__all-games')} />
+				<Route path={t('url__all-games') + '(/:page)'} component={Results} />
+				<Route path={t('url__search') + '/:names(/:page)'} component={Results} />
+				<Route path={t('url__advanced-search') + '(/:page)'} component={Results} />
+				<Route path={t('url__game') + '/:game'} component={GamePage} />
+				<Route path={t('url__info') + '/:subject/:key'} component={InfoPage} />
+				<Route path={t('url__terms-privacy')} component={TermsPage} />
+				<Route path={t('url__contact')} component={ContactPage} />
 			</Route>
 		</Router>
 	</Provider>,

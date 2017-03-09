@@ -18,9 +18,8 @@ const _getLocale = headers => {
 
 const routing = (app, db) => {
 	app
-		/*.get('/br', (req, res) => index(res, 'pt-br'))
-		.get('/en', (req, res) => index(res, 'en'))*/
 		.get('/', (req, res) => index(res, _getLocale(req.headers)))
+
 		.get('/all-games(/*)?', (req, res) => index(res, 'en'))
 		.get('/search/*', (req, res) => index(res, 'en'))
 		.get('/advanced-search(/*)?', (req, res) => index(res, 'en'))
@@ -28,6 +27,14 @@ const routing = (app, db) => {
 		.get('/info/*', (req, res) => index(res, 'en'))
 		.get('/terms-privacy', (req, res) => index(res, 'en'))
 		.get('/contact', (req, res) => index(res, 'en'))
+
+		.get('/todos-os-jogos(/*)?', (req, res) => index(res, 'pt-br'))
+		.get('/busca/*', (req, res) => index(res, 'pt-br'))
+		.get('/busca-avancada(/*)?', (req, res) => index(res, 'pt-br'))
+		.get('/jogo/*', (req, res) => index(res, 'pt-br'))
+		.get('/informacao/*', (req, res) => index(res, 'pt-br'))
+		.get('/termos-privacidade', (req, res) => index(res, 'pt-br'))
+		.get('/contato', (req, res) => index(res, 'pt-br'))
 
 		.get('/jsbundles/:file', (req, res) => assets.jsbundles(res, req.params.file))
 		.get('/images-gameplay/:code', (req, res) => assets.images.gameplay.list(res, req.params.code))

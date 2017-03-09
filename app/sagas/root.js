@@ -21,6 +21,7 @@ const rootSaga = function* () {
 
 		takeLatest(GAME.REQUESTEDINFO, gameEffects.requestInfo),
 		takeLatest(GAME.FAILEDONURL, gameEffects.triggerBack),
+		takeLatest(GAME.CHANGEIMAGEREQUESTED, gameEffects.changeImage),
 
 		takeLatest(INFO.CONTENTREQUESTED, infoEffects.requestContent),
 		takeLatest(INFO.BACKREQUESTED, infoEffects.triggerBack)

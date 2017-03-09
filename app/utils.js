@@ -30,6 +30,10 @@ export const joinText = (array, comma, and) => {
 	return array.length > 1 ? (allButLast.join(`${comma} `) + ` ${and} ` + last) : array[0]
 }
 
+/* Array helper */
+
+export const getFilledArray = quantity => new Array(quantity + 1).join('-').split('')
+
 /* History helper */
 
 export const historyPush = url => {

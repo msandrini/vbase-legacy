@@ -34,7 +34,7 @@ const _getSpecialStatus = status => {
 		return t('hack')
 	}
 }
-export const _getLink = id => `/game/${id}`
+export const _getLink = id => `/${t('url__game')}/${id}`
 const _getFirstImageUrl = id => BASE_URL + `image-gameplay/${id}.1`
 
 class Results extends Component {

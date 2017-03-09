@@ -23,9 +23,13 @@ const assets = {
 					const fileExists = fs.existsSync(imgPath);
 					if (fileExists) {
 						response.status(200);
-						response.sendFile(`games/gameplay/${code}/${count}.png`, { root: path.join(__dirname, `../static/images/`) });
+						response.sendFile(`games/gameplay/${code}/${count}.png`, { root: path.join(__dirname, '../static/images/') });
 					} else {
-						outputFile404(response);
+						if (parseInt(count, 10) === 1) {
+							response.sendFile('offair.jpg', { root: path.join(__dirname, '../static/images/') });
+						} else {
+							outputFile404(response);
+						}
 					}
 				} else {
 					outputFile404(response);
@@ -33,20 +37,18 @@ const assets = {
 			},
 			list: (response, code) => {
 				if (gameIdIsValid(code)) {
-					let feedback = [];
-					let counter = 1;
+					let counter = 0;
 					let lastFileFound = false;
 					while (!lastFileFound) {
-						const imgPath = path.join(__dirname, `../static/images/games/gameplay/${code}/${counter}.png`);
+						const imgPath = path.join(__dirname, `../static/images/games/gameplay/${code}/${(counter + 1)}.png`);
 						const fileExists = fs.existsSync(imgPath);
 						if (fileExists) {
-							feedback.push(`${code}.${counter}`);
 							counter++;
 						} else {
 							lastFileFound = true;
 						}
 					}
-					response.json(feedback);
+					response.json({ images: counter });
 				} else {
 					outputFile404(response);
 				}

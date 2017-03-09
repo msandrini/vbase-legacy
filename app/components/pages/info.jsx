@@ -46,16 +46,20 @@ const _getLinkUrl = (subject, subjectKey) => {
 	let tempObject = {}
 	tempObject[subject + 'id'] = subjectKey
 	const query = buildQueryString(tempObject)
-	return `/advanced-search?${query}`
+	return `/${t('url__advanced-search')}?${query}`
 }
 
 class InfoPage extends Component {
+	constructor() {
+		super()
+		this._goBack = this._goBack.bind(this)
+	}
 
 	componentWillMount() {
 		this.props.requestAction(this.props.params)
 	}
 
-	goBack() {
+	_goBack() {
 		this.props.backAction()
 	}
 
@@ -66,7 +70,7 @@ class InfoPage extends Component {
 			<Title main={_getTitle(title)} sub={subject && t(subject)} />
 			<div id="info">
 				<div className="button-wrapper">
-					<button className="ball" onClick={() => this.goBack()} title={t('go-back')}>
+					<button className="ball" onClick={this.goBack} title={t('go-back')}>
 						<Icon size="22" type="prev" />
 					</button>
 				</div>

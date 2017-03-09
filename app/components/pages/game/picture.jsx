@@ -1,23 +1,23 @@
 import React from 'react'
 
+import { getFilledArray } from '../../../utils'
 import { BASE_URL } from '../../../constants'
 import Icon from '../../shared/icon.jsx'
 import t from '../../../i18n'
 import './picture.styl'
 
-const morePictures = false /* for now */
-
 const GamePicture = props => <figure>
-    <span className="overlay" />
-    <img src={`${BASE_URL}image-gameplay/${props.gameId}.1`} alt={t('image-of-the-gameplay')} />
-    {morePictures && <div className="controls">
-        <a className="ball btn prev" title={t('previous')}>
-            <Icon size="14" type="prev" />
-        </a>
-        <a className="ball btn next" title={t('next')}>
-            <Icon size="20" type="next" />
-        </a>
-    </div>}
+	<span className="overlay" />
+	{getFilledArray(props.total).map((v, i) => <img key={i} src={`${BASE_URL}image-gameplay/${props.gameId}.${i + 1}`}
+		alt={t('image-of-the-gameplay') + ` #${i}`} className={props.current === (i + 1) ? 'chosen' : ''} />)}
+	{(props.total > 1) && <div className="controls">
+		<a className="ball btn prev" title={t('previous')} onClick={() => { props.changeImage(-1) }}>
+			<Icon size="14" type="prev" />
+		</a>
+		<a className="ball btn next" title={t('next')} onClick={() => { props.changeImage(1) }}>
+			<Icon size="20" type="next" />
+		</a>
+	</div>}
 </figure>
 
 export default GamePicture
