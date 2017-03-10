@@ -9,6 +9,10 @@ const singleInfo = (db, response, id) => {
             if (error) {
                 response.status(500).json({ error: error, errorType: 'main' })
             } else {
+                if (doc === null) {
+                    response.status(404).json({ error: doc, errorType: 'main' })
+                    return false
+                }
                 doc = doc || {}
                 let promises = []
                 if (doc.series) {

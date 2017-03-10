@@ -6,6 +6,7 @@ const contact = (db, response, payload) => {
         } else {
             response.status(200).json({ feedback: results.result })
         }
+        db.close()
     });
 }
 

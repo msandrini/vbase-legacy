@@ -30,8 +30,12 @@ const gameEffects = {
 			}
 
 		} catch (e) {
-			yield put(createAction(GAME.FAILEDLOADING)({ feedback: e }))
-			warnOnNetworkError(e)
+			if (e.toString().indexOf(404) !== -1) {
+				yield put(createAction(GAME.FAILEDLOADING)({ feedback: t('game-not-found') }))
+			} else {
+				yield put(createAction(GAME.FAILEDLOADING)({ feedback: e }))
+				warnOnNetworkError(e)
+			}
 		}
 	},
 

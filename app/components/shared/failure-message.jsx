@@ -3,11 +3,12 @@ import t from '../../i18n'
 
 import './failure-message.styl'
 
-const FailureMessage = (props) => (
-	<div className="failure-message">
+const FailureMessage = (props) => {
+	console.log(props)
+	return <div className="failure-message">
 		<strong>{t('error')}</strong>
-		<p>{props.message}</p>
+		{props && (typeof props.message === 'string') && <p>{props.message}</p>}
 	</div>
-)
+}
 
 export default FailureMessage

@@ -5,7 +5,6 @@ import t from '../../../i18n'
 import './basic-info.styl'
 
 const _getCompanies = companies => {
-	console.log(companies)
 	return companies.map(c =>
 		<Link to={`/${t('url__info')}/${t('url__company')}/${c.id}`} key={c.id} className="info-link company">{c.title}</Link>)
 }

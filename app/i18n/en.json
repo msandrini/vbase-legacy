@@ -79,6 +79,10 @@
 	"released-from-x":"released *since {0}*",
 	"released-until-x":"released *until {0}*",
 
+	"n-a":"n/a",
+	"not-applicable":"not applicable",
+	"not-scored":"not scored",
+
 	"prototype":"prototype",
 	"unlicensed":"unlicensed game",
 	"hack":"hack",
@@ -139,6 +143,8 @@
 	"url__genre":"genre",
 	"url__addon":"addon",
 	"url__series":"series",
+
+	"url__other-language-root":"todos-os-jogos",
 
 	"sps__prototype-alpha":"unfinished prototype",
 	"sps__prototype-beta":"almost finished prototype",

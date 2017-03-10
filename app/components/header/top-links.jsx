@@ -21,7 +21,7 @@ const TopLinks = ({location}) => (
 			<Icon type="mail" size="18" />
 		</a> */}
 		{_locIsNotHome(location) && <span className="line" />}
-		{_locIsNotHome(location) && <Link className="home ball btn" to="/all-games" title={t('back-to-all-games')}>
+		{_locIsNotHome(location) && <Link className="home ball btn" to={`/${t('url__all-games')}`} title={t('back-to-all-games')}>
 			<Icon type="house" size="22" />
 		</Link>}
 		{lang === 'en' ? '' : <a onClick={() => _goToLang('en')} className="flag btn ball flag-uk" title="English Version">

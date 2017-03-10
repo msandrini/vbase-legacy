@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects'
 import { browserHistory } from 'react-router'
 import { RESULTS, BASE_URL } from '../constants'
-import { lang } from '../i18n'
+import t, { lang } from '../i18n'
 import { sendCall, warnOnNetworkError, createAction, historyPush, buildQueryString } from '../utils'
 
 const _getCallName = (action) => {

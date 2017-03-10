@@ -50,7 +50,11 @@ sagaMiddleware.run(rootSaga)
 
 /* Router mapping */
 const history = syncHistoryWithStore(browserHistory, store)
-// history.listen(location => ...)
+history.listen(location => {
+	if (location.pathname === '/' + t('url__other-language-root')) {
+		document.location.reload()
+	}
+})
 ReactDOM.render(
 	<Provider store={store}>
 		<Router history={history}>

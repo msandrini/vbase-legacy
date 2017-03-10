@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import PageTitle from '../../shared/page-title.jsx'
 import Title from '../../shared/title.jsx'
+import FailureMessage from '../../shared/failure-message.jsx'
 import Spinner from '../../shared/spinner.jsx'
 import { GAME } from '../../../constants'
 import { createAction } from '../../../utils'
