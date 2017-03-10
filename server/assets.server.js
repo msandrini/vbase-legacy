@@ -1,4 +1,4 @@
-const { outputFile404, gameIdIsValid } = require('./utils.server');
+const { gameIdIsValid } = require('./utils.server');
 const path = require("path");
 const fs = require('fs');
 
@@ -10,7 +10,7 @@ const assets = {
 			response.status(200);
 			response.sendFile(file, { root: path.join(__dirname, '../app/_bundled') });
 		} else {
-			outputFile404(response);
+			response.sendStatus(404)
 		}
 	},
 
@@ -28,11 +28,11 @@ const assets = {
 						if (parseInt(count, 10) === 1) {
 							response.sendFile('offair.jpg', { root: path.join(__dirname, '../static/images/') });
 						} else {
-							outputFile404(response);
+							response.sendStatus(404)
 						}
 					}
 				} else {
-					outputFile404(response);
+					response.sendStatus(404)
 				}
 			},
 			list: (response, code) => {
@@ -50,7 +50,7 @@ const assets = {
 					}
 					response.json({ images: counter });
 				} else {
-					outputFile404(response);
+					response.sendStatus(404)
 				}
 			}
 		},
@@ -62,7 +62,7 @@ const assets = {
 					response.status(200);
 					response.sendFile(filePath, { root: path.join(__dirname, `../static/images/`) });
 				} else {
-					outputFile404(response);
+					response.sendStatus(404)
 				}
 			}
 		}

@@ -17,6 +17,8 @@ const misc = {
         });
     },
 
+    const b = (fn) => ((v) => fn(db, res, v))
+
     /*modifyFileWriteNew: (response, type, code) => {
 
 				let feedback = [];

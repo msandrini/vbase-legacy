@@ -5,6 +5,7 @@ const assets = require('./assets.server')
 const index = require('./index.server')
 const info = require('./info.server')
 const contact = require('./contact.server')
+const { connect, issueToClient: { send, fail } } = require('./utils.server')
 
 const _getLocale = headers => {
 	const supported = new locale.Locales(['en', 'pt'])
@@ -16,9 +17,9 @@ const _getLocale = headers => {
 	}
 }
 
-const defaultRoute = (db, res) => res.sendStatus(404)
+const defaultRoute = res => res.sendStatus(404)
 
-const routing = (app, db) => {
+const routing = (app) => {
 
 	app
 		.get('/', (req, res) => index(res, _getLocale(req.headers)))
@@ -50,26 +51,40 @@ const routing = (app, db) => {
 
 		/* games list */
 
-		.get('/games/all/:page', (req, res) => games.all(db, res, req.params.page))
-		.get('/games/by-names/:name/:page', (req, res) => games.byNames(db, res, req.params.name, req.params.page))
-		.post('/games/advanced', (req, res) => games.advanced(db, res, req.body))
-		.get('/games/from-series/:series', (req, res) => games.fromSeries(db, res, req.params.series))
+		.get('/games/all/:page', (req, res) => connect().then(db => 
+			games.all(db, req.params.page).then(v => send(db, res, v)).catch(e => fail(db, res, e))
+		))
+		.get('/games/by-names/:name/:page', (req, res) => connect().then(db => 
+			games.byNames(db, req.params.name, req.params.page).then(v => send(db, res, v)).catch(e => fail(db, res, e))
+		))
+		.post('/games/advanced', (req, res) => connect().then(db => 
+			games.advanced(db, req.body).then(v => send(db, res, v)).catch(e => fail(db, res, e))
+		))
+		.get('/games/from-series/:series', (req, res) => connect().then(db => 
+			games.fromSeries(db, req.params.series).then(v => send(db, res, v)).catch(e => fail(db, res, e))
+		))
 
 		/* single game */
 
-		.get('/game-entry/:id', (req, res) => singleGame(db, res, req.params.id))
+		.get('/game-entry/:id', (req, res) => connect().then(db => 
+			singleGame(db, req.params.id).then(v => send(db, res, v)).catch(e => fail(db, res, e))
+		))
 
 		/* info */
 
-		.get('/info-entry/:type/:key', (req, res) => info(db, res, req.params.type, req.params.key))
+		.get('/info-entry/:type/:key', (req, res) => connect().then(db => 
+			info(db, req.params.type, req.params.key).then(v => send(db, res, v)).catch(e => fail(db, res, e))
+		))
 
 		/* contact */
 
-		.post('/send-contact', (req, res) => contact(db, res, req.body))
+		.post('/send-contact', (req, res) => connect().then(db => {
+			contact(db, req.body).then(v => send(db, res, v)).catch(e => fail(db, res, e))
+		}))
 
 		/* default route */
 
-		.get('*', (req, res) => defaultRoute(db, res))
+		.get('*', (req, res) => defaultRoute(res))
 
 }
 

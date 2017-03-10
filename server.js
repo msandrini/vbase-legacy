@@ -4,7 +4,6 @@ const { outputJsonError, setServer } = require('./server/utils.server')
 const routing = require('./server/routes.server')
 const bodyParser = require('body-parser')
 const pem = require('pem')
-const mongo = require('mongodb').MongoClient
 
 const app = express()
 
@@ -15,15 +14,7 @@ app.set('port', (process.env.PORT || 5000))
 app.use(bodyParser.json())
 
 // connect to DB and then continue to routing
-const mongoUrl = 'mongodb://localhost:27017/local'
-mongo.connect(mongoUrl, null, (error, db) => {
-	if (error) {
-		outputJsonError(connection.res, 'DBConn', error)
-		db.close()
-	} else {
-		routing(app, db)
-	}
-})
+routing(app)
 
 // final listener (https)
 pem.createCertificate({ days: 1, selfSigned: true }, (err, keys) => {

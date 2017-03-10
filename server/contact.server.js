@@ -1,13 +1,14 @@
-const contact = (db, response, payload) => {
+const contact = (db, payload) => {
     payload.dateSent = new Date()
-    db.collection('contactmessages').insertOne(payload).then((results, error) => {
-        if (error) {
-            response.status(500).json({ error })
-        } else {
-            response.status(200).json({ feedback: results.result })
-        }
-        db.close()
-    });
+    return new Promise((resolve, reject) => {
+        db.collection('contactmessages').insertOne(payload).then((results, error) => {
+            if (error) {
+                reject(error)
+            } else {
+                resolve({ feedback: results.result })
+            }
+        })
+    })
 }
 
 module.exports = contact

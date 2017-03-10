@@ -1,6 +1,8 @@
 const ITEMS_PER_PAGE = 20
-const projectionForList = { title: 1, genres: 1, releaseIn: 1, otherNames: 1, 
-	companies: 1, editorScore: 1, specialStatus: 1 }
+const projectionForList = {
+	title: 1, genres: 1, releaseIn: 1, otherNames: 1,
+	companies: 1, editorScore: 1, specialStatus: 1
+}
 const sortCriteria = { title: 1 }
 const basicCondition = { specialStatus: { $ne: 'homebrew' } }
 
@@ -59,112 +61,114 @@ const _getConditions = data => {
 	return conditions
 }
 
-const _getGames = (db, cursor, page, response, pageSize = ITEMS_PER_PAGE) => {
+const _getGames = (db, cursor, page, pageSize = ITEMS_PER_PAGE) => {
 	const skip = (page - 1) * pageSize
-	cursor.skip(skip).limit(pageSize).sort(sortCriteria).toArray((err, docs) => {
-		if (err) {
-			response.status(500).json({ error: err, errorType: 'find' })
-		} else {
-			cursor.count(false, (errCount, count) => {
-				if (errCount) {
-					response.status(500).json({ error: errCount, errorType: 'count' })
-				} else {
-					docs = docs || []
-					let genres = []
-					for (d of docs) {
-						if (d.genres) {
-							genres = [...genres, ...d.genres]
-						}
-					}
-					let companies = []
-					for (d of docs) {
-						if (d.companies) {
-							companies = [...companies, ...d.companies]
-						}
-					}
-					if (genres.length || companies.length) {
-						const genresCondition = { _id: { $in: _unique(genres) || [] } }
-						const companiesCondition = { _id: { $in: _unique(companies) || [] } }
-						Promise.all([
-							db.collection('genres').find(genresCondition, { title: 1 }).toArray(),
-							db.collection('companies').find(companiesCondition, { name: 1 }).toArray()
-						]).then((results) => {
-							let [docsGenre, docsCompany] = results
-
-							let genresObj = {}
-							for (g of docsGenre) {
-								genresObj[g._id] = g.title
-							}
-							for (d of docs) {
-								let genresForThisDoc = []
-								for (dg of d.genres) {
-									genresForThisDoc.push(genresObj[dg])
-								}
-								d.genreTitles = genresForThisDoc
-								delete d.genres
-							}
-
-							let companiesObj = {}
-							for (c of docsCompany) {
-								companiesObj[c._id] = c.name
-							}
-							for (d of docs) {
-								let companiesForThisDoc = []
-								for (dg of d.companies) {
-									companiesForThisDoc.push(companiesObj[dg])
-								}
-								d.companyNames = companiesForThisDoc
-								delete d.companies
-							}
-							response.json({ games: docs, total: count })
-
-						}).catch((e) => {
-							response.status(500).json({ error: e, errorType: 'genre/company' })
-						})
+	return new Promise((resolve, reject) => {
+		cursor.skip(skip).limit(pageSize).sort(sortCriteria).toArray((err, docs) => {
+			if (err) {
+				reject(err)
+			} else {
+				cursor.count(false, (errCount, count) => {
+					if (errCount) {
+						reject(errCount)
 					} else {
-						response.json({ games: docs, total: count })
+						docs = docs || []
+						let genres = []
+						for (d of docs) {
+							if (d.genres) {
+								genres = [...genres, ...d.genres]
+							}
+						}
+						let companies = []
+						for (d of docs) {
+							if (d.companies) {
+								companies = [...companies, ...d.companies]
+							}
+						}
+						if (genres.length || companies.length) {
+							const genresCondition = { _id: { $in: _unique(genres) || [] } }
+							const companiesCondition = { _id: { $in: _unique(companies) || [] } }
+							Promise.all([
+								db.collection('genres').find(genresCondition, { title: 1 }).toArray(),
+								db.collection('companies').find(companiesCondition, { name: 1 }).toArray()
+							]).then((results) => {
+								let [docsGenre, docsCompany] = results
+
+								let genresObj = {}
+								for (g of docsGenre) {
+									genresObj[g._id] = g.title
+								}
+								for (d of docs) {
+									let genresForThisDoc = []
+									for (dg of d.genres) {
+										genresForThisDoc.push(genresObj[dg])
+									}
+									d.genreTitles = genresForThisDoc
+									delete d.genres
+								}
+
+								let companiesObj = {}
+								for (c of docsCompany) {
+									companiesObj[c._id] = c.name
+								}
+								for (d of docs) {
+									let companiesForThisDoc = []
+									for (dg of d.companies) {
+										companiesForThisDoc.push(companiesObj[dg])
+									}
+									d.companyNames = companiesForThisDoc
+									delete d.companies
+								}
+								resolve({ games: docs, total: count })
+
+							}).catch((errAll) => {
+								reject(errAll)
+							})
+						} else {
+							resolve({ games: docs, total: count })
+						}
 					}
-				}
-			})
-		}
+				})
+			}
+		})
 	})
 }
 
 const games = {
 
-	byNames: (db, response, name, page = 0) => {
+	byNames: (db, name, page = 0) => {
 		const search = _regExpParam(name);
 		const condition = Object.assign({}, basicCondition, { $or: [{ title: search }, { 'otherNames.name': search }] })
 		const gamesCursor = db.collection('games').find(condition, projectionForList)
-		_getGames(db, gamesCursor, page, response)
+		return _getGames(db, gamesCursor, page)
 	},
 
-	all: (db, response, page = 0) => {
+	all: (db, page = 0) => {
 		const gamesCursor = db.collection('games').find(basicCondition, projectionForList)
-		_getGames(db, gamesCursor, page, response)
+		return _getGames(db, gamesCursor, page)
 	},
 
-	fromSeries: (db, response, seriesIds) => {
+	fromSeries: (db, seriesIds) => {
 		const condition = Object.assign({}, basicCondition, { series: { $in: seriesIds.split(',') } })
 		const gamesCursor = db.collection('games').find(condition, { title: 1 })
-		_getGames(db, gamesCursor, 1, response, 100)
+		return _getGames(db, gamesCursor, 1, 100)
 	},
 
-	advanced: (db, response, postBody) => {
+	advanced: (db, postBody) => {
 		const data = postBody
 		let conditions = Object.assign({}, basicCondition, _getConditions(data))
 		const _doMainCall = function (conditions) {
 			const gamesCursor = db.collection('games').find(conditions, projectionForList)
-			_getGames(db, gamesCursor, data.page || 1, response)
+			return _getGames(db, gamesCursor, data.page || 1)
 		}
 		if (data.company) {
 			db.collection('companies').find({ name: _regExpParam(data.company) }, { _id: 1 }).toArray().then(docs => {
 				const companyIds = docs.map(d => d._id)
 				conditions.companies = { $in: companyIds }
-				_doMainCall(conditions)
+				return _doMainCall(conditions)
 			})
 		} else {
-			_doMainCall(conditions)
+			return _doMainCall(conditions)
 		}
 	}
 
