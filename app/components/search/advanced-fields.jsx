@@ -59,26 +59,22 @@ class AdvancedFields extends Component {
 					</div>
 					<div className="group">
 						<label htmlFor="years1">{t('years')}</label>
-						<span className="acc">{t('from')}</span>
-						<SelectBox name="years1">
+						<SelectBox name="years1" subLabel={t('from')}>
 							<option value=''>{t('any')}</option>
 							{this.years.map(y => <option value={y} key={y}>{y}</option>)}
 						</SelectBox>
-						<span className="acc">{t('to')}</span>
-						<SelectBox name="years2">
+						<SelectBox name="years2" subLabel={t('to')}>
 							<option value=''>{t('any')}</option>
 							{this.years.map(y => <option value={y} key={y}>{y}</option>)}
 						</SelectBox>
 					</div>
 					<div className="group">
 						<label htmlFor="scores1">{t('editor-score')}</label>
-						<span className="acc">{t('from')}</span>
-						<SelectBox name="scores1">
+						<SelectBox name="scores1" subLabel={t('from')}>
 							<option value=''>{t('any')}</option>
 							{this.scores.map(s => <option value={s} key={s}>{s}</option>)}
 						</SelectBox>
-						<span className="acc">{t('to')}</span>
-						<SelectBox name="scores2">
+						<SelectBox name="scores2" subLabel={t('to')}>
 							<option value=''>{t('any')}</option>
 							{this.scores.map(s => <option value={s} key={s}>{s}</option>)}
 						</SelectBox>
@@ -101,13 +97,11 @@ class AdvancedFields extends Component {
 					</div>
 					<div className="group">
 						<label htmlFor="sizes1">{t('sizes')}</label>
-						<span className="acc">{t('from')}</span>
-						<SelectBox name="sizes1">
+						<SelectBox name="sizes1" subLabel={t('from')}>
 							<option value=''>{t('any')}</option>
 							{this.sizes.map(s => <option value={s} key={s}>{s}</option>)}
 						</SelectBox>
-						<span className="acc">{t('to')}</span>
-						<SelectBox name="sizes2">
+						<SelectBox name="sizes2" subLabel={t('to')}>
 							<option value=''>{t('any')}</option>
 							{this.sizes.map(s => <option value={s} key={s}>{s}</option>)}
 						</SelectBox>

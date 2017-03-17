@@ -5,6 +5,8 @@ const assets = require('./assets.server')
 const index = require('./index.server')
 const info = require('./info.server')
 const contact = require('./contact.server')
+const user = require('./user.server')
+const reviews = require('./reviews.server')
 const { connect, issueToClient: { send, fail } } = require('./utils.server')
 
 const _getLocale = headers => {
@@ -76,9 +78,26 @@ const routing = (app) => {
 			info(db, req.params.type, req.params.key).then(v => send(db, res, v)).catch(e => fail(db, res, e))
 		))
 
+		/* user review */
+
+		.get('/user-reviews/:game', (req, res) => connect().then(db => {
+			reviews.list(db, req.params.game).then(v => send(db, res, v)).catch(e => fail(db, res, e))
+		}))
+		.post('/review', (req, res) => connect().then(db => {
+			reviews.insert(db, req.body, req.session).then(v => send(db, res, v)).catch(e => fail(db, res, e))
+		}))
+
+		/* user login */
+
+		.post('/user', (req, res) => connect().then(db => {
+			user.login(db, req.body, req.session).then(v => send(db, res, v)).catch(e => fail(db, res, e))
+		}))
+		.get('/user', (req, res) => user.check(res, req.session))
+		.delete('/user', (req, res) => user.logout(res, req.session))
+
 		/* contact */
 
-		.post('/send-contact', (req, res) => connect().then(db => {
+		.post('/contact', (req, res) => connect().then(db => {
 			contact(db, req.body).then(v => send(db, res, v)).catch(e => fail(db, res, e))
 		}))
 

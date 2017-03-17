@@ -31,6 +31,7 @@ import resultsReducer from './reducers/results.reducer'
 import contactReducer from './reducers/contact.reducer'
 import gameReducer from './reducers/game.reducer'
 import infoReducer from './reducers/info.reducer'
+import userInputReducer from './reducers/user-input.reducer'
 
 /* Middleware routines */
 const combinedReducers = combineReducers({
@@ -40,7 +41,8 @@ const combinedReducers = combineReducers({
 	results: resultsReducer,
 	game: gameReducer,
 	info: infoReducer,
-	routing: routerReducer
+	routing: routerReducer,
+	userInput: userInputReducer
 })
 const sagaMiddleware = createSagaMiddleware()
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

@@ -19,10 +19,14 @@ import GameMediaInfo from './media-info.jsx'
 import GameBasicInfo from './basic-info.jsx'
 import GameGenres from './genres.jsx'
 
-import t from '../../../i18n'
+import t, { lang } from '../../../i18n'
 import './_main.styl'
 
 // const infoTypes = ['year', 'companies', 'genres', 'size', 'series', 'addons', 'locals']
+const _getAggregateRatings = game => (game.userReviews && game.userReviews.averageScore) ?
+	(game.editorScore + game.userReviews.averageScore) / 2 : game.editorScore
+const _getTimesReviewed = game => (game.userReviews && game.userReviews.timesReviewed) ?
+	(1 + game.userReviews.timesReviewed) : 1
 
 class GamePage extends Component {
 	constructor() {
@@ -87,7 +91,7 @@ class GamePage extends Component {
 						<GameEditorScore score={game.editorScore} />
 						<GameUserScore reviews={game.userReviews} />
 						<GameEditorReview editorReview={game.editorReview} />
-						<GameUserReviews userReviews={game.userReviews} />
+						<GameUserReviews userReviews={game.userReviews} gameId={this.props.gameId} />
 					</div>
 					<div className="outer-box">
 						<GameBasicInfo year={game.year} companies={game.companies} />
@@ -96,6 +100,34 @@ class GamePage extends Component {
 					<GameSeries series={game.series} seriesGames={this.props.seriesGames} currentGameId={this.props.gameId} />
 					<GameMediaInfo mediaSize={game.cartridgeSize} addOns={game.addOns} />
 				</div>
+				<script type="application/ld+json">
+					{`{
+						"@context": "http://schema.org",
+						"@type": "Review",
+						"author": {
+							"@type": "Person",
+							"name": "Marcos Sandrini Lemos"
+						},
+						"itemReviewed": {
+							"@type": "VideoGame",
+							"name": "${game.title}",
+							"gamePlatform": "Super Nintendo Entrertainment System",
+							"applicationCategory": "Game",
+							"aggregateRating": {
+								"bestRating": "10",
+								"worstRating": "1",
+								"ratingValue": "${_getAggregateRatings(game)}",
+								"ratingCount: "${_getTimesReviewed(game)}"
+							}
+						},
+						"reviewBody":"${game.editorReview[lang]}",
+						"reviewRating": {
+							"bestRating": "10",
+							"worstRating": "1",
+							"ratingValue": "${game.editorScore}"
+						}
+					}`}
+				</script>
 			</div>}
 		</div>
 	}

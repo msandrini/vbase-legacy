@@ -1,0 +1,56 @@
+@require '../../common.styl'
+
+#user-reviews-overlay
+	position fixed
+	width 100%
+	height 100%
+	pos 0 0
+	z-index 10
+	background rgba(c-dark2, 50%)
+	overflow-y auto
+	.window
+		opacity 100
+		trans .3s
+		width 50%
+		max-width 700px
+		min-width 400px
+		margin 0 auto 32px
+		border 3px solid c-light
+		border-top 0
+		padding 14px 0 20px
+		background rgba(c-dark2, 88%)
+		min-height 500px
+		position relative
+		box-shadow 4px 4px 20px rgba(black, .2)
+		.ball.close
+			right -20px
+			top 29px
+			size 36px 36px
+			svg
+				pos 6px 6px
+	&.inactive
+		display none
+		.window
+			opacity 0
+	h5
+		font-size 36px
+		color c-medium2
+		margin 15px 0 0
+		padding 0 40px
+		text-align left
+		font-weight 900
+		line-height 30px
+		small
+			display block
+			font-size 12px
+			font-weight bold
+	ul
+		margin 20px 0 40px
+		padding 0
+		list-style none
+	.no-reviews
+		padding 35px 40px
+		color c-medium
+		font-weight 100
+		font-size 20px
+		text-align left

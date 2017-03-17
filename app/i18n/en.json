@@ -1,4 +1,5 @@
 {
+	"date-locale":"en-US",
 	"and":"and",
 	"error":"error",
 	"loading":"Loading...",
@@ -82,6 +83,7 @@
 	"n-a":"n/a",
 	"not-applicable":"not applicable",
 	"not-scored":"not scored",
+	"optional":"(optional)",
 
 	"prototype":"prototype",
 	"unlicensed":"unlicensed game",
@@ -131,6 +133,23 @@
 	"cartridge-contains":"Cartridge contains",
 	"and-contains":"and contains",
 	"cartridge-supports":"Cartridge supports",
+
+	"user-reviews-for-this-game":"User reviews for this game",
+	"review-this-game":"Review this game",
+	"review-text":"Review text",
+	"review":"review",
+	"no-reviews":"no reviews",
+	"score":"score",
+	"language":"language",
+	"language-en":"english",
+	"language-pt-br":"portuguese",
+	"written-in":"written in",
+	"left":"left: ",
+	"character":"character",
+	"enter-score":"Please enter a score!",
+	"thanks-for-review":"Thanks for your review!",
+	"required":"required",
+	"login-required":"It is required to login before posting",
 
 	"url__all-games":"all-games",
 	"url__search":"search",

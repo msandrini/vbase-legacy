@@ -19,8 +19,8 @@
 
 .advanced-search
 	trans .5s
-	height 280px
-	background c-dark
+	height 250px
+	background rgba(c-dark, 95%)
 	box-shadow 4px 4px 20px rgba(black, .2)
 	border 3px solid c-light
 	border-top none
@@ -37,7 +37,7 @@
 	label
 		width 110px
 		float left
-		color c-dark3
+		color c-medium2
 		padding 3px 10px
 		font-size 13px
 		text-transform uppercase
@@ -60,10 +60,11 @@
 				fill white
 	select
 		padding-right 15px
-		width 90px
+		width 100%
 	.select-box
+		width calc(50% - 68px)
 		float left
-		margin-left 8px
+		margin-right 8px
 		position relative
 		svg
 			fill c-medium
@@ -71,14 +72,15 @@
 			right 1px
 			top 10px
 			trans .3s
-		& + .acc
-			margin-left 15px
-	.acc
-		display block
-		float left
-		color c-dark2
-		font-size 14px
-		padding-top 2px
+		span
+			color c-dark2
+			font-size 14px
+			padding-top 2px
+			position absolute
+		select 
+			padding-left 40px
+		&:last-child
+			width calc(50% - 60px)
 	.reset
 		float left
 		margin-top 12px

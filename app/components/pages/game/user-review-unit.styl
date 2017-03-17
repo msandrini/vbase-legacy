@@ -1,0 +1,70 @@
+@require '../../common.styl'
+
+#user-reviews-overlay
+	li
+		text-transform none
+		margin 0 0 20px
+		padding 20px 40px
+		position relative
+		.avatar.ball
+			right auto
+			left -40px
+			size 28px 28px
+			svg
+				pos 6px 6px
+		.score.ball
+			right auto
+			left 39px
+			size 40px 40px
+			font-size 8px
+			color c-medium
+			text-align center
+			line-height 12px
+			top 4px
+			strong
+				font-size 22px
+				line-height 18px
+				font-weight bold
+				display block
+				letter-spacing -1px
+			n = 10
+			for c in scoresColours
+				&.score{'' + n}
+					strong
+						color mix(c, c-dark, 50%)
+				n = n - .5
+
+		&:before
+			content ' '
+			size 60px 3px
+			position absolute
+			pos -13px 24px
+			display block
+			background c-light
+		.user
+			color c-light
+			float left
+			padding-left 50px
+			position relative
+			top -8px
+		time
+			color c-medium2
+			font-size 14px
+			float left
+			position relative
+			top -6px
+			padding-left 4px
+		p
+			padding-left 50px
+			text-align left
+			font-size 14px
+			font-weight 100
+			line-height 16px
+			clear left
+			margin 3px 0 0
+			color c-medium
+			&.other-language
+				color black
+				small
+					color c-medium2
+					display block

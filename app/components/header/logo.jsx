@@ -5,6 +5,7 @@ import './logo.styl'
 
 const Logo = () => <h1 id="logo">
     <div className="wrapper">
+        <span>snes</span>
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
             width="272px" height="85px" viewBox="0 0 272 85" enableBackground="new 0 0 272 85">
             <title>vbase</title>

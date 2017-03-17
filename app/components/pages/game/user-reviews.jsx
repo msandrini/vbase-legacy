@@ -1,5 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { USERINPUT } from '../../../constants'
+import { createAction } from '../../../utils'
 
+import GameUserReviewsOverlay from './user-reviews-overlay.jsx'
 import Icon from '../../shared/icon.jsx'
 import t from '../../../i18n'
 import './user-reviews.styl'
@@ -7,8 +11,8 @@ import './user-reviews.styl'
 const _getKeyForActionText = reviews => reviews ? 'read-write' : 'write-a-review'
 const _getIcon = reviews => reviews ? 'plus' : 'pencil'
 
-const GameUserReviews = ({userReviews}) => <div className="user-reviews">
-	<a>
+const GameUserReviews = ({ userReviews, toggleAction, gameId }) => <div className="user-reviews">
+	<a onClick={() => toggleAction({ gameId })}>
 		{t('reviewed-by') + ' '}
 		{userReviews && userReviews.timesReviewed ?
 			<strong>{userReviews.timesReviewed + ' ' +
@@ -21,6 +25,11 @@ const GameUserReviews = ({userReviews}) => <div className="user-reviews">
 			<Icon type={_getIcon(userReviews && userReviews.timesReviewed)} size="11" />
 		</span>
 	</a>
+	<GameUserReviewsOverlay />
 </div>
 
-export default GameUserReviews
+const mapDispatchToProps = {
+	toggleAction: createAction(USERINPUT.OVERLAYREQUESTED)
+}
+
+export default connect(null, mapDispatchToProps)(GameUserReviews)

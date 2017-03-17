@@ -1,0 +1,123 @@
+@require '../../common.styl'
+
+#user-reviews-overlay
+	form
+		margin 40px 0 50px
+		.field
+			margin-top 30px
+			height 20px
+			&.text
+				height 150px
+			&.score
+				position static
+	label
+		width 20%
+		margin-left 40px
+		padding-right 15px
+		color c-medium2
+		font-size 16px
+		line-height 14px
+		float left
+		small
+			display block
+			font-size 12px
+			margin-top 5px
+			line-height 12px
+			color c-dark
+		strong
+			display inline-block
+			font-size 20px
+			margin-left 4px
+			n = 10
+			for c in scoresColours
+				&.score{'' + n}
+					color mix(c, c-light, 50%)
+				&.score{'' + n + '-5'}
+					color mix(c, c-light, 50%)
+				n = n - 1
+	.choose-score
+		position relative
+		top 7px
+		margin-left calc(20% + 40px)
+		.rc-slider
+			&-rail
+				position absolute
+				width 100%
+				background-color c-light
+				height 3px
+			&-track
+				position absolute
+				left 0
+				height 3px
+				background-color c-light
+			&-handle
+				position absolute
+				margin-left -7px
+				margin-top -5px
+				width 14px
+				height 14px
+				cursor pointer
+				border-radius 50%
+				border solid 3px c-light
+				background-color c-light
+				&:hover
+					transform scale(1.1, 1.1)
+				&-active
+					&:active
+						border-color c-dark
+						box-shadow 0 0 5px c-dark
+			&-mark
+				position absolute
+				top 18px
+				left 0
+				width 100%
+				font-size 12px
+			&-mark-text
+				position absolute
+				display inline-block
+				vertical-align middle
+				text-align center
+				cursor pointer
+				color #999
+			&-step
+				position absolute
+				width 100%
+				height 4px
+				background transparent
+			&-active
+				color #666
+
+	textarea
+		display block
+		float left
+		width calc(80% - 80px)
+		height 150px
+		background rgba(c-dark3, 40%)
+		padding 5px 9px
+		font-size 16px
+		border none
+		color c-light
+		trans-prop background-color .3s
+		&:focus
+			outline none
+			background rgba(c-dark3, 80%)
+	
+	.button-wrapper
+		position relative
+		left 30px
+		clear right
+		margin-bottom 100px
+		&:after
+			content ' '
+			display block
+			size 35px 3px
+			background c-light
+			position absolute
+			right 30px
+			top 34px
+		button.ball
+			size 48px 48px
+			float right
+			margin-right 32px
+			svg
+				margin 6px 0 0 5px

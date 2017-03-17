@@ -1,7 +1,7 @@
 @require '../common.styl'
 
 #contact-form
-	padding 20px 0 20px 100px
+	padding 20px 30px 20px 100px
 	margin-right 170px
 	border-right 3px solid c-light
 	clearfix()
@@ -33,17 +33,18 @@
 		width calc(60% + 10px)
 		clear right
 		resize vertical
+		border none
 		background-color rgba(c-dark, .5)
 		padding 6px 12px
-		margin-bottom 20px
-		-webkit-transition-property border
-		transition-property border
+		margin 20px 0
+		trans-prop border .3s
 	.failure-message
 		float right
 		color red
 		
 	.button-wrapper
 		position relative
+		left 30px
 		clear right
 		margin-bottom 100px
 		&:after

@@ -9,7 +9,7 @@ const contactEffects = {
 
 	send: function* (action) {
 		try {
-			const feedback = yield call(sendCall, BASE_URL + 'send-contact', 'post', action.fields)
+			const feedback = yield call(sendCall, BASE_URL + 'contact', 'post', action.fields)
 			if (feedback.status === 200) {
 				yield put(createAction(CONTACT.SENTSUCCESFULLY)({ feedback: feedback.data }))
 			} else {

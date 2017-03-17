@@ -27,6 +27,7 @@ const infoEffects = {
 	},
 
 	triggerBack: function* (action) {
+		console.log(browserHistory)
 		browserHistory.goBack()
 	}
 

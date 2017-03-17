@@ -3,6 +3,7 @@ import Icon from './icon.jsx'
 
 const SelectBox = props => (
 	<div className="select-box">
+		{props.subLabel ? <span>{props.subLabel}</span> : ''}
 		<select onChange={props.onChange} value={props.value} name={props.name}>
 			{props.children}
 		</select>

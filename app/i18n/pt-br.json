@@ -1,4 +1,5 @@
 {
+	"date-locale":"pt-BR",
 	"and":"e",
 	"error":"erro",
 	"loading":"carregando...",
@@ -82,6 +83,7 @@
 	"n-a":"n/a",
 	"not-applicable":"não aplicável",
 	"not-scored":"não avaliado",
+	"optional":"(opcional)",
 
 	"prototype":"protótipo",
 	"unlicensed":"jogo não licenciado",
@@ -131,6 +133,23 @@
 	"cartridge-contains":"O cartucho contém",
 	"and-contains":"e contém",
 	"cartridge-supports":"O cartucho suporta",
+
+	"user-reviews-for-this-game":"Avaliações para esse jogo",
+	"review-this-game":"Avalie este jogo",
+	"review-text":"Texto",
+	"review":"review",
+	"no-reviews":"nenhuma avaliação",
+	"score":"nota",
+	"language":"língua",
+	"language-en":"inglês",
+	"language-pt-br":"português",
+	"written-in":"escrito em",
+	"left":"restando ",
+	"character":"toque",
+	"enter-score":"Preencha ao menos a nota!",
+	"thanks-for-review":"Obrigado por avaliar este jogo!",
+	"required":"obrigatório",
+	"login-required":"A autenticação é obrigatória",
 
 	"url__all-games":"todos-os-jogos",
 	"url__search":"busca",

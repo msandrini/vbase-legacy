@@ -70,7 +70,7 @@ class InfoPage extends Component {
 			<Title main={_getTitle(title)} sub={subject && t(subject)} />
 			<div id="info">
 				<div className="button-wrapper">
-					<button className="ball" onClick={this.goBack} title={t('go-back')}>
+					<button className="ball" onClick={this._goBack} title={t('go-back')}>
 						<Icon size="22" type="prev" />
 					</button>
 				</div>
