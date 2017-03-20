@@ -29,7 +29,7 @@
 			color c-medium
 	textarea
 		height 120px
-		min-width 300px
+		min-width 410px
 		width calc(60% + 10px)
 		clear right
 		resize vertical
@@ -66,3 +66,15 @@
 		border none
 		top -40px
 		z-index 3
+
+	@media (max-width: 1024px)
+		margin-right 70px
+
+	@media (max-width: 500px)
+		margin-right 40px
+		padding-left 40px
+		input
+			width 100%
+		textarea
+			width 100%
+			min-width 0

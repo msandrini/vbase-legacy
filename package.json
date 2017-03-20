@@ -24,6 +24,7 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.0",
     "extract-text-webpack-plugin": "2.0.0-rc.2",
+    "js-htmlencode": "^0.3.0",
     "json-loader": "^0.5.4",
     "pem": "^1.9.4",
     "webpack": "2.2.1",

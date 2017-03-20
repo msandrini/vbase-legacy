@@ -5,6 +5,25 @@
 	position absolute
 	pos 375px 67px
 	z-index 5
+	@media (max-width: 1024px)
+		width calc(100% - 380px)
+	@media (max-width: 890px)
+		width calc(100% - 450px)
+		.basic-search input
+			width calc(100% - 78px)
+	@media (max-width: 720px)
+		position static
+		margin-left 56px
+		width auto
+		.basic-search input
+			padding-left 20px
+	@media (max-width: 500px)
+		//width calc(100% - 20px)
+	@media (max-width: 400px)
+		//width calc(100% - 60px)
+		.basic-search input
+			width calc(100% - 45px)
+			padding-right 20px
 
 .basic-search
 	position relative
@@ -46,3 +65,6 @@
 			color white
 			svg
 				opacity 1
+
+		@media (max-width: 720px)
+			margin-left 20px

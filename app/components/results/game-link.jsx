@@ -35,7 +35,7 @@ const _getSpecialStatus = status => {
 	}
 }
 export const _getLink = id => `/${t('url__game')}/${id}`
-const _getFirstImageUrl = id => BASE_URL + `image-gameplay/${id}.1`
+const _getFirstImageUrl = id => BASE_URL + `image-gameplay/${id}.1.png`
 
 class Results extends Component {
 	render() {

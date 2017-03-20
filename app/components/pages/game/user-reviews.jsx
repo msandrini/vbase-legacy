@@ -10,19 +10,23 @@ import './user-reviews.styl'
 
 const _getKeyForActionText = reviews => reviews ? 'read-write' : 'write-a-review'
 const _getIcon = reviews => reviews ? 'plus' : 'pencil'
+const _getNumReviews = reviews => (reviews && reviews.timesReviewed) || 0
 
 const GameUserReviews = ({ userReviews, toggleAction, gameId }) => <div className="user-reviews">
 	<a onClick={() => toggleAction({ gameId })}>
-		{t('reviewed-by') + ' '}
-		{userReviews && userReviews.timesReviewed ?
-			<strong>{userReviews.timesReviewed + ' ' +
-				t('user', { plural: userReviews.timesReviewed })}</strong> : t('no-users')
-		}
-		<span className="action-text">
-			{t(_getKeyForActionText(userReviews && userReviews.timesReviewed))}
+		<span className="first-text">
+			{t('reviewed-by') + ' '}
+			{_getNumReviews(userReviews) ?
+				<strong>{_getNumReviews(userReviews) + ' ' +
+					t('user', { plural: _getNumReviews(userReviews) })}</strong> : t('no-users')
+			}
 		</span>
-		<span className={'btn ball ' + _getIcon(userReviews && userReviews.timesReviewed)}>
-			<Icon type={_getIcon(userReviews && userReviews.timesReviewed)} size="11" />
+		<span className="mobile-text">{t('review', { plural: _getNumReviews(userReviews) })} ({_getNumReviews(userReviews)})</span>
+		<span className="action-text">
+			{t(_getKeyForActionText(_getNumReviews(userReviews)))}
+		</span>
+		<span className={'btn ball ' + _getIcon(_getNumReviews(userReviews))}>
+			<Icon type={_getIcon(_getNumReviews(userReviews))} size="11" />
 		</span>
 	</a>
 	<GameUserReviewsOverlay />

@@ -30,7 +30,7 @@ const _getContent = content => {
 }
 
 const _getImageUrl = (subject, subjectKey) => {
-	return `${BASE_URL}image-info/${keyToDbMapping[subject]}/${subjectKey}`
+	return `${BASE_URL}image-info/${keyToDbMapping[subject]}/${subjectKey}.png`
 }
 
 const _getLinkStr = (subject, title) => {

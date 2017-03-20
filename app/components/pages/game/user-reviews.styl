@@ -38,3 +38,20 @@
 	&:hover
 		.action-text
 			color c-light
+	.mobile-text
+		display none
+		&:after
+			content ' '
+			display block
+			height 22px
+			width 3px
+			background c-light
+			position absolute
+			right 41px
+			top 32px
+
+	@media (max-width: 870px)
+		.action-text, .first-text
+			display none
+		.mobile-text
+			display block

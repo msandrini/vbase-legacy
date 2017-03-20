@@ -57,7 +57,7 @@ class AdvancedFields extends Component {
 						<label htmlFor="names">{t('names')}</label>
 						<input type="search" autoComplete="off" name="names" />
 					</div>
-					<div className="group">
+					<div className="group select-group">
 						<label htmlFor="years1">{t('years')}</label>
 						<SelectBox name="years1" subLabel={t('from')}>
 							<option value=''>{t('any')}</option>
@@ -68,7 +68,7 @@ class AdvancedFields extends Component {
 							{this.years.map(y => <option value={y} key={y}>{y}</option>)}
 						</SelectBox>
 					</div>
-					<div className="group">
+					<div className="group select-group">
 						<label htmlFor="scores1">{t('editor-score')}</label>
 						<SelectBox name="scores1" subLabel={t('from')}>
 							<option value=''>{t('any')}</option>
@@ -95,7 +95,7 @@ class AdvancedFields extends Component {
 						<label htmlFor="review">{t('on-review')}</label>
 						<input type="search" autoComplete="off" name="review" />
 					</div>
-					<div className="group">
+					<div className="group select-group">
 						<label htmlFor="sizes1">{t('sizes')}</label>
 						<SelectBox name="sizes1" subLabel={t('from')}>
 							<option value=''>{t('any')}</option>

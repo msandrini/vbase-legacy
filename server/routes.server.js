@@ -7,6 +7,7 @@ const info = require('./info.server')
 const contact = require('./contact.server')
 const user = require('./user.server')
 const reviews = require('./reviews.server')
+const sitemap = require('./sitemap.server')
 const { connect, issueToClient: { send, fail } } = require('./utils.server')
 
 const _getLocale = headers => {
@@ -20,6 +21,10 @@ const _getLocale = headers => {
 }
 
 const defaultRoute = res => res.sendStatus(404)
+const LANG = {
+	EN: 'en',
+	BR: 'pt-br'
+}
 
 const routing = (app) => {
 
@@ -28,28 +33,28 @@ const routing = (app) => {
 
 		/* index pages (returns index.html) */
 
-		.get('/all-games(/*)?', (req, res) => index(res, 'en'))
-		.get('/search/*', (req, res) => index(res, 'en'))
-		.get('/advanced-search(/*)?', (req, res) => index(res, 'en'))
-		.get('/game/*', (req, res) => index(res, 'en'))
-		.get('/info/*', (req, res) => index(res, 'en'))
-		.get('/terms-privacy', (req, res) => index(res, 'en'))
-		.get('/contact', (req, res) => index(res, 'en'))
+		.get('/all-games(/*)?', (req, res) => index(res, LANG.EN))
+		.get('/search/*', (req, res) => index(res, LANG.EN))
+		.get('/advanced-search(/*)?', (req, res) => index(res, LANG.EN))
+		.get('/game/*', (req, res) => index(res, LANG.EN))
+		.get('/info/*', (req, res) => index(res, LANG.EN))
+		.get('/terms-privacy', (req, res) => index(res, LANG.EN))
+		.get('/contact', (req, res) => index(res, LANG.EN))
 
-		.get('/todos-os-jogos(/*)?', (req, res) => index(res, 'pt-br'))
-		.get('/busca/*', (req, res) => index(res, 'pt-br'))
-		.get('/busca-avancada(/*)?', (req, res) => index(res, 'pt-br'))
-		.get('/jogo/*', (req, res) => index(res, 'pt-br'))
-		.get('/informacao/*', (req, res) => index(res, 'pt-br'))
-		.get('/termos-privacidade', (req, res) => index(res, 'pt-br'))
-		.get('/contato', (req, res) => index(res, 'pt-br'))
+		.get('/todos-os-jogos(/*)?', (req, res) => index(res, LANG.BR))
+		.get('/busca/*', (req, res) => index(res, LANG.BR))
+		.get('/busca-avancada(/*)?', (req, res) => index(res, LANG.BR))
+		.get('/jogo/*', (req, res) => index(res, LANG.BR))
+		.get('/informacao/*', (req, res) => index(res, LANG.BR))
+		.get('/termos-privacidade', (req, res) => index(res, LANG.BR))
+		.get('/contato', (req, res) => index(res, LANG.BR))
 
 		/* assets */
 
 		.get('/jsbundles/:file', (req, res) => assets.jsbundles(res, req.params.file))
 		.get('/images-gameplay/:code', (req, res) => assets.images.gameplay.list(res, req.params.code))
-		.get('/image-gameplay/:code.:count', (req, res) => assets.images.gameplay.file(res, req.params.code, req.params.count))
-		.get('/image-info/:type/:code', (req, res) => assets.images.other.file(res, req.params.type, req.params.code))
+		.get('/image-gameplay/:code.:count.png', (req, res) => assets.images.gameplay.file(res, req.params.code, req.params.count))
+		.get('/image-info/:type/:code.png', (req, res) => assets.images.other.file(res, req.params.type, req.params.code))
 
 		/* games list */
 
@@ -100,6 +105,13 @@ const routing = (app) => {
 		.post('/contact', (req, res) => connect().then(db => {
 			contact(db, req.body).then(v => send(db, res, v)).catch(e => fail(db, res, e))
 		}))
+
+		/* sitemap generator */
+
+		.get('/sitemap-generate', (req, res) => connect().then(db => {
+			sitemap(db).then(v => send(db, res, v)).catch(e => fail(db, res, e))
+		}))
+		.get('/sitemap.xml', (req, res) => assets.sitemap(res))
 
 		/* default route */
 

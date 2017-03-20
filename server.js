@@ -18,7 +18,7 @@ app.use(bodyParser.json())
 const day = 24 * 60 * 60 * 1000
 app.use(sessions({
 	cookieName: 'session',
-	secret: 'machinaisthegreatestalbumever',
+	secret: 'come-on-are-you-really-interested-in-reading-this-pfff-omg',
 	duration: 10 * day,
 	activeDuration: day
 }));

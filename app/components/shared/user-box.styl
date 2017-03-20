@@ -71,3 +71,17 @@
 				size 12px 12px
 		& > span
 			display none
+
+@media (max-width: 1024px)
+	header .user-box
+		.avatar, .popup
+			display none
+		&:before
+			height 20px
+			right 70px
+@media (max-width: 500px)
+	header .user-box:before
+		right 40px
+@media (max-width: 400px)
+	header .user-box:before
+		right 19px

@@ -8,7 +8,7 @@ import './picture.styl'
 
 const GamePicture = props => <figure>
 	<span className="overlay" />
-	{getFilledArray(props.total).map((v, i) => <img key={i} src={`${BASE_URL}image-gameplay/${props.gameId}.${i + 1}`}
+	{getFilledArray(props.total).map((v, i) => <img key={i} src={`${BASE_URL}image-gameplay/${props.gameId}.${i + 1}.png`}
 		alt={t('image-of-the-gameplay') + ` #${i}`} className={props.current === (i + 1) ? 'chosen' : ''} />)}
 	{(props.total > 1) && <div className="controls">
 		<a className="ball btn prev" title={t('previous')} onClick={() => { props.changeImage(-1) }}>

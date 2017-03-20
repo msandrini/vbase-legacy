@@ -2,7 +2,10 @@ const path = require('path')
 const fs = require('fs')
 
 const index = (response, lang) => {
-	const html = '<!doctype html><html><head><title>VBase</title></head><body>' +
+	const langHtml = lang === 'pt-br' ? 'pt-BR' : lang
+	const html = `<!doctype html><html lang="${langHtml}"><head>` +
+		'<meta name="viewport" content="width=device-width, initial-scale=1">' +
+		'<title>VBase</title></head><body>' +
 		'<div id="app"></div>' +
 		`<script type="text/javascript">window.lang = '${lang}'</script>` +
 		'<script type="text/javascript" src="/jsbundles/vendor.js"></script>' +
