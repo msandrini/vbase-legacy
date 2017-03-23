@@ -8,8 +8,13 @@ import { MAX_REVIEW_LENGTH } from '../../../constants'
 import './user-review-form.styl'
 
 let scores = []
+let marks = {}
 for (let x = 2; x <= 10; x = x + 0.5) {
 	scores.push(x)
+	const isInt = !(x % 1)
+	if (x < 10 && isInt) {
+		marks[x] = x
+	}
 }
 
 const GameUserReviewForm = props => <form onSubmit={props.send}>
@@ -23,7 +28,7 @@ const GameUserReviewForm = props => <form onSubmit={props.send}>
 			<strong className={`score${String(props.ownScore).replace('.', '-')}`}>{props.ownScore || '-'}</strong>
 		</label>
 		<div className="choose-score">
-			<Slider min={2} max={10} step={0.5} onChange={props.changeScore} />
+			<Slider min={2} max={10} step={0.5} onChange={props.changeScore} marks={marks} />
 		</div>
 	</div>
 	<div className="field text">

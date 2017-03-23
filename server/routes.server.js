@@ -8,6 +8,7 @@ const contact = require('./contact.server')
 const user = require('./user.server')
 const reviews = require('./reviews.server')
 const sitemap = require('./sitemap.server')
+const ops = require('./ops.server')
 const { connect, issueToClient: { send, fail } } = require('./utils.server')
 
 const _getLocale = headers => {
@@ -112,6 +113,12 @@ const routing = (app) => {
 			sitemap(db).then(v => send(db, res, v)).catch(e => fail(db, res, e))
 		}))
 		.get('/sitemap.xml', (req, res) => assets.sitemap(res))
+
+		/* maintenance */
+
+		.get('/ops', (req, res) => connect().then(db => {
+			ops(db).then(v => send(db, res, v)).catch(e => fail(db, res, e))
+		}))
 
 		/* default route */
 
