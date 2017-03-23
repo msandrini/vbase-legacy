@@ -37,3 +37,6 @@ pem.createCertificate({ days: 1, selfSigned: true }, (err, keys) => {
 	})
 })
 
+process.on('uncaughtException', function(err) {
+	console.log(err);
+});
