@@ -4,9 +4,8 @@ const ops = (db, payload) => {
             if (error) {
                 reject(error)
             } else {
-                const x = results.map(r => r._id + `: ` + r.text['pt-br'])
-
-                resolve({ feedback: x.join('++++++++++++++++++++') })
+                const map = results.map(r => r._id + `: ` + r.text['pt-br'])
+                resolve({ feedback: map })
             }
         })
     })
