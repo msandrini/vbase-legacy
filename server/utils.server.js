@@ -1,7 +1,8 @@
+const fs = require('fs')
+
 const gameIdIsValid = id => /[a-z0-9\-]+/.test(String(id))
 
 const connect = () => {
-	const mongoUrl = 'mongodb://localhost:27017/local'
 	const mongo = require('mongodb').MongoClient
 	return new Promise((resolve, reject) => {
 		mongo.connect(mongoUrl, null, (error, db) => {
@@ -28,6 +29,17 @@ const issueToClient = {
 		}
 		db.close()
 	}
+}
+
+const getMongoUrl = (local = false) => {
+	if (local) {
+		return 'mongodb://localhost:27017/local'
+	}
+	/**
+	 * This is intended
+	 */
+	const url = fs.readFileSync(path.join(__dirname, '../.connection'))
+	return url
 }
 
 module.exports = { gameIdIsValid, connect, issueToClient };
