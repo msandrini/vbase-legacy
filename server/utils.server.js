@@ -9,6 +9,7 @@ const connect = () => {
 		mongo.connect(getMongoUrl(), null, (error, db) => {
 			if (error) {
 				db.close()
+				console.error(connection.res)
 				reject(connection.res, 'DBConn')
 			} else {
 				resolve(db)
@@ -25,10 +26,10 @@ const issueToClient = {
 	fail: (db, res, error) => {
 		if (typeof error === 'number') {
 			res.sendStatus(error)
-			throw(error)
+			throw new ConnectionException(error)
 		} else {
 			res.status(500).json(error)
-			throw(error)
+			throw new ConnectionException(error)
 		}
 		db.close()
 	}
@@ -42,6 +43,11 @@ const getMongoUrl = (local = false) => {
 	const url = fs.readFileSync(path.join(__dirname, '../.connection'), 'utf-8')
 	fs.writeFileSync(path.join(__dirname, './whichurl'), url)
 	return url ? url : localUrl
+}
+
+const ConnectionException = message => {
+	this.message = message
+	this.name = 'ConnectionException'
 }
 
 module.exports = { gameIdIsValid, connect, issueToClient };
