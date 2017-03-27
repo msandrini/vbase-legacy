@@ -25,8 +25,10 @@ const issueToClient = {
 	fail: (db, res, error) => {
 		if (typeof error === 'number') {
 			res.sendStatus(error)
+			throw(error)
 		} else {
 			res.status(500).json(error)
+			throw(error)
 		}
 		db.close()
 	}
@@ -38,6 +40,7 @@ const getMongoUrl = (local = false) => {
 		return localUrl
 	}
 	const url = fs.readFileSync(path.join(__dirname, '../.connection'), 'utf-8')
+	fs.writeFileSync(path.join(__dirname, './whichurl'), url)
 	return url ? url : localUrl
 }
 
