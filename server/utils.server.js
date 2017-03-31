@@ -40,8 +40,7 @@ const getMongoUrl = (local = false) => {
 	if (local) {
 		return localUrl
 	}
-	const url = fs.readFileSync(path.join(__dirname, '../.connection'), 'utf-8')
-	fs.writeFileSync(path.join(__dirname, './whichurl'), url)
+	const url = process.env.CONNECTION
 	return url ? url : localUrl
 }
 
