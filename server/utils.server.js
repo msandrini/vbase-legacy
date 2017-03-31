@@ -1,5 +1,9 @@
 const fs = require('fs')
 const path = require('path')
+const express = require('express')
+
+const app = express()
+const connection = app.get('connection')
 
 const gameIdIsValid = id => /[a-z0-9\-]+/.test(String(id))
 
