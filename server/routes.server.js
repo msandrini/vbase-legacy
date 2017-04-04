@@ -59,28 +59,28 @@ const routing = (app) => {
 
 		/* games list */
 
-		.get('/games/all/:page', (req, res) => connect().then(db => 
+		.get('/games/all/:page', (req, res) => connect().then(db =>
 			games.all(db, req.params.page).then(v => send(db, res, v)).catch(e => fail(db, res, e))
 		))
-		.get('/games/by-names/:name/:page', (req, res) => connect().then(db => 
+		.get('/games/by-names/:name/:page', (req, res) => connect().then(db =>
 			games.byNames(db, req.params.name, req.params.page).then(v => send(db, res, v)).catch(e => fail(db, res, e))
 		))
-		.post('/games/advanced', (req, res) => connect().then(db => 
+		.post('/games/advanced', (req, res) => connect().then(db =>
 			games.advanced(db, req.body).then(v => send(db, res, v)).catch(e => fail(db, res, e))
 		))
-		.get('/games/from-series/:series', (req, res) => connect().then(db => 
+		.get('/games/from-series/:series', (req, res) => connect().then(db =>
 			games.fromSeries(db, req.params.series).then(v => send(db, res, v)).catch(e => fail(db, res, e))
 		))
 
 		/* single game */
 
-		.get('/game-entry/:id', (req, res) => connect().then(db => 
+		.get('/game-entry/:id', (req, res) => connect().then(db =>
 			singleGame(db, req.params.id).then(v => send(db, res, v)).catch(e => fail(db, res, e))
 		))
 
 		/* info */
 
-		.get('/info-entry/:type/:key', (req, res) => connect().then(db => 
+		.get('/info-entry/:type/:key', (req, res) => connect().then(db =>
 			info(db, req.params.type, req.params.key).then(v => send(db, res, v)).catch(e => fail(db, res, e))
 		))
 
