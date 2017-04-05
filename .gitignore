@@ -43,5 +43,11 @@ app/_cache/*
 # visual studio
 .vscode/*
 
-#db
+# db
 .connection
+
+# swap
+.server.js.swp
+
+# mongologs script
+mongologs.sh
