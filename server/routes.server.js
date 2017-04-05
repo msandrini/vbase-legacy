@@ -1,8 +1,8 @@
+const assets = require('./assets.server')
 const locale = require('locale')
 const games = require('./games.server')
 const singleGame = require('./single-game.server')
-const assets = require('./assets.server')
-const index = require('./index.server')
+// const index = require('./index.server')
 const info = require('./info.server')
 const contact = require('./contact.server')
 const user = require('./user.server')
@@ -34,6 +34,8 @@ const routing = (app) => {
 
 		/* index pages (returns index.html) */
 
+		/*
+		 MOVED TO NGINX FOR BETTER PERFORMANCE
 		.get('/all-games(/*)?', (req, res) => index(res, LANG.EN))
 		.get('/search/*', (req, res) => index(res, LANG.EN))
 		.get('/advanced-search(/*)?', (req, res) => index(res, LANG.EN))
@@ -49,13 +51,18 @@ const routing = (app) => {
 		.get('/informacao/*', (req, res) => index(res, LANG.BR))
 		.get('/termos-privacidade', (req, res) => index(res, LANG.BR))
 		.get('/contato', (req, res) => index(res, LANG.BR))
+		*/
 
 		/* assets */
 
+		/*
+		 MOVED TO NGINX FOR BETTER PERFORMANCE
 		.get('/jsbundles/:file', (req, res) => assets.jsbundles(res, req.params.file))
-		.get('/images-gameplay/:code', (req, res) => assets.images.gameplay.list(res, req.params.code))
 		.get('/image-gameplay/:code.:count.png', (req, res) => assets.images.gameplay.file(res, req.params.code, req.params.count))
 		.get('/image-info/:type/:code.png', (req, res) => assets.images.other.file(res, req.params.type, req.params.code))
+		.get('/icon/:type', (req, res) => assets.icons(res, req.params.type))
+		*/
+		.get('/images-gameplay/:code', (req, res) => assets.images.gameplay.list(res, req.params.code))
 
 		/* games list */
 
@@ -112,7 +119,7 @@ const routing = (app) => {
 		.get('/sitemap-generate', (req, res) => connect().then(db => {
 			sitemap(db).then(v => send(db, res, v)).catch(e => fail(db, res, e))
 		}))
-		.get('/sitemap.xml', (req, res) => assets.sitemap(res))
+		//.get('/sitemap.xml', (req, res) => assets.sitemap(res))
 
 		/* maintenance */
 
