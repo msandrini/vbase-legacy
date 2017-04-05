@@ -30,7 +30,7 @@ const LANG = {
 const routing = (app) => {
 
 	app
-		.get('/', (req, res) => index(res, _getLocale(req.headers)))
+		.get('/locale', (req, res) => res.json({ lang: _getLocale(req.headers) }))
 
 		/* index pages (returns index.html) */
 
