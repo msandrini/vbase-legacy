@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://vbase.games/'
+export const BASE_URL = 'https://vbase.games/api'
 export const ITEMS_PER_PAGE = 20
 export const DOCUMENT_TITLE = 'VBase'
 export const DOCUMENT_TITLE_SEPARATOR = '-'
