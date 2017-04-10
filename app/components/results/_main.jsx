@@ -51,7 +51,7 @@ const _getComposedSearchDetails = query => {
 		searchDetails.push(t('max-cart-size-x', { replacements: query['sizes-to'] }))
 	}
 	if (query['years-from'] && query['years-to']) {
-		searchDetails.push(t('released-fom-x-to-y', { replacements: [query['years-from'], query['years-to']] }))
+		searchDetails.push(t('released-from-x-to-y', { replacements: [query['years-from'], query['years-to']] }))
 	} else if (query['years-from']) {
 		searchDetails.push(t('released-from-x', { replacements: query['years-from'] }))
 	} else if (query['years-to']) {
