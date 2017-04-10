@@ -1,4 +1,7 @@
-export const BASE_URL = 'https://vbase.games/api/'
+export const BASE_URL = 'https://vbase.games/'
+export const API_URL = BASE_URL + 'api/'
+export const IMAGEGAME_URL = BASE_URL + 'image-gameplay/'
+export const IMAGEINFO_URL = BASE_URL + 'image-info/'
 export const ITEMS_PER_PAGE = 20
 export const DOCUMENT_TITLE = 'VBase'
 export const DOCUMENT_TITLE_SEPARATOR = '-'

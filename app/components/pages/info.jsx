@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createAction, buildQueryString } from '../../utils'
 import { Link } from 'react-router'
-import { INFO, BASE_URL } from '../../constants'
+import { INFO, IMAGEINFO_URL } from '../../constants'
 
 import PageTitle from '../shared/page-title.jsx'
 import Title from '../shared/title.jsx'
@@ -30,7 +30,7 @@ const _getContent = content => {
 }
 
 const _getImageUrl = (subject, subjectKey) => {
-	return `${BASE_URL}image-info/${keyToDbMapping[subject]}/${subjectKey}.png`
+	return `${IMAGEINFO_URL}${keyToDbMapping[subject]}/${subjectKey}.png`
 }
 
 const _getLinkStr = (subject, title) => {

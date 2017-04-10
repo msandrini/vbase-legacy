@@ -1,5 +1,3 @@
-const fs = require('fs')
-const path = require('path')
 const express = require('express')
 
 const app = express()
@@ -30,12 +28,13 @@ const issueToClient = {
 	fail: (db, res, error) => {
 		if (typeof error === 'number') {
 			res.sendStatus(error)
+			db.close()
 			throw new ConnectionException(error)
 		} else {
 			res.status(500).json(error)
+			db.close()
 			throw new ConnectionException(error)
 		}
-		db.close()
 	}
 }
 
@@ -45,7 +44,7 @@ const getMongoUrl = (local = false) => {
 		return localUrl
 	}
 	const url = process.env.CONNECTION
-	return url ? url : localUrl
+	return url || localUrl
 }
 
 const ConnectionException = message => {
@@ -53,4 +52,4 @@ const ConnectionException = message => {
 	this.name = 'ConnectionException'
 }
 
-module.exports = { gameIdIsValid, connect, issueToClient };
+module.exports = { gameIdIsValid, connect, issueToClient }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import Scorebar from '../shared/scorebar.jsx'
-import { BASE_URL } from '../../constants'
+import { IMAGEGAME_URL } from '../../constants'
 
 import t, { lang } from '../../i18n'
 import './game-link.styl'
@@ -35,7 +35,7 @@ const _getSpecialStatus = status => {
 	}
 }
 export const _getLink = id => `/${t('url__game')}/${id}`
-const _getFirstImageUrl = id => BASE_URL + `image-gameplay/${id}.1.png`
+const _getFirstImageUrl = id => `${IMAGEGAME_URL}${id}/1.png`
 
 class Results extends Component {
 	render() {
