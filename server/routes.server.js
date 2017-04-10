@@ -22,10 +22,6 @@ const _getLocale = headers => {
 }
 
 const defaultRoute = res => res.sendStatus(404)
-const LANG = {
-	EN: 'en',
-	BR: 'pt-br'
-}
 
 const routing = (app) => {
 
@@ -110,7 +106,7 @@ const routing = (app) => {
 
 		/* contact */
 
-		.post('/contact', (req, res) => connect().then(db => {
+		.post('//contact', (req, res) => connect().then(db => {
 			contact(db, req.body).then(v => send(db, res, v)).catch(e => fail(db, res, e))
 		}))
 
@@ -119,7 +115,7 @@ const routing = (app) => {
 		.get('/sitemap-generate', (req, res) => connect().then(db => {
 			sitemap(db).then(v => send(db, res, v)).catch(e => fail(db, res, e))
 		}))
-		//.get('/sitemap.xml', (req, res) => assets.sitemap(res))
+		// .get('/sitemap.xml', (req, res) => assets.sitemap(res))
 
 		/* maintenance */
 
