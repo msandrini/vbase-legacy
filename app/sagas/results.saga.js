@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects'
 import { browserHistory } from 'react-router'
-import { RESULTS, BASE_URL } from '../constants'
+import { RESULTS, API_URL } from '../constants'
 import t, { lang } from '../i18n'
 import { sendCall, warnOnNetworkError, createAction, historyPush, buildQueryString } from '../utils'
 
@@ -14,12 +14,12 @@ const _getCallName = (action) => {
 	const isQueryEmpty = Object.keys(action.query).length === 0
 	if (action.params.names) {
 		const query = encodeURIComponent(action.params.names)
-		return `${BASE_URL}games/by-names/${query}/${page}`
+		return `${API_URL}games/by-names/${query}/${page}`
 	} else if (action.query && !isQueryEmpty) {
 		const query = { ...action.query, page, lang }
-		return [`${BASE_URL}games/advanced`, query]
+		return [`${API_URL}games/advanced`, query]
 	} else {
-		return `${BASE_URL}games/all/${page}`
+		return `${API_URL}games/all/${page}`
 	}
 }
 

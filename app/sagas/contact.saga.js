@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects'
 import { browserHistory } from 'react-router'
-import { CONTACT, BASE_URL } from '../constants'
+import { CONTACT, API_URL } from '../constants'
 import { sendCall, warnOnNetworkError, createAction } from '../utils'
 
 import t from '../i18n'
@@ -9,7 +9,7 @@ const contactEffects = {
 
 	send: function* (action) {
 		try {
-			const feedback = yield call(sendCall, BASE_URL + 'contact', 'post', action.fields)
+			const feedback = yield call(sendCall, API_URL + 'contact', 'post', action.fields)
 			if (feedback.status === 200) {
 				yield put(createAction(CONTACT.SENTSUCCESFULLY)({ feedback: feedback.data }))
 			} else {

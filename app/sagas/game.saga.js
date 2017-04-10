@@ -1,7 +1,7 @@
 import { call, put, select } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 import { browserHistory } from 'react-router'
-import { GAME, BASE_URL } from '../constants'
+import { GAME, API_URL } from '../constants'
 import { sendCall, warnOnNetworkError, createAction } from '../utils'
 
 import t from '../i18n'
@@ -10,18 +10,18 @@ const gameEffects = {
 
 	requestInfo: function* (action) {
 		try {
-			const feedback = yield call(sendCall, BASE_URL + 'game-entry/' + action.id)
+			const feedback = yield call(sendCall, API_URL + 'game-entry/' + action.id)
 			if (feedback.status === 200) {
 				yield put(createAction(GAME.INFORETRIEVED)({ info: feedback.data }))
 				if (feedback.data.series && feedback.data.series.length) {
 					// Get number of images
 					yield call(delay, 200)
-					const feedbackImg = yield call(sendCall, BASE_URL + 'images-gameplay/' + action.id)
+					const feedbackImg = yield call(sendCall, API_URL + 'images-gameplay/' + action.id)
 					yield put(createAction(GAME.IMAGELISTRETRIEVED)({ images: feedbackImg.data.images }))
 					// Get related games (series)
 					yield call(delay, 200)
 					const seriesIds = feedback.data.series.map(s => s.id)
-					const feedbackSeries = yield call(sendCall, BASE_URL + 'games/from-series/' + seriesIds.join(','))
+					const feedbackSeries = yield call(sendCall, API_URL + 'games/from-series/' + seriesIds.join(','))
 					yield put(createAction(GAME.RELATEDGAMESRETRIEVED)({ info: feedbackSeries.data }))
 				}
 			} else {

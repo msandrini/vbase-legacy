@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects'
-import { BASE_URL, USERINPUT } from '../constants'
+import { API_URL, USERINPUT } from '../constants'
 import { createAction, sendCall, warnOnNetworkError } from '../utils'
 import t, { lang } from '../i18n'
 
@@ -11,7 +11,7 @@ export const userInputEffects = {
 
 	getReviews: function* (action) {
 		try {
-			const feedback = yield call(sendCall, `${BASE_URL}user-reviews/${action.gameId}`)
+			const feedback = yield call(sendCall, `${API_URL}user-reviews/${action.gameId}`)
 			if (feedback.status === 200) {
 				yield put(createAction(USERINPUT.LISTRETRIEVED)({ feedback: feedback.data }))
 
@@ -29,7 +29,7 @@ export const userInputEffects = {
 	submitNewReview: function* (action) {
 		try {
 			action.fields.lang = lang
-			const feedback = yield call(sendCall, `${BASE_URL}review`, 'post', action.fields)
+			const feedback = yield call(sendCall, `${API_URL}review`, 'post', action.fields)
 			if (feedback.status === 200) {
 				alert(t('thanks-for-review'))
 				document.location.reload()
