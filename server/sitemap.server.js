@@ -1,4 +1,4 @@
-const path = require("path")
+const path = require('path')
 const fs = require('fs')
 const htmlEncode = require('js-htmlencode').htmlEncode
 
@@ -8,7 +8,7 @@ const basicCondition = { specialStatus: { $ne: 'homebrew' } }
 
 const HOST = 'https://vbase.games/'
 
-const header = '<?xml version="1.0" encoding="UTF-8"?>' + 
+const header = '<?xml version="1.0" encoding="UTF-8"?>' +
 	'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">'
 const footer = '</urlset>'
 let urlsInitial = [
@@ -20,12 +20,15 @@ let urlsInitial = [
 let changefreq = 'monthly'
 
 const sitemap = db => {
-	let urls = [ ...urlsInitial ]
+	let urls = [...urlsInitial]
 	return new Promise((resolve, reject) => {
 		const gamesCursor = db.collection('games').find(basicCondition, projectionForList).sort(sortCriteria)
 		gamesCursor.toArray((err, games) => {
+			if (err) {
+				reject(err)
+			}
 			const priority = '0.7'
-			for (g of games) {
+			for (let g of games) {
 				const id = g._id
 				let images = []
 				const imgPath = path.join(__dirname, `../static/images/games/gameplay/${id}/1.png`)
@@ -84,4 +87,3 @@ const sitemap = db => {
 }
 
 module.exports = sitemap
-

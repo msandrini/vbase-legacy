@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 const connection = app.get('connection')
 
-const gameIdIsValid = id => /[a-z0-9\-]+/.test(String(id))
+const gameIdIsValid = id => /[a-z0-9-]+/.test(String(id))
 
 const connect = () => {
 	const mongo = require('mongodb').MongoClient

@@ -1,3 +1,5 @@
+/*
+
 const { collectionOutputError, find } = require('./utils');
 
 const misc = {
@@ -17,9 +19,9 @@ const misc = {
         });
     },
 
-    const b = (fn) => ((v) => fn(db, res, v))
+    // const b = (fn) => ((v) => fn(db, res, v))
 
-    /*modifyFileWriteNew: (response, type, code) => {
+    modifyFileWriteNew: (response, type, code) => {
 
 				let feedback = [];
 				let lastFileFound = false;
@@ -35,7 +37,7 @@ const misc = {
 				})
 				response.json(feedback);
 
-			}*/
+			}
 
 	const path = require('path')
 	const fs = require('fs')
@@ -45,7 +47,6 @@ const misc = {
 		const renamed = fs.renameSync(dir, ndir);
 		console.log(renamed, dir, ndir)
 	})
-
 
     index: (db, response, pag) => {
         // PHASE 2: , "otherNames.reasonForName": { "$ne": "japanese-script" }
@@ -64,7 +65,7 @@ const misc = {
                     }
                     let x = `<li>
                     	<a href="upd/${g._id}">${g.title}</a>
-                    	&nbsp; 
+                    	&nbsp;
                     	<form action="/updy" method="post" style="display:inline-block">
                     		<input type="hidden" name="id" value="${g._id}">
                     		<input type="hidden" name="title" value="${g.title}">
@@ -255,7 +256,7 @@ const misc = {
                     selP3 += `<option value="${p}" ${isSel}>${p}</option>`;
                 }
 
-                onFields += `<input type="text" name="onn[${contador}]" placeholder="name" style="font-size:16px; 
+                onFields += `<input type="text" name="onn[${contador}]" placeholder="name" style="font-size:16px;
         		padding:3px; width:500px" value="${on.name}">
         		<select name="onr[${contador}]" style='width:150px'>${selV}</select>
         		<select name="onpa[${contador}]"><option value=""></option>${selP1}</select>
@@ -263,7 +264,6 @@ const misc = {
         		<select name="onpc[${contador}]"><option value=""></option>${selP3}</select><br>`;
                 contador++;
             }
-
 
             response.set('Content-Type', 'text/html');
             response.status(200);
@@ -309,4 +309,4 @@ if (d.old_rec) {
 					if (addons[a] === 'relogio') addons[a] = 'internal-clock';
 				}
 				oI = {addOns: addons};
-*/
+* */

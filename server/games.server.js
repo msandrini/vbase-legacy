@@ -1,12 +1,17 @@
 const ITEMS_PER_PAGE = 20
 const projectionForList = {
-	title: 1, genres: 1, releaseIn: 1, otherNames: 1,
-	companies: 1, editorScore: 1, specialStatus: 1
+	title: 1,
+	genres: 1,
+	releaseIn: 1,
+	otherNames: 1,
+	companies: 1,
+	editorScore: 1,
+	specialStatus: 1
 }
 const sortCriteria = { title: 1 }
 const basicCondition = { specialStatus: { $ne: 'homebrew' } }
 
-const _escapeRegExp = str => str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&")
+const _escapeRegExp = str => str.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&')
 const _regExpParam = str => ({ $regex: `${_escapeRegExp(str)}`, $options: 'i' })
 const _unique = (array) => array.filter((value, index, self) => self.indexOf(value) === index)
 
@@ -74,13 +79,13 @@ const _getGames = (db, cursor, page, pageSize = ITEMS_PER_PAGE) => {
 					} else {
 						docs = docs || []
 						let genres = []
-						for (d of docs) {
+						for (let d of docs) {
 							if (d.genres) {
 								genres = [...genres, ...d.genres]
 							}
 						}
 						let companies = []
-						for (d of docs) {
+						for (let d of docs) {
 							if (d.companies) {
 								companies = [...companies, ...d.companies]
 							}
@@ -95,12 +100,12 @@ const _getGames = (db, cursor, page, pageSize = ITEMS_PER_PAGE) => {
 								let [docsGenre, docsCompany] = results
 
 								let genresObj = {}
-								for (g of docsGenre) {
+								for (let g of docsGenre) {
 									genresObj[g._id] = g.title
 								}
-								for (d of docs) {
+								for (let d of docs) {
 									let genresForThisDoc = []
-									for (dg of d.genres) {
+									for (let dg of d.genres) {
 										genresForThisDoc.push(genresObj[dg])
 									}
 									d.genreTitles = genresForThisDoc
@@ -108,12 +113,12 @@ const _getGames = (db, cursor, page, pageSize = ITEMS_PER_PAGE) => {
 								}
 
 								let companiesObj = {}
-								for (c of docsCompany) {
+								for (let c of docsCompany) {
 									companiesObj[c._id] = c.name
 								}
-								for (d of docs) {
+								for (let d of docs) {
 									let companiesForThisDoc = []
-									for (dg of d.companies) {
+									for (let dg of d.companies) {
 										companiesForThisDoc.push(companiesObj[dg])
 									}
 									d.companyNames = companiesForThisDoc
@@ -137,7 +142,7 @@ const _getGames = (db, cursor, page, pageSize = ITEMS_PER_PAGE) => {
 const games = {
 
 	byNames: (db, name, page = 0) => {
-		const search = _regExpParam(name);
+		const search = _regExpParam(name)
 		const condition = Object.assign({}, basicCondition, { $or: [{ title: search }, { 'otherNames.name': search }] })
 		const gamesCursor = db.collection('games').find(condition, projectionForList)
 		return _getGames(db, gamesCursor, page)
@@ -175,4 +180,3 @@ const games = {
 }
 
 module.exports = games
-

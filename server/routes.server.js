@@ -1,8 +1,8 @@
-const assets = require('./assets.server')
 const locale = require('locale')
+
+const assets = require('./assets.server')
 const games = require('./games.server')
 const singleGame = require('./single-game.server')
-// const index = require('./index.server')
 const info = require('./info.server')
 const contact = require('./contact.server')
 const user = require('./user.server')
@@ -106,7 +106,7 @@ const routing = (app) => {
 
 		/* contact */
 
-		.post('//contact', (req, res) => connect().then(db => {
+		.post('/contact', (req, res) => connect().then(db => {
 			contact(db, req.body).then(v => send(db, res, v)).catch(e => fail(db, res, e))
 		}))
 
@@ -115,7 +115,6 @@ const routing = (app) => {
 		.get('/sitemap-generate', (req, res) => connect().then(db => {
 			sitemap(db).then(v => send(db, res, v)).catch(e => fail(db, res, e))
 		}))
-		// .get('/sitemap.xml', (req, res) => assets.sitemap(res))
 
 		/* maintenance */
 
@@ -130,4 +129,3 @@ const routing = (app) => {
 }
 
 module.exports = routing
-

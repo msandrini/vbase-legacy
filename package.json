@@ -62,6 +62,8 @@
     "start": "node server.js",
     "build": "webpack",
     "buildprod": "webpack -p",
-    "clean": "rm -r app/_bundled/*"
+    "clean": "rm -r app/_bundled/*",
+    "lint:server": "eslint --ext=js server.js",
+    "lint:app": "eslint --ext=jsx,js .app"
   }
 }

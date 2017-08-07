@@ -1,5 +1,5 @@
-const path = require('path')
-const fs = require('fs')
+// const path = require('path')
+// const fs = require('fs')
 
 const index = (response, lang) => {
 	const langHtml = lang === 'pt-br' ? 'pt-BR' : lang
@@ -16,4 +16,3 @@ const index = (response, lang) => {
 }
 
 module.exports = index
-

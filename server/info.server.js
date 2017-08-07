@@ -1,12 +1,12 @@
-const path = require("path");
-const fs = require('fs');
+const path = require('path')
+const fs = require('fs')
 
 const singleInfo = (db, type, key) => {
 	const condition = { _id: key }
 	const typeWhitelist = ['addon', 'genre', 'series', 'company']
 	return new Promise((resolve, reject) => {
 		if (typeWhitelist.includes(type)) {
-			let dbName, queryOperation;
+			let dbName
 			if (type !== 'company') {
 				if (type !== 'series') {
 					dbName = type + 's'
@@ -21,7 +21,7 @@ const singleInfo = (db, type, key) => {
 					reject(error)
 				} else {
 					if (!doc) {
-						reject(404)
+						reject(new Error('404 Error'))
 					}
 					const imgPath = `../static/images/${dbName}/${key}/1.png`
 					doc.imageExists = fs.existsSync(path.join(__dirname, imgPath))
@@ -38,4 +38,3 @@ const singleInfo = (db, type, key) => {
 }
 
 module.exports = singleInfo
-

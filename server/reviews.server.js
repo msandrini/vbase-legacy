@@ -15,13 +15,13 @@ const reviews = {
 							userIds.add(r.user)
 						}
 					}
-					const searchU = { _id: { $in: Array.from(userIds) } };
+					const searchU = { _id: { $in: Array.from(userIds) } }
 					const projectionU = { name: 1, source: 1 }
 					db.collection('users').find(searchU, projectionU).toArray((errorU, resultsU) => {
 						if (errorU) {
 							reject(errorU)
 						} else {
-							let users = {};
+							let users = {}
 							for (const u of resultsU) {
 								users[u._id] = u
 								delete users[u._id]._id
@@ -60,8 +60,7 @@ const reviews = {
 				resolve(resultU)
 			})
 		})
-	},
-
+	}
 
 }
 

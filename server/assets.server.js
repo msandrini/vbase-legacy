@@ -1,5 +1,5 @@
 const { gameIdIsValid } = require('./utils.server')
-const path = require("path")
+const path = require('path')
 const fs = require('fs')
 
 const assets = {
@@ -75,4 +75,3 @@ const assets = {
 }
 
 module.exports = assets
-

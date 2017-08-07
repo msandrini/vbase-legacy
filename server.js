@@ -1,5 +1,4 @@
 const express = require('express')
-const { outputJsonError, setServer } = require('./server/utils.server')
 const routing = require('./server/routes.server')
 const bodyParser = require('body-parser')
 const sessions = require('client-sessions')
@@ -19,7 +18,7 @@ app.use(sessions({
 	secret: 'come-on-are-you-really-interested-in-reading-this-pfff-omg',
 	duration: 10 * day,
 	activeDuration: day
-}));
+}))
 
 // connect to DB and then continue to routing
 routing(app)
@@ -30,5 +29,5 @@ app.listen(app.get('port'), () => {
 })
 
 process.on('uncaughtException', function(err) {
-	console.log(err);
-});
+	console.log(err)
+})
