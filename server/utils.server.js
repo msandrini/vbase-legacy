@@ -2,6 +2,9 @@ const express = require('express')
 
 const app = express()
 const connection = app.get('connection')
+const dotenv = require('dotenv')
+
+dotenv.load()
 
 const gameIdIsValid = id => /[a-z0-9-]+/.test(String(id))
 
