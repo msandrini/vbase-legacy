@@ -1,17 +1,21 @@
 
 const mongo = require('mongodb').MongoClient
-const fs = require('fs')
-const path = require('path')
 const logger = require('mongodb').Logger
 
 const url = process.env.CONNECTION
-mongo.connect(url, null, (error, db) => {
+mongo.connect(url, null, (connectionError, db) => {
 	logger.setLevel('info')
-	if (error) {
+	if (connectionError) {
 		db.close()
-		console.error(connection.res)
-		throw 'Connection error: ' + error
+		console.error(connectionError.res)
+		throw new Error('Connection error: ' + connectionError)
 	} else {
-		db.listCollections().toArray((err, g) => { console.log(g) })
+		db.listCollections().toArray((errorListing, list) => {
+			if (errorListing) {
+				db.close()
+				throw new Error('Error when listing: ' + errorListing)
+			}
+			console.log(list)
+		})
 	}
 })
