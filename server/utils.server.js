@@ -13,7 +13,7 @@ const connect = () => {
 	return new Promise((resolve, reject) => {
 		mongo.connect(getMongoUrl(), null, (error, db) => {
 			if (error) {
-				db.close()
+				if (db) db.close()
 				console.error(connection.res)
 				reject(connection.res, 'DBConn')
 			} else {
@@ -31,11 +31,11 @@ const issueToClient = {
 	fail: (db, res, error) => {
 		if (typeof error === 'number') {
 			res.sendStatus(error)
-			db.close()
+			if (db) db.close()
 			throw new ConnectionException(error)
 		} else {
 			res.status(500).json(error)
-			db.close()
+			if (db) db.close()
 			throw new ConnectionException(error)
 		}
 	}
