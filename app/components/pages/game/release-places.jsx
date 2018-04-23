@@ -10,7 +10,11 @@ const _getPlacesObject = ({releasePlaces, otherNames}) => {
 	let places = {}
 	if (releasePlaces) {
 		for (const ln of localNames) {
-			places[t(`loc__${ln.place}`)] = ln.name
+			const placesForName = []
+			for (const pn of ln.place) {
+				placesForName.push(t(`loc__${pn}`))
+			}
+			places[joinText(placesForName, ', ', ` ${t('and')} `)] = ln.name
 		}
 		for (const p of releasePlaces) {
 			if (!places[t(`loc__${p}`)]) {
