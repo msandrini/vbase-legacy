@@ -13,7 +13,7 @@ const TermsPage = () => (
 
 		<div className="text-content">
 			<h3>1. {t('trm-1')}</h3>
-			<p>{t('trm-1-p', [address])}</p>
+			<p>{t('trm-1-p', {replacements: [address]})}</p>
 
 			<h3>2. {t('trm-2')}</h3>
 			<ol type="a">

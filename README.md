@@ -33,3 +33,12 @@ After cloning the repo:
 ### Part IV - misc setup
 
 14. Run `<domain>/api/sitemap-generate` to update sitemap.xml
+
+
+## maintainance
+
+### Rebuild
+
+1. Stash and pull
+2. Stash pop
+3. Run `npm run build:prod`

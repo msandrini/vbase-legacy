@@ -1,21 +1,32 @@
 const path = require('path')
 const fs = require('fs')
 
+const getDBNameFromType = (typeRaw) => {
+	const typeWhitelist = ['addon', 'genre', 'series', 'company']
+	const typesBR = {
+		extensao: 'addon',
+		genero: 'genre',
+		serie: 'series',
+		empresa: 'company'
+	}
+	const type = (typesBR[typeRaw]) ? typesBR[typeRaw] : typeRaw
+	if (typeWhitelist.includes(type)) {
+		if (type !== 'company') {
+			if (type !== 'series') {
+				return type + 's'
+			}
+			return type
+		}
+		return 'companies'
+	}
+	return null
+}
+
 const singleInfo = (db, type, key) => {
 	const condition = { _id: key }
-	const typeWhitelist = ['addon', 'genre', 'series', 'company']
+	const dbName = getDBNameFromType(type)
 	return new Promise((resolve, reject) => {
-		if (typeWhitelist.includes(type)) {
-			let dbName
-			if (type !== 'company') {
-				if (type !== 'series') {
-					dbName = type + 's'
-				} else {
-					dbName = type
-				}
-			} else {
-				dbName = 'companies'
-			}
+		if (dbName) {
 			db.collection(dbName).findOne(condition, { _id: 0 }).then((doc, error) => {
 				if (error) {
 					reject(error)
@@ -34,7 +45,6 @@ const singleInfo = (db, type, key) => {
 			reject(new Error(`${type} not whitelisted`))
 		}
 	})
-
 }
 
 module.exports = singleInfo
