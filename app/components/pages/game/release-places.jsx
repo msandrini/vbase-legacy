@@ -5,28 +5,28 @@ import { joinText } from '../../../utils'
 import t from '../../../i18n'
 import './release-places.styl'
 
-const _getPlacesObject = ({releasePlaces, otherNames}) => {
+const _getReleasePlacesObject = ({releasePlaces, otherNames}) => {
 	const localNames = (otherNames && otherNames.filter(on => on.reasonForName === 'local')) || []
-	let places = {}
+	let releasePlacesObj = {}
+	const placeKeysWithNames = []
 	if (releasePlaces) {
 		for (const ln of localNames) {
-			const placesForName = []
 			for (const pn of ln.place) {
-				placesForName.push(t(`loc__${pn}`))
+				placeKeysWithNames.push(t(`loc__${pn}`))
 			}
-			places[joinText(placesForName, ', ', ` ${t('and')} `)] = ln.name
+			releasePlacesObj[joinText(placeKeysWithNames, ', ', ` ${t('and')} `)] = ln.name
 		}
 		for (const p of releasePlaces) {
-			if (!places[t(`loc__${p}`)]) {
-				places[t(`loc__${p}`)] = false
+			if (!placeKeysWithNames[t(`loc__${p}`)]) {
+				releasePlacesObj[t(`loc__${p}`)] = false
 			}
 		}
 	}
-	return places
+	return releasePlacesObj
 }
 
 const _getPlacesString = props => {
-	const places = _getPlacesObject(props)
+	const places = _getReleasePlacesObject(props)
 	let placesStr = []
 	let placeKeys = Object.keys(places)
 	for (const p of placeKeys) {
