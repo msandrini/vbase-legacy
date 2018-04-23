@@ -1,15 +1,8 @@
 const path = require('path')
 const fs = require('fs')
 
-const getDBNameFromType = (typeRaw) => {
+const getDBNameFromType = (type) => {
 	const typeWhitelist = ['addon', 'genre', 'series', 'company']
-	const typesBR = {
-		extensao: 'addon',
-		genero: 'genre',
-		serie: 'series',
-		empresa: 'company'
-	}
-	const type = (typesBR[typeRaw]) ? typesBR[typeRaw] : typeRaw
 	if (typeWhitelist.includes(type)) {
 		if (type !== 'company') {
 			if (type !== 'series') {
