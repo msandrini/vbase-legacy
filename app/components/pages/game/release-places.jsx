@@ -17,7 +17,7 @@ const _getReleasePlacesObject = ({releasePlaces, otherNames}) => {
 			releasePlacesObj[joinText(placeKeysWithNames, ', ', ` ${t('and')} `)] = ln.name
 		}
 		for (const p of releasePlaces) {
-			if (!placeKeysWithNames[t(`loc__${p}`)]) {
+			if (!placeKeysWithNames.includes(t(`loc__${p}`))) {
 				releasePlacesObj[t(`loc__${p}`)] = false
 			}
 		}
