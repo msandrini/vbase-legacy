@@ -36,7 +36,7 @@ const _getImageUrl = (subject, subjectKey) => {
 const _getLinkStr = (subject, title) => {
 	if (typeof title === 'object') title = title[lang]
 	if (subject !== 'addon') {
-		return t('list-games-from-the-x-y', { replacements: [subject, title] })
+		return t('list-games') + t(`from-${subject}-x`, { replacements: [title] }).replace(/\*/g, '')
 	} else {
 		return t('list-games-with-supporting-x', { replacements: title })
 	}

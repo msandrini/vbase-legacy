@@ -55,8 +55,10 @@
 	"searching-for-x":"Buscando por *\"{0}\"*",
 	"from-advanced-search":"Da busca avançada",
 	"back-to-simple-search":"Voltar à busca simples",
-	"list-games-from-the-x-y":"Ver os jogos do {0} {1}",
+	"list-games":"Ver todos os jogos",
 	"list-games-with-supporting-x":"Ver os jogos com (suporte a) {0}",
+	"from-company-x":"da empresa {0}",
+	"from-addon-x":"com a expansão {0}",
 
 	"all-games":"todos os jogos",
 
@@ -67,7 +69,7 @@
 	"searching-for-games":"Procurando por jogos",
 	"from-x":"da *{0}*",
 	"having-x-on-review":"tendo *{0}* no texto da avaliação",
-	"on-genre-x":"do gênero *{0}*",
+	"from-genre-x":"do gênero *{0}*",
 	"named-x":"com nome *{0}*",
 	"from-series-x":"da série *{0}*",
 	"scored-between-x-and-y":"com nota de *{0}* a *{1}*",

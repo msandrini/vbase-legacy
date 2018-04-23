@@ -28,7 +28,7 @@ const _getComposedSearchDetails = query => {
 		searchDetails.push(t('having-x-on-review', { replacements: query.review }))
 	}
 	if (query.genre) {
-		searchDetails.push(t('on-genre-x', { replacements: query.genre }))
+		searchDetails.push(t('from-genre-x', { replacements: query.genre }))
 	}
 	if (query.names) {
 		searchDetails.push(t('named-x', { replacements: query.names }))

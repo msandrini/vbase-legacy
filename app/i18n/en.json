@@ -55,8 +55,10 @@
 	"searching-for-x":"Searching for *\"{0}\"*",
 	"from-advanced-search":"From advanced search",
 	"back-to-simple-search":"Back to simple search",
-	"list-games-from-the-x-y":"List all games from the {0} {1}",
+	"list-games":"List all games",
 	"list-games-with-supporting-x":"List all games with/supporting {0}",
+	"from-company-x":"from the company {0}",
+	"from-addon-x":"with the addon {0}",
 
 	"all-games":"all games",
 
@@ -67,7 +69,7 @@
 	"searching-for-games":"Searching for games",
 	"from-x":"from *{0}*",
 	"having-x-on-review":"having *{0}* on editor review",
-	"on-genre-x":"on genre *{0}*",
+	"from-genre-x":"on genre *{0}*",
 	"named-x":"named *{0}*",
 	"from-series-x":"from the *{0}* series",
 	"scored-between-x-and-y":"scored between *{0}* and*{1}*",
