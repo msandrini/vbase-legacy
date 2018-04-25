@@ -42,3 +42,7 @@ After cloning the repo:
 1. Stash and pull
 2. Stash pop
 3. Run `npm run build:prod`
+
+### Error logs
+
+Nginx: `/var/log/nginx/error.log` (logs) and `/etc/init.d/nginx status` (status)

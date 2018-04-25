@@ -16,6 +16,7 @@ class GameUserReviewsOverlay extends Component {
 		this._toggleVisibility = this._toggleVisibility.bind(this)
 		this._changeField = this._changeField.bind(this)
 		this._sendOwnReview = this._sendOwnReview.bind(this)
+		this._handleOverlayClick = this._handleOverlayClick.bind(this)
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -48,27 +49,46 @@ class GameUserReviewsOverlay extends Component {
 		} else if (!this.props.ownScore) {
 			alert(t('enter-score'))
 		} else {
-			this.props.submitAction({ fields: { score: this.props.ownScore, text: this.props.ownText, game: this.props.gameId } })
+			this.props.submitAction({
+				fields: {
+					score: this.props.ownScore,
+					text: this.props.ownText,
+					game: this.props.gameId
+				}
+			})
+		}
+	}
+
+	_handleOverlayClick(e) {
+		e.stopPropagation()
+		if (e.target.id === 'user-reviews-overlay') {
+			this.props.closeAction()
 		}
 	}
 
 	render() {
-		return <div id="user-reviews-overlay" className={this.props.overlayVisible ? '' : 'inactive'}>
-			<div className="window">
-				<a className="btn ball close" onClick={this._toggleVisibility}><Icon type="x" size="24" /></a>
-				<h5>{t('user-reviews-for-this-game')}
-					{this.props.reviews.length > 0 && <small>{this.props.reviews.length + ' ' + t('review', { plural: this.props.reviews.length })}</small>}
-				</h5>
-				{this.props.reviews.length > 0 && <ul>
-					{this.props.reviews.map((review, key) => <li key={key}>
-						<GameUserReviewUnit review={review} />
-					</li>)}
-				</ul>}
-				{this.props.reviews.length === 0 && <div className="no-reviews">{t('no-reviews')}</div>}
-				<GameUserReviewForm send={this._sendOwnReview} ownScore={this.props.ownScore} ownText={this.props.ownText}
-					changeScore={this._changeField('score')} changeText={this._changeField('text')} />
+		return (
+			<div id="user-reviews-overlay" onClick={this._handleOverlayClick} className={this.props.overlayVisible ? '' : 'inactive'}>
+				<div className="window">
+					<a className="btn ball close" onClick={this._toggleVisibility}>
+						<Icon type="x" size="24" />
+					</a>
+					<h5>{t('user-reviews-for-this-game')}
+						{this.props.reviews.length > 0 &&
+							<small>{this.props.reviews.length + ' ' + t('review', { plural: this.props.reviews.length })}</small>}
+					</h5>
+					{this.props.reviews.length > 0 && <ul>
+						{this.props.reviews.map((review, key) => <li key={key}>
+							<GameUserReviewUnit review={review} />
+						</li>)}
+					</ul>}
+					{this.props.reviews.length === 0 &&
+						<div className="no-reviews">{t('no-reviews')}</div>}
+					<GameUserReviewForm send={this._sendOwnReview} ownScore={this.props.ownScore} ownText={this.props.ownText}
+						changeScore={this._changeField('score')} changeText={this._changeField('text')} />
+				</div>
 			</div>
-		</div>
+		)
 	}
 }
 

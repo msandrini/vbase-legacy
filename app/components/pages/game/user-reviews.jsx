@@ -21,7 +21,9 @@ const GameUserReviews = ({ userReviews, toggleAction, gameId }) => <div classNam
 					t('user', { plural: _getNumReviews(userReviews) })}</strong> : t('no-users')
 			}
 		</span>
-		<span className="mobile-text">{t('review', { plural: _getNumReviews(userReviews) })} ({_getNumReviews(userReviews)})</span>
+		<span className="mobile-text">
+			{t('review', { plural: _getNumReviews(userReviews) })} ({_getNumReviews(userReviews)})
+		</span>
 		<span className="action-text">
 			{t(_getKeyForActionText(_getNumReviews(userReviews)))}
 		</span>
