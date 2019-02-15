@@ -9,12 +9,6 @@
 	"games":"jogos",
 
 	"contact-us":"Contacte-nos!",
-	"login-with-Google":"Entrar com o Google",
-
-	"profile-picture":"Imagem de perfil",
-	"logged-in-as":"Autenticado como",
-	"do-logout":"Sair",
-
 	"contact":"Contato",
 	"terms-of-use-and-privacy":"Termos de uso e privacidade",
 	"terms-of-service":"Termos de serviço",
@@ -48,6 +42,7 @@
 
 	"made-by":"por",
 	"out-of-10":"de 10",
+	"unknown-user":"(anônimo)",
 
 	"no-results-found":"Nenhum jogo encontrado",
 	"showing-results":"Resultados da busca",
@@ -151,7 +146,10 @@
 	"enter-score":"Preencha ao menos a nota!",
 	"thanks-for-review":"Obrigado por avaliar este jogo!",
 	"required":"obrigatório",
-	"login-required":"A autenticação é obrigatória",
+	"nickname":"usuário",
+	"store-nickname":"salvar usuário",
+	"anonymous-review":"(anônimo)",
+	"insert-nickname-or-go-anonymous":"Quer mesmo inserir uma avaliação anônima (sem nome de usuário)?",
 
 	"url__all-games":"todos-os-jogos",
 	"url__search":"busca",
@@ -241,10 +239,8 @@
 	"trm-7":"Modificações",
 	"trm-7-p":"O site VBase pode revisar estes termos de serviço para seu website a qualquer momento sem aviso prévio. Ao usar este site, você está concordando em ficar vinculado à versão atual desses termos de serviço.",
 	"trm-8":"Lei de governo",
-	"trm-8-p":"Estes termos e condições são regidos e interpretados de acordo com as leis de Berlim, Alemanha, e você se submete irrevogavelmente à jurisdição exclusiva dos tribunais desse Estado ou local.",
+	"trm-8-p":"Estes termos e condições são regidos e interpretados de acordo com as leis de Berlim, Alemanha, e você se submete irrevogavelmente à jurisdição exclusiva dos tribunais desse Estado.",
 	"trm-pp":"Política de privacidade",
-	"trm-pp-p1":"Sua privacidade é importante para nós.",
-	"trm-pp-p2":"É política da VBase respeitar sua privacidade em relação a qualquer informação que possamos coletar durante a operação do nosso site. Consequentemente, desenvolvemos esta política de privacidade para que você possa entender como coletamos, usamos, comunicamos, divulgamos e, de outra forma, fazemos uso de informações pessoais. Abaixo apresentamos nossa política de privacidade.",
-	"trm-pp-p3":"Estamos empenhados em conduzir nossos negócios de acordo com esses princípios, a fim de garantir que a confidencialidade das informações pessoais seja protegida e mantida. A VBase pode alterar esta política de privacidade de tempos em tempos, a critério exclusivo da VBase.",
-	"trm-pp-li":"Iremos coletar apenas o nome e às vezes o país e a cidade de nossos usuários registrados.]]] Antes ou no momento da coleta de informações pessoais, identificaremos os propósitos para os quais a informação está sendo coletada.]]] Iremos coletar e usar Informações pessoais apenas para o cumprimento dos fins especificados por nós e para outros fins auxiliares, a menos que obtenhamos o consentimento do indivíduo em questão ou conforme exigido por lei.]]] Os dados pessoais devem ser relevantes para os fins para os quais ele deve ser usado, E, na medida necessária para esses fins, devem ser precisos, completos e atualizados.]]] Protegemos as informações pessoais usando salvaguardas de segurança razoáveis ​​contra perda ou roubo, bem como acesso não autorizado, divulgação, cópia, uso ou modificação.]]] Iremos disponibilizar prontamente aos clientes informações sobre nossas políticas e práticas relacionadas ao gerenciamento de informações pessoais.]]] Só manteremos informações pessoais durante o tempo necessário para o cumprimento dessas finalidades."
+	"trm-pp-p":"A sua privacidade é fundamental para nós. Tal como acontece com os termos, reservamo-nos o direito de alterar esta política de privacidade a nosso exclusivo critério, mas, neste caso, deve ser observado que nosso objetivo não passa por lidar com informações pessoais críticas em nenhum local neste site.",
+	"trm-pp-li":"Podemos coletar apenas um apelido dos usuários, quando estes adicionam uma revisão no banco de dados e concordam em fornecer um apelido, associado com a data e hora em que a revisão é feita. Nada mais!]]]Até 2017, recolhemos e utilizamos informações pessoais (apenas o nome), embora apenas para cumprir os objetivos de uma base de dados (identificação dos avaliadores), e nenhuma outra informação para além do nome é destinada a ser armazenada ou divulgada para estes registos antigos.]]]Vamos proteger estes apelidos e nomes armazenados utilizando salvaguardas de segurança razoáveis contra perda ou roubo, bem como acesso, divulgação, cópia, utilização ou modificação não autorizada.]]]Só reteremos informações pessoais durante o tempo necessário para o cumprimento dos objetivos da base de dados."
 }

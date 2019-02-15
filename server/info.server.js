@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const { updateAccessCounter } = require('./utils.server')
 
 const getDBNameFromType = (type) => {
 	const typeWhitelist = ['addon', 'genre', 'series', 'company']
@@ -27,6 +28,7 @@ const singleInfo = (db, type, key) => {
 					if (!doc) {
 						reject(new Error('404 Error'))
 					}
+					updateAccessCounter('info')
 					const imgPath = `../static/images/${dbName}/${key}/1.png`
 					doc.imageExists = fs.existsSync(path.join(__dirname, imgPath))
 					resolve(doc)

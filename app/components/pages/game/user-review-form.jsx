@@ -2,7 +2,6 @@ import React from 'react'
 import Slider from 'rc-slider/lib/Slider'
 
 import Icon from '../../shared/icon.jsx'
-import UserBox from '../../shared/user-box.jsx'
 import t from '../../../i18n'
 import { MAX_REVIEW_LENGTH } from '../../../constants'
 import './user-review-form.styl'
@@ -20,8 +19,13 @@ for (let x = 2; x <= 10; x = x + 0.5) {
 const GameUserReviewForm = props => <form onSubmit={props.send}>
 	<h5>{t('review-this-game')}</h5>
 	<div className="field user">
-		<label htmlFor="score">{t('user')}</label>
-		<UserBox verify={true} />
+		<label htmlFor="score">
+			{t('nickname')}
+			<small>{t('optional')}</small>
+		</label>
+		<input type="text" className="nickname" value={props.ownNickname}
+			onChange={(e) => props.changeNickname(e.target.value)}
+			onBlur={() => {} /* (e) => props.blurNickname({ value: e.target.value }) */} />
 	</div>
 	<div className="field score">
 		<label htmlFor="score">{t('score')}:

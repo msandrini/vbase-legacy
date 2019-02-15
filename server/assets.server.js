@@ -69,6 +69,15 @@ const assets = {
 				} else {
 					response.sendStatus(404)
 				}
+			},
+			icons: (response, file) => {
+				const fileExists = fs.existsSync(path.join(__dirname, `../static/icons/${file}`))
+				if (fileExists) {
+					response.status(200)
+					response.sendFile(file, { root: path.join(__dirname, `../static/icons/`) })
+				} else {
+					response.sendStatus(404)
+				}
 			}
 		}
 	}

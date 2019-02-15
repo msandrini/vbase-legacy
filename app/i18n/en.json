@@ -9,12 +9,6 @@
 	"games":"games",
 
 	"contact-us":"Contact Us!",
-	"login-with-Google":"login with Google",
-
-	"profile-picture":"Profile Picture",
-	"logged-in-as":"Logged in as",
-	"do-logout":"Logout",
-
 	"contact":"Contact",
 	"terms-of-use-and-privacy":"Terms of Use and Privacy",
 	"terms-of-service":"Terms of service",
@@ -48,6 +42,7 @@
 
 	"made-by":"by",
 	"out-of-10":"out of 10",
+	"unknown-user":"(anonymous)",
 
 	"no-results-found":"No results found",
 	"showing-results":"Search results",
@@ -151,7 +146,10 @@
 	"enter-score":"Please enter a score!",
 	"thanks-for-review":"Thanks for your review!",
 	"required":"required",
-	"login-required":"It is required to login before posting",
+	"nickname":"nickname",
+	"store-nickname":"store nickname",
+	"anonymous-review":"(anonymous)",
+	"insert-nickname-or-go-anonymous":"Do you wish to insert an anonymous review (without nickname)?",
 
 	"url__all-games":"all-games",
 	"url__search":"search",
@@ -235,18 +233,16 @@
 	"trm-4":"Limitations",
 	"trm-4-p":"In no event shall VBase or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the information on VBase's website, even if VBase or a VBase authorized representative has been notified orally or in writing of the possibility of such damage. Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.",
 	"trm-5":"Accuracy of information",
-	"trm-5-p":"The information appearing on VBase's website could include technical errors.  VBase does not warrant that any of the information on its website are accurate, complete or current. VBase may make changes to the information contained on its website at any time without notice. However VBase does not make any commitment to update the information.",
+	"trm-5-p":"The information appearing on VBase's website could include technical errors.  VBase does not warrant that any of the information on its website are accurate, complete or current. VBase may make changes to the information contained on its website at any time without notice. However, although pointed errors are likely to be corrected, VBase is not able to make any commitment to update the information.",
 	"trm-6":"Links",
 	"trm-6-p":"VBase has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by VBase of the site. Use of any such linked website is at the user's own risk.",
 	"trm-7":"Modifications",
 	"trm-7-p":"VBase may revise these terms of service for its website at any time without notice. By using this website you are agreeing to be bound by the then current version of these terms of service.",
 	"trm-8":"Governing Law",
-	"trm-8-p":"These terms and conditions are governed by and construed in accordance with the laws of Berlin and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.",
+	"trm-8-p":"These terms and conditions are governed by and construed in accordance with the laws of Berlin, Germany, and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.",
 	"trm-pp":"Privacy Policy",
-	"trm-pp-p1":"Your privacy is important to us.",
-	"trm-pp-p2":"It is VBase's policy to respect your privacy regarding any information we may collect while operating our website. Accordingly, we have developed this privacy policy in order for you to understand how we collect, use, communicate, disclose and otherwise make use of personal information. We have outlined our privacy policy below.",
-	"trm-pp-p3":"We are committed to conducting our business in accordance with these principles in order to ensure that the confidentiality of personal information is protected and maintained. VBase may change this privacy policy from time to time at VBase's sole discretion.",
-	"trm-pp-li":"We will collect only the name and sometimes the country and city of our registered users.]]]Before or at the time of collecting personal information, we will identify the purposes for which information is being collected.]]]We will collect and use personal information solely for fulfilling those purposes specified by us and for other ancillary purposes, unless we obtain the consent of the individual concerned or as required by law.]]]Personal data should be relevant to the purposes for which it is to be used, and, to the extent necessary for those purposes, should be accurate, complete, and up-to-date.]]]We will protect personal information by using reasonable security safeguards against loss or theft, as well as unauthorized access, disclosure, copying, use or modification.]]]We will make readily available to customers information about our policies and practices relating to the management of personal information.]]]We will only retain personal information for as long as necessary for the fulfilment of those purposes."
+	"trm-pp-p":"Your privacy is fundamental to us. As with the terms, we reserve the right to change this privacy policy at our sole discretion, but in this case it should be noted that our goal is not to deal with sensitive personal information at all in this website.",
+	"trm-pp-li":"We may collect only a nickname of the users, when those add a review on the database and agree on providing a nickname, associated with the date and time the review is done. Nothing else!]]]Until circa 2017, we collected and used personal information (name), although solely for fulfilling the purposes of a database (indentification of reviewers), and no other information besides the name is bound to be stored or disclosed for these old registers.]]]We will protect these nicknames and names stored by using reasonable security safeguards against loss or theft, as well as unauthorized access, disclosure, copying, use or modification.]]]We will only retain personal information for as long as necessary for the fulfilment of the purposes of the database."
 }
 
 

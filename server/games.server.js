@@ -1,3 +1,5 @@
+const { updateAccessCounter } = require('./utils.server')
+
 const ITEMS_PER_PAGE = 20
 const projectionForList = {
 	title: 1,
@@ -77,6 +79,7 @@ const _getGames = (db, cursor, page, pageSize = ITEMS_PER_PAGE) => {
 					if (errCount) {
 						reject(errCount)
 					} else {
+						updateAccessCounter('list')
 						docs = docs || []
 						let genres = []
 						for (let d of docs) {

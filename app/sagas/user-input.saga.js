@@ -9,6 +9,10 @@ export const userInputEffects = {
 		yield put(createAction(USERINPUT.LISTREQUESTED)({ gameId: action.gameId }))
 	},
 
+	storeNickname: function* (action) {
+		window.localStorage.setItem('nickname', action.value)
+	},
+
 	getReviews: function* (action) {
 		try {
 			const feedback = yield call(sendCall, `${API_URL}user-reviews/${action.gameId}`)

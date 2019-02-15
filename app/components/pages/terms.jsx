@@ -48,12 +48,10 @@ const TermsPage = () => (
 			<p>{t('trm-8-p')}</p>
 
 			<h2>{t('trm-pp')}</h2>
-			<p>{t('trm-pp-p1')}</p>
-			<p>{t('trm-pp-p2')}</p>
+			<p>{t('trm-pp-p')}</p>
 			<ul>
 				{ t('trm-pp-li').split(']]]').map((li, x) => <li key={x}>{li}</li>) }
 			</ul>
-			<p>{t('trm-pp-p3')}</p>
 
 		</div>
 

@@ -38,26 +38,15 @@ const reviews = {
 		})
 	},
 
-	insert: (db, payload, session) => {
+	insert: (db, payload) => {
 		payload.added = new Date()
-		return new Promise((resolve, reject) => {
-			const query = { serviceId: session.user.serviceId, via: session.user.via }
-			db.collection('users').find(query, { _id: 1 }).limit(1).toArray((errorU, resultU) => {
-				if (errorU) {
-					reject(errorU)
+		return new Promise((resolve, reject) => {			
+			db.collection('reviews').insertOne(payload).then((result, error) => {
+				if (error) {
+					reject(error)
 				} else {
-					const userId = resultU[0]._id
-					payload.user = userId
-					payload.source = 'new-api'
-					db.collection('reviews').insertOne(payload).then((result, error) => {
-						if (error) {
-							reject(error)
-						} else {
-							resolve({ feedback: result.result })
-						}
-					})
+					resolve({ feedback: result.result })
 				}
-				resolve(resultU)
 			})
 		})
 	}

@@ -8,7 +8,8 @@ const initialState = {
 	listFailed: false,
 	sendFailed: false,
 	ownScore: null,
-	ownText: ''
+	ownText: '',
+	ownNickname: ''
 }
 
 const userInputReducer = (state = initialState, action) => {
@@ -34,6 +35,11 @@ const userInputReducer = (state = initialState, action) => {
 
 		case USERINPUT.TEXTCHANGED:
 			return { ...state, ownText: action.value }
+
+		case USERINPUT.NICKNAMECHANGED:
+			return { ...state, ownNickname: action.value }
+
+		// case SEARCH.NICKNAMEBLURRED - triggers saga
 
 		case USERINPUT.SUBMITTED:
 			return { ...state, isSending: true, fields: action.fields }

@@ -1,8 +1,6 @@
-const express = require('express')
-
-const app = express()
-const connection = app.get('connection')
 const dotenv = require('dotenv')
+const path = require('path')
+const fs = require('fs')
 
 dotenv.load()
 
@@ -11,11 +9,11 @@ const gameIdIsValid = id => /[a-z0-9-]+/.test(String(id))
 const connect = () => {
 	const mongo = require('mongodb').MongoClient
 	return new Promise((resolve, reject) => {
-		mongo.connect(getMongoUrl(), null, (error, db) => {
+		const mongoUrl = getMongoUrl()
+		mongo.connect(mongoUrl, null, (error, db) => {
 			if (error) {
 				if (db) db.close()
-				console.error(connection.res)
-				reject(connection.res, 'DBConn')
+				reject(error, 'DBConn')
 			} else {
 				resolve(db)
 			}
@@ -55,4 +53,42 @@ const ConnectionException = message => {
 	this.name = 'ConnectionException'
 }
 
-module.exports = { gameIdIsValid, connect, issueToClient }
+const connectCatcher = (res, error) => {
+	res.status(500).json({ error })
+}
+
+const updateAccessCounter = (type = 'index') => {
+	const filePath = path.join(__dirname, `logs/${type}-counter.txt`)
+	return new Promise((resolve) => {
+		fs.readFile(filePath, 'utf8', (error, data) => {
+			if (error) {
+				fs.writeFile(filePath, '1', () => { resolve(1) })
+			} else {
+				const oldCounter = parseInt(data, 10)
+				const newCounter = oldCounter + 1
+				fs.writeFile(filePath, String(newCounter), () => { resolve(newCounter) })
+			}
+		})
+	})
+}
+const logAcessedGame = (game) => {
+	const filePath = path.join(__dirname, `logs/acessed-games.txt`)
+	return new Promise((resolve) => {
+		fs.readFile(filePath, 'utf8', (error) => {
+			if (error) {
+				fs.writeFile(filePath, game, () => { resolve() })
+			} else {
+				fs.appendFile(filePath, `\n${game}`, () => { resolve() })
+			}
+		})
+	})
+}
+
+module.exports = {
+	gameIdIsValid,
+	connect,
+	issueToClient,
+	connectCatcher,
+	updateAccessCounter,
+	logAcessedGame
+}

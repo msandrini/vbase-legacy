@@ -46,3 +46,7 @@ After cloning the repo:
 ### Error logs
 
 Nginx: `/var/log/nginx/error.log` (logs) and `/etc/init.d/nginx status` (status)
+
+### TODO
+
+Flexibilize Redux/Saga (implement local state when preferable)

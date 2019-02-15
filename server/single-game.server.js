@@ -1,10 +1,13 @@
-const { gameIdIsValid } = require('./utils.server')
+const { gameIdIsValid, updateAccessCounter, logAcessedGame } = require('./utils.server')
 
 const singleInfo = (db, id) => {
 	return new Promise((resolve, reject) => {
 		if (!gameIdIsValid(id)) {
 			reject(new Error('Invalid ID'))
 		} else {
+			updateAccessCounter('game').then(() => {
+				logAcessedGame(id)
+			})
 			const condition = { _id: id }
 			db.collection('games').findOne(condition, { _id: 0 }).then((doc, error) => {
 				if (error) {

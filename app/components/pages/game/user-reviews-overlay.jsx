@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { USERINPUT } from '../../../constants'
+import { USERINPUT, ANONYMOUS_REVIEWER } from '../../../constants'
 import { createAction } from '../../../utils'
 import GameUserReviewUnit from './user-review-unit.jsx'
 import GameUserReviewForm from './user-review-form.jsx'
@@ -19,6 +19,13 @@ class GameUserReviewsOverlay extends Component {
 		this._handleOverlayClick = this._handleOverlayClick.bind(this)
 	}
 
+	componentDidMount() {
+		const nickname = window.localStorage.getItem('nickname')
+		if (nickname) {
+			this._changeField('nickname')(nickname)
+		}
+	}
+
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.overlayVisible !== this.props.overlayVisible) {
 			this._setBodyScroll(nextProps.overlayVisible)
@@ -35,24 +42,32 @@ class GameUserReviewsOverlay extends Component {
 	}
 
 	_changeField(field) {
-		let fn = this.props.changeScoreAction
-		if (field === 'text') {
-			fn = this.props.changeTextAction
+		const getFn = () => {
+			switch (field) {
+				case 'text':
+					return this.props.changeTextAction
+				case 'nickname':
+					return this.props.changeNickAction
+				case 'score':
+					return this.props.changeScoreAction
+			}
 		}
-		return value => fn({ value })
+		return value => getFn()({ value })
 	}
 
 	_sendOwnReview(e) {
 		e.preventDefault()
-		if (!this.props.isLoggedIn) {
-			alert(t('login-required'))
-		} else if (!this.props.ownScore) {
+		if (!this.props.ownScore) {
 			alert(t('enter-score'))
 		} else {
+			if (!this.props.ownNickname) {
+				if (!confirm(t('insert-nickname-or-go-anonymous'))) return false
+			}
 			this.props.submitAction({
 				fields: {
 					score: this.props.ownScore,
 					text: this.props.ownText,
+					nickname: this.props.ownNickname || ANONYMOUS_REVIEWER,
 					game: this.props.gameId
 				}
 			})
@@ -84,8 +99,12 @@ class GameUserReviewsOverlay extends Component {
 					</ul>}
 					{this.props.reviews.length === 0 &&
 						<div className="no-reviews">{t('no-reviews')}</div>}
-					<GameUserReviewForm send={this._sendOwnReview} ownScore={this.props.ownScore} ownText={this.props.ownText}
-						changeScore={this._changeField('score')} changeText={this._changeField('text')} />
+					<GameUserReviewForm send={this._sendOwnReview} ownScore={this.props.ownScore}
+						ownText={this.props.ownText} ownNickname={this.props.ownNickname}
+						changeScore={this._changeField('score')}
+						changeText={this._changeField('text')}
+						changeNickname={this._changeField('nickname')}
+						blurNickname={this.props.blurNickAction} />
 				</div>
 			</div>
 		)
@@ -101,7 +120,7 @@ const mapStateToProps = state => ({
 	sendFailed: state.userInput.sendFailed,
 	ownScore: state.userInput.ownScore,
 	ownText: state.userInput.ownText,
-	isLoggedIn: state.login.loggedIn,
+	ownNickname: state.userInput.ownNickname,
 	gameId: state.game.gameId
 })
 
@@ -109,7 +128,9 @@ const mapDispatchToProps = {
 	closeAction: createAction(USERINPUT.OVERLAYDISMISSED),
 	submitAction: createAction(USERINPUT.SUBMITTED),
 	changeScoreAction: createAction(USERINPUT.SCORECHANGED),
-	changeTextAction: createAction(USERINPUT.TEXTCHANGED)
+	changeTextAction: createAction(USERINPUT.TEXTCHANGED),
+	changeNickAction: createAction(USERINPUT.NICKNAMECHANGED),
+	blurNickAction: createAction(USERINPUT.NICKNAMEBLURRED)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameUserReviewsOverlay)

@@ -25,7 +25,6 @@ import GamePage from './components/pages/game/_main.jsx'
 import InfoPage from './components/pages/info.jsx'
 
 /* Reducers */
-import loginReducer from './reducers/login.reducer'
 import searchReducer from './reducers/search.reducer'
 import resultsReducer from './reducers/results.reducer'
 import contactReducer from './reducers/contact.reducer'
@@ -35,7 +34,6 @@ import userInputReducer from './reducers/user-input.reducer'
 
 /* Middleware routines */
 const combinedReducers = combineReducers({
-	login: loginReducer,
 	search: searchReducer,
 	contact: contactReducer,
 	results: resultsReducer,
