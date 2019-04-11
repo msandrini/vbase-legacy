@@ -21,6 +21,11 @@ const connect = () => {
 	})
 }
 
+const ConnectionException = message => {
+	this.message = message
+	this.name = 'ConnectionException'
+}
+
 const issueToClient = {
 	send: (db, res, values) => {
 		res.json(values)
@@ -46,11 +51,6 @@ const getMongoUrl = (local = false) => {
 	}
 	const url = process.env.CONNECTION
 	return url || localUrl
-}
-
-const ConnectionException = message => {
-	this.message = message
-	this.name = 'ConnectionException'
 }
 
 const connectCatcher = (res, error) => {
